@@ -13,6 +13,27 @@
   <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+
+  <!-- Display logout link if user is signed in -->
+  <% if user_signed_in? %>
+    <%link_to 'Logout', destroy_user_session_path, method: :delete %>
+    <%=link_to 'Sign out', '/users/sign_out', :method => :delete %>
+  <% else %>
+    <%= link_to 'Login', new_user_session_path %>
+  <% end %>
+  
     <%= yield %>
+
+<!--
+some commented code for future need if needed . 
+  # <% if user_signed_in? %>
+  #   <% if current_user.user_detail.nil? %>
+  #     <%= link_to 'Fill Your Details', new_user_detail_path %>
+  #   <% else %>
+  #     <%= link_to 'View Your Details', user_detail_path %>
+  #     <%= link_to 'Edit Your Details', edit_user_detail_path %>
+  #   <% end %>
+  # <% end %>
+-->
   </body>
 </html>
