@@ -6,7 +6,7 @@ class HomesController < ApplicationController
     # @homes = Home.all
   end
 
-  # GET /homes/1 or /homes/1.json
+  # GET /homes/1 or /homes/1.json .
   def show
   end
 
