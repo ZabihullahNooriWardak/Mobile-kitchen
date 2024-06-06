@@ -7,46 +7,35 @@
         <%= link_to 'New Food', new_food_path, class: "btn btn-primary mb-4" %>
       <% end %>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Image</th>
-            <% if user_signed_in? && current_user.user_detail&.is_admin %>
-              <th colspan="2">Actions</th>
-            <% else %>
-              <th>Show</th>
-            <% end %>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @foods.each do |food| %>
-            <tr>
-              <td><%= food.name %></td>
-              <td><%= food.category %></td>
-              <td><%= number_to_currency(food.price) %></td>
-              <td>
-                <% if food.image.attached? %>
-                  <%= image_tag food.image.variant(resize_to_limit: [100, 100]), class: "img-thumbnail" %>
-                <% else %>
-                  No image available
-                <% end %>
-              </td>
-              <% if user_signed_in? && current_user.user_detail&.is_admin %>
-                <td><%= link_to 'Edit', edit_food_path(food), class: "btn btn-secondary btn-sm" %></td>
-                <td>
-                  <%= button_to 'Destroy', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "display:inline-block" %>
-                </td>
+      <% @foods.group_by(&:category).each do |category, foods| %>
+        <h2 class="mb-4"><%= category.capitalize %></h2>
+        <div class="row">
+          <% foods.each do |food| %>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+              <div class="card-text">
+              <strong>Image:</strong>
+              <% if food.image.attached? %>
+                <%= image_tag food.image, class: "img-fluid" %>
               <% else %>
-                <td><%= link_to 'Show', food, class: "btn btn-primary btn-sm" %></td>
+                No image available
               <% end %>
-            </tr>
+            </div>
+               
+                <div class="card-body">
+                  <h5 class="card-title"><%= food.name %></h5>
+                  <p class="card-text"><strong>Price:</strong> <%= number_to_currency(food.price) %></p>
+                  <p class="card-text"><%= link_to 'Show', food, class: "btn btn-primary btn-sm" %></p>
+                  <% if user_signed_in? && current_user.user_detail&.is_admin %>
+                    <%= link_to 'Edit', edit_food_path(food), class: "btn btn-secondary btn-sm" %>
+                    <%= button_to 'Destroy', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "display:inline-block" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
