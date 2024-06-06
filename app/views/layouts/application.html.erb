@@ -14,8 +14,23 @@
 
   <body>
   <%= render 'partials/header' %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="container mt-3">
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show mx-auto" style="max-width: 600px;" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible fade show mx-auto" style="max-width: 600px;" role="alert">
+      <%= alert %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+</div>
+
+
  
  
     <%= yield %>

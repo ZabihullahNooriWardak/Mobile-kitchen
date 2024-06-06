@@ -1,6 +1,9 @@
-<!-- app/views/foods/new.html.erb -->
-<h1>New Food</h1>
-
-<%= render 'form', food: @food %>
-
-<%= link_to 'Back', foods_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="mb-4">New Food</h1>
+      <%= render 'form', food: @food %>
+      <%= link_to 'Back', foods_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

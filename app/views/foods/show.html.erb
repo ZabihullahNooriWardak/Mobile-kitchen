@@ -1,27 +1,41 @@
-<!-- app/views/foods/show.html.erb -->
-<p>
-  <strong>Name:</strong>
-  <%= @food.name %>
-</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Food Details</h5>
 
-<p>
-  <strong>Category:</strong>
-  <%= @food.category %>
-</p>
+          <p class="card-text">
+            <strong>Name:</strong>
+            <%= @food.name %>
+          </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@food.price) %>
-</p>
+          <p class="card-text">
+            <strong>Category:</strong>
+            <%= @food.category %>
+          </p>
 
-<p>
-  <strong>Image:</strong>
-  <% if @food.image.attached? %>
-    <%= image_tag @food.image %>
-  <% else %>
-    No image available
-  <% end %>
-</p>
+          <p class="card-text">
+            <strong>Price:</strong>
+            <%= number_to_currency(@food.price) %>
+          </p>
 
-<%= link_to 'Edit', edit_food_path(@food) if user_signed_in? && current_user.user_detail&.is_admin %> |
-<%= link_to 'Back', foods_path %>
+          <div class="card-text">
+            <strong>Image:</strong>
+            <% if @food.image.attached? %>
+              <%= image_tag @food.image, class: "img-fluid" %>
+            <% else %>
+              No image available
+            <% end %>
+          </div>
+
+          <% if user_signed_in? && current_user.user_detail&.is_admin %>
+            <%= link_to 'Edit', edit_food_path(@food), class: "btn btn-primary" %>
+          <% end %>
+
+          <%= link_to 'Back', foods_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
