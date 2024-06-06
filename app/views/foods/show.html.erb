@@ -1,10 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/foods/show.html.erb -->
+<p>
+  <strong>Name:</strong>
+  <%= @food.name %>
+</p>
 
-<%= render @food %>
+<p>
+  <strong>Category:</strong>
+  <%= @food.category %>
+</p>
 
-<div>
-  <%= link_to "Edit this food", edit_food_path(@food) %> |
-  <%= link_to "Back to foods", foods_path %>
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@food.price) %>
+</p>
 
-  <%= button_to "Destroy this food", @food, method: :delete %>
-</div>
+<p>
+  <strong>Image:</strong>
+  <% if @food.image.attached? %>
+    <%= image_tag @food.image %>
+  <% else %>
+    No image available
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_food_path(@food) if user_signed_in? && current_user.user_detail&.is_admin %> |
+<%= link_to 'Back', foods_path %>
