@@ -1,0 +1,62 @@
+
+<Navbar  class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+     
+<div class="col-md-3 mb-2 mb-md-0 ms-4">
+        <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
+         Our logo
+        </h2>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary me-4">Home</a></li>
+        <li><a href="#" class="nav-link px-2  me-4">Features</a></li>
+        <li><a href="#" class="nav-link px-2 me-4">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2 me-4">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2 me-4">About</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+      <% if user_signed_in? %>
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-2" %>
+     <% else %>
+      <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary me-2" %>
+      <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary me-4" %>
+     <% end %>
+      </div>
+    </Navbar>
+
+
+    <!--
+    Just another option for design purpose
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+           <% if user_signed_in? %>
+           <%=  button_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
+           
+           <% else %>
+           <%=  link_to 'Login', new_user_session_path, class:  "nav-link" %>
+           <% end %>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    -->
+    
