@@ -29,6 +29,25 @@ class OrdersController < ApplicationController
     end
   end
 
+  def edit
+    @order = current_user.orders.find(params[:id])
+  end
+
+  def update
+    @order = current_user.orders.find(params[:id])
+    if @order.update(order_params)
+      redirect_to order_path(@order), notice: 'Order updated successfully.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @order = current_user.orders.find(params[:id])
+    @order.destroy
+    redirect_to orders_path, notice: 'Order canceled.'
+  end
+
   private
 
   def order_params
