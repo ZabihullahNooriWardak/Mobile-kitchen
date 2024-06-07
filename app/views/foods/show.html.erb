@@ -32,7 +32,7 @@
           <% if user_signed_in? && current_user.user_detail&.is_admin %>
             <%= link_to 'Edit', edit_food_path(@food), class: "btn btn-primary mb-2" %>
           <% end %>
-
+ 
           <%= link_to 'Back', foods_path, class: "btn btn-secondary" %>
         </div>
       </div>

@@ -29,6 +29,9 @@
                       <%= link_to 'Edit', edit_food_path(food), class: "btn btn-secondary btn-sm mb-2" %>
                       <%= button_to 'Destroy', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "display:inline-block" %>
                     <% end %>
+                   
+                    <%= button_to 'Add to Cart', cart_items_path(food_id: food.id), method: :post %>
+                 
                   </div>
                 </div>
               </div>

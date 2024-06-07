@@ -1,0 +1,16 @@
+<h1>Order Details</h1>
+
+<p>Address: <%= @order.address %></p>
+<p>Guests Number: <%= @order.guests_number %></p>
+<p>Date: <%= @order.date %></p>
+<p>Description: <%= @order.description %></p>
+<p>Status: <%= @order.status %></p>
+
+<h2>Foods</h2>
+<ul>
+  <% @order.foods.each do |food| %>
+    <li><%= food.name %> - <%= food.price %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Orders', orders_path %>

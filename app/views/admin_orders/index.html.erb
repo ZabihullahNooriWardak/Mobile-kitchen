@@ -1,0 +1,9 @@
+<h1>All Orders</h1>
+
+<% @orders.each do |order| %>
+  <div>
+    <p>Order #<%= order.id %></p>
+    <p>Status: <%= order.status %></p>
+    <%= link_to 'View Details', admin_order_path(order) %>
+  </div>
+<% end %>
