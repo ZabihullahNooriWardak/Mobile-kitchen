@@ -1,13 +1,20 @@
-<h1>Your Orders</h1>
-
-<% @orders.each do |order| %>
-  <div>
-    <p>Order #<%= order.id %></p>
-    <p>Status: <%= order.status %></p>
-    <%= link_to 'View Details', order_path(order) %>
-    <% if order.status == 'pending' %>
-      <%= link_to 'Edit', edit_order_path(order) %>
-      <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h1>Your Orders</h1>
+    </div>
+    <div class="card-body">
+      <% @orders.each do |order| %>
+        <div class="mb-3">
+          <p class="mb-0">Order #<%= order.full_name %>'s order</p>
+          <p class="mb-0">Status: <%= order.status %></p>
+          <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm mr-2" %>
+          <% if order.status == 'pending' %>
+            <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm mr-2" %>
+            <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "display:inline-block" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

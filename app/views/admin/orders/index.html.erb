@@ -1,10 +1,14 @@
-<h1>All Orders</h1>
+<div class="container mt-5">
+  <h1>All Orders</h1>
 
-<% @orders.each do |order| %>
-  <div>
-    <p>Order #<%= order.id %></p>
-    <p>Status: <%= order.status %></p>
-    <%= link_to 'View Details', admin_order_path(order) %>
-    <%= button_to 'Delete', admin_order_path(order), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </div>
-<% end %>
+  <% @orders.each do |order| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">Order #<%= order.id %></p>
+        <p class="card-text">Status: <%= order.status %></p>
+        <%= link_to 'View Details', admin_order_path(order), class: "btn btn-primary me-2" %>
+        <%= button_to 'Delete', admin_order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+</div>
