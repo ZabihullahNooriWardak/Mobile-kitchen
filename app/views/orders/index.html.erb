@@ -9,7 +9,7 @@
           <p class="mb-0">Order #<%= order.id %> - <%= order.full_name %>'s order</p>
           <p class="mb-0">
             Status: 
-            <span class="badge bg-<%= order.status == 'pending' ? 'warning' : 'success' %>">
+            <span id="order-status-<%= order.id %>" class="badge bg-<%= order.status == 'pending' ? 'warning' : 'success' %>">
               <%= order.status.capitalize %>
             </span>
           </p>
@@ -25,18 +25,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .order-item {
-    background-color: #f8f9fa;
-  }
-  .order-item h5 {
-    font-weight: bold;
-  }
-  .order-item p {
-    font-size: 1rem;
-  }
-  .btn-group .btn {
-    margin-right: 0.5rem;
-  }
-</style>

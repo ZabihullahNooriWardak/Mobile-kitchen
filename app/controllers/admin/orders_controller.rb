@@ -1,7 +1,7 @@
 class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_admin
-
+  rescue_from ActiveRecord::RecordNotFound, with: :order_not_found
   def index
     @orders = Order.all
   end
@@ -13,11 +13,14 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      redirect_to admin_order_path(@order), notice: 'Order status updated.'
+      ActionCable.server.broadcast "order_#{@order.id}", { id: @order.id, status: @order.status }
+      redirect_to admin_order_path(@order), notice: 'Order status was successfully updated.'
     else
-      render :show
+      render :edit
     end
   end
+  
+  
 
   def destroy
     @order = Order.find(params[:id])
@@ -33,5 +36,9 @@ class Admin::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:status)
+  end
+  def order_not_found
+    flash[:alert] = "Order not found."
+    redirect_to admin_orders_path
   end
 end
