@@ -1,7 +1,39 @@
-<% if current_user.user_detail && current_user.user_detail.is_admin %>
-  <!-- Admin-specific content goes here -->
-  <p>Welcome, Admin!</p>
-<% else %>
-  <!-- Non-admin content goes here -->
-  <p>Welcome, User!</p>
-<% end %>
+<% user_name = current_user.email.split('@').first.capitalize %>
+
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-md-8 offset-md-2 text-center">
+      <% if current_user.user_detail && current_user.user_detail.is_admin %>
+        <p class="welcome-message">Welcome, Admin!</p>
+      <% else %>
+        <p class="welcome-message">Welcome, <%= user_name %>!</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+      <h1 class="display-4">About Mobile Kitchen</h1>
+      <p class="lead">Your one-stop solution for convenient and delicious meals, delivered straight to your door.</p>
+      <hr class="my-4">
+      <img src="https://via.placeholder.com/800x400" alt="Mobile Kitchen" class="img-fluid mb-4">
+      <p class="text-justify">
+        At Mobile Kitchen, we believe that everyone deserves a delicious and nutritious meal, no matter how busy their schedule. Our mission is to make meal time easier and more enjoyable for you and your family.
+      </p>
+      <p class="text-justify">
+        We offer a wide variety of dishes, from classic comfort foods to innovative culinary creations, all made with fresh, high-quality ingredients. Our chefs are passionate about cooking and dedicated to providing you with the best dining experience possible.
+      </p>
+      <p class="text-justify">
+        Whether you're looking for a quick lunch, a family dinner, or catering for a special event, Mobile Kitchen has you covered. Explore our menu, place your order, and enjoy the convenience of having great food delivered right to your doorstep.
+      </p>
+      <a class="btn btn-primary btn-lg mt-4" href="<%= foods_path %>" role="button">Explore Our Menu</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .welcome-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+</style>

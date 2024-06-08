@@ -5,16 +5,38 @@
     </div>
     <div class="card-body">
       <% @orders.each do |order| %>
-        <div class="mb-3">
-          <p class="mb-0">Order #<%= order.full_name %>'s order</p>
-          <p class="mb-0">Status: <%= order.status %></p>
-          <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm mr-2" %>
-          <% if order.status == 'pending' %>
-            <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm mr-2" %>
-            <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm", style: "display:inline-block" %>
-          <% end %>
+        <div class="mb-3 p-3 border rounded">
+          <p class="mb-0">Order #<%= order.id %> - <%= order.full_name %>'s order</p>
+          <p class="mb-0">
+            Status: 
+            <span class="badge bg-<%= order.status == 'pending' ? 'warning' : 'success' %>">
+              <%= order.status.capitalize %>
+            </span>
+          </p>
+          <div class="btn-group mt-2" role="group">
+            <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm" %>
+            <% if order.status == 'pending' %>
+              <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm" %>
+              <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<style>
+  .order-item {
+    background-color: #f8f9fa;
+  }
+  .order-item h5 {
+    font-weight: bold;
+  }
+  .order-item p {
+    font-size: 1rem;
+  }
+  .btn-group .btn {
+    margin-right: 0.5rem;
+  }
+</style>
