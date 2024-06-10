@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :set_order, only: [:edit, :update, :destroy]
+  before_action :check_order_status, only: [:edit, :update, :destroy]
   def index
     @orders = current_user.orders
   end
@@ -52,5 +53,20 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:address, :guests_number, :date, :description,:full_name,:phone_number)
+  end
+  private
+
+  def set_order
+    @order = Order.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Order not found."
+    redirect_to orders_path
+  end
+
+  def check_order_status
+    if @order.status != 'pending'
+      flash[:alert] = "Order can no longer be edited or canceled."
+      redirect_to orders_path
+    end
   end
 end
