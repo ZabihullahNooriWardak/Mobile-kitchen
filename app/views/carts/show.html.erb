@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Your Cart</h1><h5>toal for a person</h5>
+  <h1>Your Cart</h1>  <h5>Total for a person: <%= @cart.total_price %> </h5>
 
   <% if @cart && @cart.cart_items.any? %>
     <table class="table">
