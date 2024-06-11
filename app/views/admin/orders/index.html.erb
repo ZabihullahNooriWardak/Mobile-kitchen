@@ -5,10 +5,13 @@
     <div class="card mb-3">
       <div class="card-body">
         <p class="card-text">Order #<%= order.id %></p>
-        <p class="card-text">Status: <%= order.status %></p>
-        <%= link_to 'View Details', admin_order_path(order), class: "btn btn-primary me-2" %>
+        Status:  <p class="card-text badge bg-<%= order.status == 'pending' ? 'warning' : order.status == 'in_progress' ? 'info' : 'success' %>"> <%= order.status %></p> <br>
+        <%= link_to 'View Details', admin_order_path(order), class: "btn btn-primary me-2 mb-1" %> 
         <%= button_to 'Delete', admin_order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
       </div>
     </div>
   <% end %>
 </div>
+
+
+         

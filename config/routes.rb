@@ -25,5 +25,5 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :update, :destroy]
   end
 
-  root 'homes#index'
+  root 'foods#index'
 end
