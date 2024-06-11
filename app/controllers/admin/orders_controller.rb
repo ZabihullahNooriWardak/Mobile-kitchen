@@ -28,7 +28,11 @@ class Admin::OrdersController < ApplicationController
   private
 
   def ensure_admin
-    redirect_to root_path, alert: 'Access denied.' unless current_user.user_detail.is_admin
+    if current_user.nil?
+      redirect_to new_user_session_path, alert: 'Please log in to access this page.'
+    elsif !current_user.user_detail.is_admin
+      redirect_to root_path, alert: 'Access denied.'
+    end
   end
 
   def order_params
