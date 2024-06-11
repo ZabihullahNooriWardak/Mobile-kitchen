@@ -7,9 +7,9 @@ class CartItemsController < ApplicationController
 
     if @cart_item.new_record?
       @cart_item.save
-      redirect_to cart_path, notice: 'Item added to cart.'
+      redirect_to foods_path, notice: 'Item added to cart.'
     else
-      redirect_to cart_path, notice: 'Item is already in your cart.'
+      redirect_to foods_path, notice: 'Item is already in your cart.'
     end
   end
 

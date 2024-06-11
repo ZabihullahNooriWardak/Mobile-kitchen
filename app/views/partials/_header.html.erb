@@ -36,7 +36,7 @@
         <li><%= link_to 'Orders', admin_orders_path, class: "nav-link px-2 me-4", style: "color: #333;" %></li>
         <li><%= link_to 'Add food', new_food_path, class: "nav-link px-2 me-4", style: "color: #333;" %></li>
       <% end %>
-      <li><%= link_to 'About', root_path, class: "nav-link px-2 me-4", style: "color: #333;" %></li>
+      <li><%= link_to 'About', about_path, class: "nav-link px-2 me-4", style: "color: #333;" %></li>
     </ul>
     <div class="col-md-3 text-end">
       <% if user_signed_in? %>
@@ -79,10 +79,13 @@
             <li class="nav-item"><%= link_to 'Orders', admin_orders_path, class: "nav-link me-4" %></li>
             <li class="nav-item"><%= link_to 'Add food', new_food_path, class: "nav-link me-4" %></li>
           <% end %>
-          <li class="nav-item"><%= link_to 'About', root_path, class: "nav-link me-4" %></li>
+          <li class="nav-item"><%= link_to 'About', about_path, class: "nav-link me-4" %></li>
           <% if user_signed_in? %>
             <li class="nav-item"><%= link_to 'Edit Profile', edit_user_registration_path, class: "nav-link me-4" %></li>
-            <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4" %></li>
+            <li class="nav-item">
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-none nav-link me-4" %>
+        </li>
+          
           <% else %>
             <li class="nav-item"><%= link_to 'Login', new_user_session_path, class: "nav-link me-4" %></li>
             <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link me-4" %></li>
@@ -98,3 +101,13 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

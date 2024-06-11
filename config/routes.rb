@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'orders/edit'
   get 'orders/update'
   get 'orders/destroy'
-  
+  get 'about', to:'homes#index'
   resource :cart, only: [:show] do
     resources :cart_items, only: [:create, :destroy]
   end
