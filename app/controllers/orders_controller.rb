@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update, :destroy]
   before_action :check_order_status, only: [:edit, :update, :destroy]
   before_action :check_cart_source, only: [:new]
+  before_action :check_cart_presence, only: [:new]
   def index
     @orders = current_user.orders
   end
@@ -73,6 +74,11 @@ class OrdersController < ApplicationController
   def check_cart_source
     unless params[:from_cart]
       redirect_to cart_path, alert: "Please proceed from the cart page."
+    end
+  end
+  def check_cart_presence
+    if current_user.cart.foods.empty?
+      redirect_to cart_path, alert: "Your cart is empty. Please add items before proceeding to checkout."
     end
   end
 end
