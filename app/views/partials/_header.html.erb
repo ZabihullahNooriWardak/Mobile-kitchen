@@ -119,22 +119,24 @@
   <!-- Bootstrap JavaScript and dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script>
-    function closeDesktopDrawer() {
-      var desktopDrawer = document.getElementById('desktopDrawer');
-      var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(desktopDrawer);
-
-      if (bootstrapOffcanvas) {
-        bootstrapOffcanvas.hide();
-      }
-    }
+    var targetCategory = null; // Global variable to store the target category
 
     function scrollToCategory(event, category) {
       event.preventDefault();
 
-      var element = document.getElementById(category);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(closeDesktopDrawer, 500); // Ensure drawer is closed after scrolling
+      targetCategory = category; // Set the target category
+
+      var desktopDrawer = document.getElementById('desktopDrawer');
+      var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(desktopDrawer);
+
+      if (bootstrapOffcanvas) {
+        bootstrapOffcanvas.hide(); // Close the drawer
+      } else {
+        // If the drawer is not open, scroll directly
+        var element = document.getElementById(category);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     }
 
@@ -142,10 +144,12 @@
       const offCanvasElems = document.querySelectorAll('.offcanvas');
       offCanvasElems.forEach(offCanvasEl => {
         offCanvasEl.addEventListener('hidden.bs.offcanvas', (event) => {
-          document.body.classList.remove('offcanvas-backdrop');
-          const backdrop = document.querySelector('.offcanvas-backdrop');
-          if (backdrop) {
-            backdrop.remove();
+          if (targetCategory) {
+            var element = document.getElementById(targetCategory);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              targetCategory = null; // Reset the target category
+            }
           }
         });
       });
