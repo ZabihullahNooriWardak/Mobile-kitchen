@@ -15,7 +15,7 @@
       <% end %>
 
       <% @foods.group_by(&:category).each do |category, foods| %>
-        <h2 class="mb-4"><%= category.capitalize %></h2>
+        <h2 id="<%= category.parameterize %>" class="mb-4"><%= category.capitalize %></h2> <!-- Add unique ID here -->
         <div class="row custom-card-spacing"> <!-- Added custom-card-spacing class -->
           <% foods.each do |food| %>
             <div class="col-md-3 mb-4"> <!-- Changed to col-md-3 -->
