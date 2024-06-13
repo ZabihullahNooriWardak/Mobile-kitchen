@@ -75,23 +75,14 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-    <!-- Update the category links to include the onclick event -->
-    <ul class="navbar-nav">
-  <% if @foods.present? %>
-    <% @foods.group_by(&:category).each do |category, foods| %>
-      <li class="nav-item">
-        <a href="<%= foods_path %>#<%= category.parameterize %>" class="nav-link link-secondary me-4" onclick="closeDesktopDrawer();"><%= category.capitalize %></a>
-      </li>
-    <% end %>
-  <% else %>
-    <li class="nav-item">
-      <span class="nav-link link-secondary me-4">No categories found</span>
-    </li>
-  <% end %>
-</ul>
-    
+      <ul class="navbar-nav">
+        <% @foods.group_by(&:category).each do |category, foods| %>
+          <li class="nav-item"><a href="<%= foods_path %>#<%= category.parameterize %>" class="nav-link link-secondary me-4"><%= category.capitalize %></a></li>
+        <% end %>
+      </ul>
     </div>
   </div>
+
   <!-- Mobile Navbar -->
   <nav class="mobile-navbar d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0 ms-4">
@@ -137,18 +128,5 @@
       });
     });
   </script>
-  <!-- Add this script at the end of your HTML body or in a separate JS file -->
-<script>
-  // Function to close the desktop drawer
-  function closeDesktopDrawer() {
-    var desktopDrawer = document.getElementById('desktopDrawer');
-    var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(desktopDrawer); // Get the Bootstrap Offcanvas instance
-
-    if (bootstrapOffcanvas) {
-      bootstrapOffcanvas.hide(); // Hide the Offcanvas element
-    }
-  }
-</script>
-
 </body>
 </html>
