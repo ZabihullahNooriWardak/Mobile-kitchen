@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:edit, :update, :destroy]
   before_action :check_order_status, only: [:edit, :update, :destroy]
+  before_action :check_cart_source, only: [:new]
   def index
     @orders = current_user.orders
   end
@@ -67,6 +68,11 @@ class OrdersController < ApplicationController
     if @order.status != 'pending'
       flash[:alert] = "Order can no longer be edited or canceled."
       redirect_to orders_path
+    end
+  end
+  def check_cart_source
+    unless params[:from_cart]
+      redirect_to cart_path, alert: "Please proceed from the cart page."
     end
   end
 end
