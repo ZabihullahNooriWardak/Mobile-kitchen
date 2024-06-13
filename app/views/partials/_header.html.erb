@@ -119,38 +119,33 @@
   <!-- Bootstrap JavaScript and dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script>
-    var targetCategory = null; // Global variable to store the target category
-
     function scrollToCategory(event, category) {
       event.preventDefault();
 
-      targetCategory = category; // Set the target category
-
-      var desktopDrawer = document.getElementById('desktopDrawer');
-      var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(desktopDrawer);
-
-      if (bootstrapOffcanvas) {
-        bootstrapOffcanvas.hide(); // Close the drawer
-      } else {
-        // If the drawer is not open, scroll directly
-        var element = document.getElementById(category);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+      var element = document.getElementById(category);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          var desktopDrawer = document.getElementById('desktopDrawer');
+          var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(desktopDrawer);
+          if (bootstrapOffcanvas) {
+            bootstrapOffcanvas.hide();
+          }
+          removeBackdrop();
+        }, 500);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', (event) => {
+    function removeBackdrop() {
+      var backdrops = document.querySelectorAll('.offcanvas-backdrop');
+      backdrops.forEach(backdrop => backdrop.remove());
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
       const offCanvasElems = document.querySelectorAll('.offcanvas');
       offCanvasElems.forEach(offCanvasEl => {
-        offCanvasEl.addEventListener('hidden.bs.offcanvas', (event) => {
-          if (targetCategory) {
-            var element = document.getElementById(targetCategory);
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              targetCategory = null; // Reset the target category
-            }
-          }
+        offCanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+          removeBackdrop();
         });
       });
     });
