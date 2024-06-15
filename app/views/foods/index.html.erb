@@ -3,6 +3,12 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
+  .category-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
 </style>
 
 <div class="container">
@@ -15,10 +21,10 @@
       <% end %>
 
       <% @foods.group_by(&:category).each do |category, foods| %>
-        <h2 class="mb-4"><%= category.capitalize %></h2>
-        <div class="row custom-card-spacing"> <!-- Added custom-card-spacing class -->
+        <h2 class="mb-4" id="<%= category.parameterize %>"><%= category.capitalize %></h2>
+        <div class="row custom-card-spacing">
           <% foods.each do |food| %>
-            <div class="col-md-3 mb-4"> <!-- Changed to col-md-3 -->
+            <div class="col-md-3 mb-4">
               <div class="card" style="width: 18rem;">
                 <% if food.image.attached? %>
                   <%= link_to food do %>
@@ -52,3 +58,59 @@
     </div>
   </div>
 </div>
+
+<!-- Category Button -->
+<button class="btn btn-primary category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
+  Categories
+</button>
+
+<!-- Category Drawer -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="categoryDrawer" aria-labelledby="categoryDrawerLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="categoryDrawerLabel">Categories</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav">
+      <% @foods.group_by(&:category).each do |category, foods| %>
+        <li class="nav-item">
+          <a href="#<%= category.parameterize %>" class="nav-link link-secondary" onclick="scrollToCategory(event, '<%= category.parameterize %>')"><%= category.capitalize %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- Bootstrap JavaScript and dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+  function scrollToCategory(event, category) {
+    event.preventDefault();
+    var element = document.getElementById(category);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        var categoryDrawer = document.getElementById('categoryDrawer');
+        var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(categoryDrawer);
+        if (bootstrapOffcanvas) {
+          bootstrapOffcanvas.hide();
+        }
+        removeBackdrop();
+      }, 500);
+    }
+  }
+
+  function removeBackdrop() {
+    var backdrops = document.querySelectorAll('.offcanvas-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const offCanvasElems = document.querySelectorAll('.offcanvas');
+    offCanvasElems.forEach(offCanvasEl => {
+      offCanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+        removeBackdrop();
+      });
+    });
+  });
+</script>
