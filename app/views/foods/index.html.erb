@@ -113,4 +113,11 @@
       });
     });
   });
+
+  document.addEventListener('click', (event) => {
+    var target = event.target;
+    if (target && target.classList.contains('offcanvas-backdrop')) {
+      target.remove();
+    }
+  });
 </script>
