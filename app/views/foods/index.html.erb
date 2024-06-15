@@ -95,24 +95,23 @@
         if (bootstrapOffcanvas) {
           bootstrapOffcanvas.hide();
         }
-        removeBackdrop();
       }, 500);
     }
-  }
-
-  function removeBackdrop() {
-    var backdrops = document.querySelectorAll('.offcanvas-backdrop');
-    backdrops.forEach(backdrop => backdrop.remove());
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     const offCanvasElems = document.querySelectorAll('.offcanvas');
     offCanvasElems.forEach(offCanvasEl => {
-      offCanvasEl.addEventListener('hidden.bs.offcanvas', () => {
-        removeBackdrop();
-      });
+      offCanvasEl.addEventListener('hidden.bs.offcanvas', removeBackdrop);
     });
   });
+
+  function removeBackdrop() {
+    var backdrop = document.querySelector('.offcanvas-backdrop');
+    if (backdrop) {
+      backdrop.parentNode.removeChild(backdrop);
+    }
+  }
 
   document.addEventListener('click', (event) => {
     var target = event.target;
