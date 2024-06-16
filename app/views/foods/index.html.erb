@@ -104,6 +104,13 @@
     offCanvasElems.forEach(offCanvasEl => {
       offCanvasEl.addEventListener('hidden.bs.offcanvas', removeBackdrop);
     });
+    
+    // Disable the backdrop for offcanvas
+    offCanvasElems.forEach(offCanvasEl => {
+      new bootstrap.Offcanvas(offCanvasEl, {
+        backdrop: false
+      });
+    });
   });
 
   function removeBackdrop() {
