@@ -2,12 +2,66 @@
   .custom-card-spacing .card {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
   }
+
+  .custom-card-spacing .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .custom-card-spacing .card-body {
+    padding: 1rem;
+  }
+
+  .custom-card-spacing .card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .custom-card-spacing .card-title {
+    font-weight: bold;
+  }
+
+  .custom-card-spacing .list-group-item {
+    border: none;
+    padding-left: 0;
+  }
+
   .category-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+  }
+
+  .btn {
+    border-radius: 50px;
+  }
+
+  .offcanvas-header {
+    background-color: #f8f9fa;
+  }
+
+  .offcanvas-body ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .offcanvas-body .nav-item {
+    margin-bottom: 1rem;
+  }
+
+  .offcanvas-body .nav-link {
+    color: #495057;
+    font-weight: bold;
+  }
+
+  .offcanvas-body .nav-link:hover {
+    color: #007bff;
+    text-decoration: none;
   }
 </style>
 
