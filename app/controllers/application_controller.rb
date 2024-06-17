@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
   
     def set_cart_and_orders
       if user_signed_in?
+        @admin_order_n=Order.all.count
         @cart = current_user.cart
         @order_count = current_user.orders.count
       end
+
     end
   end
   
