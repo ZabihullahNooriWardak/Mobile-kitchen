@@ -1,32 +1,89 @@
-<div class="container">
-  <h1>Your Cart</h1>  <% if @cart %><h5>Total for a person: <%= @cart.total_price %> </h5> <% end %>
-
-  <% if @cart && @cart.cart_items.any? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Food</th>
-          <th>Price</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @cart.cart_items.each do |item| %>
-          <tr>
-            <td><%= item.food.name %></td>
-            <td><%= item.food.price %></td>
-            <td><%= button_to 'Remove', cart_item_path(item), method: :delete, class: 'btn btn-danger' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <%= link_to 'Order Now', new_order_path(from_cart: true), class: "btn btn-primary" %>
-
-    <%= link_to 'back to foods' , foods_path, class: 'btn btn-primary' %>
-  <% else %>
-    <div class="alert alert-info">
-      Your cart is empty.
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h1 class="mb-0">Your Cart</h1>
     </div>
-  <% end %>
+    <div class="card-body">
+      <% if @cart %>
+        <h5>Total for a person: <%= number_to_currency(@cart.total_price) %></h5>
+      <% end %>
+
+      <% if @cart && @cart.cart_items.any? %>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Food</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart.cart_items.each do |item| %>
+              <tr>
+                <td><%= item.food.name %></td>
+                <td><%= number_to_currency(item.food.price) %></td>
+                <td><%= button_to 'Remove', cart_item_path(item), method: :delete, class: 'btn btn-danger btn-sm' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between mt-4">
+          <%= link_to 'Order Now', new_order_path(from_cart: true), class: "btn btn-success custom-btn" %>
+          <%= link_to 'Back to Foods', foods_path, class: 'btn btn-secondary custom-btn' %>
+        </div>
+      <% else %>
+        <div class="alert alert-info mt-3">
+          Your cart is empty.
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+<style>
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  .custom-btn {
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .custom-btn-success {
+    background: linear-gradient(45deg, #28a745, #218838);
+  }
+
+  .custom-btn-secondary {
+    background: linear-gradient(45deg, #6c757d, #495057);
+  }
+
+  .custom-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .thead-dark th {
+    background-color: #343a40;
+    color: white;
+  }
+</style>
