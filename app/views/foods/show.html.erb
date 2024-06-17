@@ -85,9 +85,10 @@
 
             <div class="d-flex justify-content-right">
               <% if user_signed_in? && current_user.user_detail&.is_admin %>
-                <%= link_to 'Edit', edit_food_path(@food), class: "btn btn-primary" %>
-              <% end %>
-              <%= button_to 'Add to Cart', cart_items_path(food_id: @food.id), method: :post, class: "btn btn-primary me-1" %>
+                <%= link_to 'Edit', edit_food_path(@food), class: "btn me-1 btn-primary" %>
+                <%else%>
+                <%= button_to 'Add to Cart', cart_items_path(food_id: @food.id), method: :post, class: "btn btn-primary me-1" %>
+                <% end %>
               <%= link_to 'Back', foods_path, class: "btn btn-secondary" %>
             </div>
           </div>
