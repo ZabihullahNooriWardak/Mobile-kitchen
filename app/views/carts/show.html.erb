@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div class="card shadow-sm">
+  <div class="card shadow-sm rounded">
     <div class="card-header bg-primary text-white">
       <h1 class="mb-0">Your Cart</h1>
     </div>
@@ -9,27 +9,29 @@
       <% end %>
 
       <% if @cart && @cart.cart_items.any? %>
-        <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Food</th>
-              <th scope="col">Price</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @cart.cart_items.each do |item| %>
+        <div class="table-responsive">
+          <table class="table table-striped rounded-table">
+            <thead class="thead-dark">
               <tr>
-                <td><%= item.food.name %></td>
-                <td><%= number_to_currency(item.food.price) %></td>
-                <td><%= button_to 'Remove', cart_item_path(item), method: :delete, class: 'btn btn-danger btn-sm' %></td>
+                <th scope="col">Food</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @cart.cart_items.each do |item| %>
+                <tr>
+                  <td><%= item.food.name %></td>
+                  <td><%= number_to_currency(item.food.price) %></td>
+                  <td><%= button_to 'Remove', cart_item_path(item), method: :delete, class: 'btn btn-danger btn-sm rounded-btn' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
 
-        <div class="d-flex justify-content-between mt-4">
-          <%= link_to 'Order Now', new_order_path(from_cart: true), class: "btn btn-success custom-btn" %>
+        <div class="d-flex justify-content-start mt-4">
+          <%= link_to 'Order Now', new_order_path(from_cart: true), class: "btn btn-success custom-btn me-2" %>
           <%= link_to 'Back to Foods', foods_path, class: 'btn btn-secondary custom-btn' %>
         </div>
       <% else %>
@@ -42,10 +44,17 @@
 </div>
 
 <style>
+  .card {
+    border: none;
+    border-radius: 15px;
+  }
+
   .card-header {
     background-color: #007bff;
     color: white;
     padding: 1rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
   }
 
   .card-body {
@@ -78,6 +87,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  .table-responsive {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
   }
@@ -85,5 +99,32 @@
   .thead-dark th {
     background-color: #343a40;
     color: white;
+  }
+
+  .rounded-table thead th:first-child,
+  .rounded-table tbody tr:first-child td:first-child {
+    border-top-left-radius: 15px;
+  }
+
+  .rounded-table thead th:last-child,
+  .rounded-table tbody tr:first-child td:last-child {
+    border-top-right-radius: 15px;
+  }
+
+  .rounded-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+  }
+
+  .rounded-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+  }
+
+  .rounded-btn {
+    border-radius: 20px !important;
+  }
+
+  .btn-group .btn {
+    margin-right: 0.5rem;
+    border-radius: 20px !important; /* Ensure border-radius is applied */
   }
 </style>
