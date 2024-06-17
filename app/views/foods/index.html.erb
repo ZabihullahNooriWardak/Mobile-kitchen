@@ -98,7 +98,7 @@
                   <%= link_to 'Show', food, class: "btn btn-primary mb-2" %>
                   <% if user_signed_in? && current_user.user_detail&.is_admin %>
                     <%= link_to 'Edit', edit_food_path(food), class: "btn btn-secondary mb-2" %>
-                    <%= button_to 'Destroy', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
+                    <%= button_to 'Remove', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
                   <% end %>
                   <% if user_signed_in? && !current_user.user_detail&.is_admin %>
                     <%= button_to 'Add to Cart', cart_items_path(food_id: food.id), method: :post, class: "btn btn-primary" %>
