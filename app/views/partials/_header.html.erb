@@ -70,6 +70,21 @@
     .offcanvas-body .nav-link:hover {
       color: #007bff;
     }
+    /* Custom Badge CSS */
+    .cart-badge {
+      position: relative;
+      top: -30px;
+      left: 38px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -86,10 +101,11 @@
       <%= link_to "Recommendations", root_path, class: "nav-link me-4" %>
       <%= link_to "Foods", foods_path, class: "nav-link px-2 me-4" %>
       <% if current_user && !current_user.user_detail&.is_admin %>
-      <%= link_to cart_path, class: "nav-link me-4 link-with-icon" do %>
+      <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
         Cart
         <i class="fas fa-shopping-cart me-1"></i>
-     <% end %>
+        <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count %></span>
+      <% end %>
         <li><%= link_to 'Orders', orders_path, class: "nav-link px-2 me-4" %></li>
       <% else %>
         <li><%= link_to 'Orders', admin_orders_path, class: "nav-link px-2 me-4" %></li>
