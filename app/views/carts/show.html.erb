@@ -9,8 +9,8 @@
       <% end %>
 
       <% if @cart && @cart.cart_items.any? %>
-        <div class="table-responsive">
-          <table class="table table-striped rounded-table">
+        <div class="table-responsive rounded">
+          <table class="table table-striped mb-0">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Food</th>
@@ -92,6 +92,11 @@
     overflow: hidden;
   }
 
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
   }
@@ -125,6 +130,6 @@
 
   .btn-group .btn {
     margin-right: 0.5rem;
-    border-radius: 20px !important; /* Ensure border-radius is applied */
+    border-radius: 20px !important;
   }
 </style>
