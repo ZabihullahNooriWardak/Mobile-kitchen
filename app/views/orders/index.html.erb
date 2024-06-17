@@ -14,10 +14,10 @@
             </span>
           </p>
           <div class="btn-group mt-3" role="group">
-            <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm" %>
+            <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm custom-btn" %>
             <% if order.status == 'pending' %>
-              <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm" %>
-              <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+              <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm custom-btn" %>
+              <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm custom-btn" %>
             <% end %>
           </div>
         </div>
@@ -45,6 +45,7 @@
   }
   .btn-group .btn {
     margin-right: 0.5rem;
+    border-radius: 20px !important; /* Ensure border-radius is applied */
   }
   .card-header {
     background-color: #007bff;
@@ -55,5 +56,37 @@
   }
   .card-body {
     padding: 2rem;
+  }
+
+  .custom-btn {
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+
+  .custom-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary.custom-btn {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border-radius: 20px;
+  }
+
+  .btn-secondary.custom-btn {
+    background: linear-gradient(45deg, #6c757d, #495057);
+    border-radius: 20px;
+  }
+
+  .btn-danger.custom-btn {
+    background: linear-gradient(45deg, #dc3545, #b21f2d);
+    border-radius: 20px;
   }
 </style>
