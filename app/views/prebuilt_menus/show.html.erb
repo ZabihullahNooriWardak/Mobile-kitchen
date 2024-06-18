@@ -1,0 +1,28 @@
+<!-- app/views/prebuilt_menus/show.html.erb -->
+
+<h1><%= @prebuilt_menu.name %></h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <strong>Cost:</strong> <%= number_to_currency(@prebuilt_menu.cost) %>
+  </div>
+  <div class="col-md-6">
+    <% if @prebuilt_menu.image.attached? %>
+      <%= image_tag @prebuilt_menu.image%>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Foods Included:</h3>
+  <ul>
+    <% @prebuilt_menu.foods.each do |food| %>
+      <li><%= food.name %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= link_to 'Edit', edit_prebuilt_menu_path(@prebuilt_menu), class: 'btn btn-primary' %>
+<%= link_to 'Back', prebuilt_menus_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,39 @@
+<h1>Prebuilt Menus</h1>
+
+<% if current_user&.user_detail&.is_admin %>
+  <%= link_to 'New Prebuilt Menu', new_prebuilt_menu_path, class: "btn btn-primary" %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cost</th>
+      <th>Image</th>
+      <th>Foods</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @prebuilt_menus.each do |prebuilt_menu| %>
+      <tr>
+        <td><%= prebuilt_menu.name %></td>
+        <td><%= number_to_currency(prebuilt_menu.cost) %></td>
+        <td><%= image_tag prebuilt_menu.image if prebuilt_menu.image.attached? %></td>
+        <td>
+          <ul>
+            <% prebuilt_menu.foods.each do |food| %>
+              <li><%= food.name %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td><%= link_to 'Show', prebuilt_menu %></td>
+        <% if current_user&.user_detail&.is_admin %>
+          <td><%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu) %></td>
+          <td><%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

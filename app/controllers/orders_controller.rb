@@ -21,11 +21,17 @@ class OrdersController < ApplicationController
     @order.status = 'pending'
 
     if @order.save
-      current_user.cart.cart_items.each do |item|
-        @order.order_items.create(food: item.food)
+      if params[:order][:prebuilt_menu_id].present?
+        prebuilt_menu = PrebuiltMenu.find(params[:order][:prebuilt_menu_id])
+        prebuilt_menu.foods.each do |food|
+          @order.order_items.create(food: food)
+        end
+      else
+        current_user.cart.cart_items.each do |item|
+          @order.order_items.create(food: item.food)
+        end
+        current_user.cart.cart_items.destroy_all
       end
-
-      current_user.cart.cart_items.destroy_all
       redirect_to orders_path, notice: 'Order placed successfully.'
     else
       render :new
@@ -54,9 +60,8 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:address, :guests_number, :date, :description,:full_name,:phone_number)
+    params.require(:order).permit(:address, :guests_number, :date, :description, :full_name, :phone_number, :prebuilt_menu_id)
   end
-  private
 
   def set_order
     @order = Order.find(params[:id])
@@ -71,13 +76,15 @@ class OrdersController < ApplicationController
       redirect_to orders_path
     end
   end
+
   def check_cart_source
-    unless params[:from_cart]
-      redirect_to cart_path, alert: "Please proceed from the cart page."
+    unless params[:from_cart] || params[:prebuilt_menu_id]
+      redirect_to cart_path, alert: "Please proceed from the cart page or select a prebuilt menu."
     end
   end
+
   def check_cart_presence
-    if current_user.cart.foods.empty?
+    if current_user.cart.foods.empty? && params[:prebuilt_menu_id].nil?
       redirect_to cart_path, alert: "Your cart is empty. Please add items before proceeding to checkout."
     end
   end
