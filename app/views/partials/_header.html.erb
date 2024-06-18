@@ -118,18 +118,18 @@
       <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
         Cart
         <i class="fas fa-shopping-cart me-1"></i>
-        <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count if current_user.cart.present? %></span>
+        <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count  if current_user.cart.present?  %></span>
       <% end %>
         <%= link_to orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
           Orders
           <i class="fas fa-clipboard-list me-1"></i>
-          <span class="cart-badge2"><%= @order_count %></span>
+          <span class="cart-badge2"><%= @order_count || 0  %></span>
         <% end %>
       <% else %>
       <%= link_to admin_orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
         Orders
         <i class="fas fa-clipboard-list me-1"></i>
-        <span class="cart-badge2"><%= @admin_order_n%></span>
+        <span class="cart-badge2"><%= @admin_order_n || 0%></span>
       <% end %>
         <li><%= link_to 'Add food', new_food_path, class: "nav-link px-2 me-4" %></li>
       <% end %>
