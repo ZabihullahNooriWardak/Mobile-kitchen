@@ -1,3 +1,4 @@
+<!-- app/views/orders/show.html.erb -->
 <div class="container mt-5">
   <div class="card shadow">
     <div class="card-header bg-primary text-white">
@@ -22,7 +23,34 @@
           </p>
         </div>
       </div>
-      
+
+      <% if @prebuilt_menu.present? %>
+        <div class="mt-4">
+          <h2><%= @prebuilt_menu.name %></h2>
+          <div class="row">
+            <div class="col-md-6">
+              <% if @prebuilt_menu.image.attached? %>
+                <%= image_tag @prebuilt_menu.image, class: "img-fluid" %>
+              <% else %>
+                <div class="text-center">
+                  No image available
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <strong>Cost (Per Person):</strong> <%= number_to_currency(@prebuilt_menu.cost) %><br>
+              <strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %><br>
+              <strong>Foods Included:</strong>
+              <ul>
+                <% @prebuilt_menu.foods.each do |food| %>
+                  <li><%= food.name %> - <%= number_to_currency(food.price) %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
       <h2 class="mt-4">Foods</h2>
       <ul class="list-group mb-4">
         <% @order.foods.each do |food| %>
@@ -32,7 +60,7 @@
           </li>
         <% end %>
       </ul>
-      
+
       <p class="h4"><strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %></p>
     </div>
     <div class="card-footer text-right">

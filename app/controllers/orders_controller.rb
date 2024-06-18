@@ -1,16 +1,20 @@
+# app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :check_order_status, only: [:edit, :update, :destroy]
   before_action :check_cart_source, only: [:new]
   before_action :check_cart_presence, only: [:new]
+
   def index
     @orders = current_user.orders
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.includes(:order_items, { order_items: :food }).find(params[:id])
+    @prebuilt_menu = @order.prebuilt_menu if @order.prebuilt_menu.present?
   end
+
 
   def new
     @order = Order.new
@@ -23,6 +27,7 @@ class OrdersController < ApplicationController
     if @order.save
       if params[:order][:prebuilt_menu_id].present?
         prebuilt_menu = PrebuiltMenu.find(params[:order][:prebuilt_menu_id])
+        @order.update(prebuilt_menu_id: prebuilt_menu.id)
         prebuilt_menu.foods.each do |food|
           @order.order_items.create(food: food)
         end

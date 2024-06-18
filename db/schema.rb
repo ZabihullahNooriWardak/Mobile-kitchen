@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_18_133208) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_18_144132) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -91,6 +91,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_133208) do
     t.datetime "updated_at", null: false
     t.string "full_name"
     t.string "phone_number"
+    t.integer "prebuilt_menu_id"
+    t.index ["prebuilt_menu_id"], name: "index_orders_on_prebuilt_menu_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -132,6 +134,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_133208) do
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "foods"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "prebuilt_menus"
   add_foreign_key "orders", "users"
   add_foreign_key "user_details", "users"
 end
