@@ -30,38 +30,38 @@
           <div class="row">
             <div class="col-md-6">
               <% if @prebuilt_menu.image.attached? %>
-                <%= image_tag @prebuilt_menu.image, class: "img-fluid" %>
+                <%= image_tag @prebuilt_menu.image %>
               <% else %>
-                <div class="text-center">
-                  No image available
-                </div>
+                <p>No image available</p>
               <% end %>
             </div>
             <div class="col-md-6">
-              <strong>Cost (Per Person):</strong> <%= number_to_currency(@prebuilt_menu.cost) %><br>
-              <strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %><br>
-              <strong>Foods Included:</strong>
-              <ul>
-                <% @prebuilt_menu.foods.each do |food| %>
-                  <li><%= food.name %> - <%= number_to_currency(food.price) %></li>
-                <% end %>
-              </ul>
+              <p><strong>Cost per Person:</strong> <%= number_to_currency(@prebuilt_menu.cost) %></p>
+              <p><strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %></p>
             </div>
           </div>
+
+          <h3>Foods Included:</h3>
+          <ul>
+            <% @prebuilt_menu.foods.each do |food| %>
+              <li><%= food.name %></li>
+            <% end %>
+          </ul>
         </div>
+      <% else %>
+        <div class="mt-4">
+          <h3>Foods</h3>
+          <ul class="list-group mb-4">
+            <% @order.foods.each do |food| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= food.name %>
+                <span class="badge bg-primary rounded-pill"><%= number_to_currency(food.price) %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <p class="h4"><strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %></p>
       <% end %>
-
-      <h2 class="mt-4">Foods</h2>
-      <ul class="list-group mb-4">
-        <% @order.foods.each do |food| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <%= food.name %>
-            <span class="badge bg-primary rounded-pill"><%= number_to_currency(food.price) %></span>
-          </li>
-        <% end %>
-      </ul>
-
-      <p class="h4"><strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %></p>
     </div>
     <div class="card-footer text-right">
       <%= link_to 'Back to Orders', orders_path, class: 'btn btn-primary' %>

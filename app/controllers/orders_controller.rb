@@ -1,7 +1,7 @@
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:edit, :update, :destroy]
   before_action :check_order_status, only: [:edit, :update, :destroy]
   before_action :check_cart_source, only: [:new]
   before_action :check_cart_presence, only: [:new]
@@ -15,9 +15,9 @@ class OrdersController < ApplicationController
     @prebuilt_menu = @order.prebuilt_menu if @order.prebuilt_menu.present?
   end
 
-
   def new
     @order = Order.new
+    @prebuilt_menu = PrebuiltMenu.find(params[:prebuilt_menu_id]) if params[:prebuilt_menu_id].present?
   end
 
   def create
@@ -25,10 +25,8 @@ class OrdersController < ApplicationController
     @order.status = 'pending'
 
     if @order.save
-      if params[:order][:prebuilt_menu_id].present?
-        prebuilt_menu = PrebuiltMenu.find(params[:order][:prebuilt_menu_id])
-        @order.update(prebuilt_menu_id: prebuilt_menu.id)
-        prebuilt_menu.foods.each do |food|
+      if @order.prebuilt_menu.present?
+        @order.prebuilt_menu.foods.each do |food|
           @order.order_items.create(food: food)
         end
       else
@@ -89,7 +87,7 @@ class OrdersController < ApplicationController
   end
 
   def check_cart_presence
-    if current_user.cart.foods.empty? && params[:prebuilt_menu_id].nil?
+    if (current_user.cart.nil? || current_user.cart.foods.empty?) && params[:prebuilt_menu_id].nil?
       redirect_to cart_path, alert: "Your cart is empty. Please add items before proceeding to checkout."
     end
   end
