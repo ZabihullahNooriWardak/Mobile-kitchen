@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+   get 'contact', to: 'static_pages#contact'
+  get 'static_pages/contact'
   get 'admin_orders/index'
   get 'admin_orders/show'
   get 'admin_orders/update'

@@ -111,7 +111,7 @@
     </div>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <%= link_to "Our custom menus", prebuilt_menus_path, class: "nav-link me-3" %>
-      <%= link_to "contact us", root_path, class: "nav-link me-3" %>
+       <%= link_to "contact us", contact_path, class: "nav-link me-3" %>
       <%= link_to "Recommendations", root_path, class: "nav-link me-3" %>
       <%= link_to "Foods", foods_path, class: "nav-link px-2 me-3" %>
       <% if current_user && !current_user.user_detail&.is_admin %>
@@ -169,7 +169,8 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a href="#" class="nav-link link-secondary me-4">Our custom menus</a></li>
           <%= link_to "Foods", foods_path, class: "nav-link me-4" %>
-          <%= link_to "contact us", root_path, class: "nav-link me-4" %>
+          <%= link_to "contact us", contact_path, class: "nav-link me-4" %>
+
           <%= link_to "Recommendations", root_path, class: "nav-link me-4" %>
           <% if current_user && !current_user.user_detail&.is_admin %>
             <li class="nav-item"><%= link_to 'View Cart', cart_path, class: "nav-link me-4" %></li>
