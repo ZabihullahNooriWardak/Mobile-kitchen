@@ -23,6 +23,10 @@
       margin-bottom: 30px;
       text-align: center;
       padding: 20px;
+      height: 250px; /* Ensures all cards are the same height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .contact-card:hover {
@@ -85,14 +89,6 @@
         </div>
       </div>
       <div class="col-md-3">
-      <div class="contact-card">
-        <i class="fas fa-map-marker-alt contact-icon"></i>
-        <div class="contact-info">
-          <p>123 Main Street, Anytown, USA</p>
-        </div>
-      </div>
-    </div>
-      <div class="col-md-3">
         <div class="contact-card">
           <i class="fab fa-whatsapp contact-icon"></i>
           <div class="contact-info">
@@ -100,7 +96,14 @@
           </div>
         </div>
       </div>
-     
+      <div class="col-md-3">
+        <div class="contact-card">
+          <i class="fas fa-map-marker-alt contact-icon"></i>
+          <div class="contact-info">
+            <a href="https://www.google.com/maps/place/123+Main+Street,+Anytown,+USA" target="_blank">123 Main Street, Anytown, USA</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="mt-5 text-center">
