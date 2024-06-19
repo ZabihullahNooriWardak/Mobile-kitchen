@@ -29,10 +29,7 @@
     .card-middle {
       border: 2px solid #007bff;
       padding: 20px;
-    }
-
-    .card-middle .card-body-custom {
-      padding: 2rem;
+      height: 450px; /* Adjust height to make it taller */
     }
 
     .card-body-custom {
@@ -119,20 +116,20 @@
     <div class="row">
       <% @prebuilt_menus.each_with_index do |prebuilt_menu, index| %>
         <div class="col-md-4">
-          <div class="card card-custom <%= 'card-middle' if index == 1 %>">
+          <div class="card card-custom <%= 'card-middle' if (index + 1) % 3 == 2 %>">
             <% if prebuilt_menu.image.attached? %>
               <%= image_tag prebuilt_menu.image, class: 'card-img-top img-thumbnail-custom', alt: 'Menu Image' %>
             <% else %>
               <img src="https://via.placeholder.com/300x200.png?text=No+Image" class="card-img-top img-thumbnail-custom" alt="Placeholder Image">
             <% end %>
             <div class="card-body card-body-custom">
-            <p class="card-title card-title-custom"><%= prebuilt_menu.name %></p>
               <h5 class="card-cost card-cost-custom"><%= number_to_currency(prebuilt_menu.cost) %></h5>
+              <p class="card-title card-title-custom"><%= prebuilt_menu.name %></p>
               <div class="text-center mt-4">
-              <% unless current_user&.user_detail&.is_admin %>
-              <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success-custom btn-sm' %>
-              <% end %>
-              <%= link_to 'Show', prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
+                <%= link_to 'Show', prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
+                <% unless current_user&.user_detail&.is_admin %>
+                  <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success-custom btn-sm' %>
+                <% end %>
                 <% if current_user&.user_detail&.is_admin %>
                   <%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning-custom btn-sm mr-2' %>
                   <%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger-custom btn-sm', style: 'margin-top: 5px;' %>
