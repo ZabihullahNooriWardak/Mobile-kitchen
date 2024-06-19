@@ -18,11 +18,21 @@
       transition: transform 0.3s, box-shadow 0.3s;
       background-color: #ffffff;
       margin-bottom: 30px;
+      position: relative;
     }
 
     .card-custom:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-middle {
+      border: 2px solid #007bff;
+      padding: 20px;
+    }
+
+    .card-middle .card-body-custom {
+      padding: 2rem;
     }
 
     .card-body-custom {
@@ -41,6 +51,12 @@
       color: #333;
     }
 
+    .card-cost-custom {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #007bff;
+    }
+
     .card-text-custom {
       font-size: 1.2rem;
       color: #666;
@@ -56,6 +72,39 @@
     .btn-custom:hover {
       background-color: #0056b3;
     }
+
+    .btn-success-custom {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-success-custom:hover {
+      background-color: #218838;
+    }
+
+    .btn-warning-custom {
+      background-color: #ffc107;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-warning-custom:hover {
+      background-color: #e0a800;
+    }
+
+    .btn-danger-custom {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-danger-custom:hover {
+      background-color: #c82333;
+    }
   </style>
 </head>
 <body>
@@ -68,25 +117,25 @@
     </div>
 
     <div class="row">
-      <% @prebuilt_menus.each do |prebuilt_menu| %>
+      <% @prebuilt_menus.each_with_index do |prebuilt_menu, index| %>
         <div class="col-md-4">
-          <div class="card card-custom">
+          <div class="card card-custom <%= 'card-middle' if index == 1 %>">
             <% if prebuilt_menu.image.attached? %>
               <%= image_tag prebuilt_menu.image, class: 'card-img-top img-thumbnail-custom', alt: 'Menu Image' %>
             <% else %>
               <img src="https://via.placeholder.com/300x200.png?text=No+Image" class="card-img-top img-thumbnail-custom" alt="Placeholder Image">
             <% end %>
             <div class="card-body card-body-custom">
-              <h5 class="card-title card-title-custom"><%= prebuilt_menu.name %></h5>
-              <p class="card-text card-text-custom"><%= number_to_currency(prebuilt_menu.cost) %></p>
-              <div class="text-center">
-                <%= link_to 'Show', prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
-                <% unless current_user&.user_detail&.is_admin %>
-                  <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success btn-sm' %>
-                <% end %>
+            <p class="card-title card-title-custom"><%= prebuilt_menu.name %></p>
+              <h5 class="card-cost card-cost-custom"><%= number_to_currency(prebuilt_menu.cost) %></h5>
+              <div class="text-center mt-4">
+              <% unless current_user&.user_detail&.is_admin %>
+              <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success-custom btn-sm' %>
+              <% end %>
+              <%= link_to 'Show', prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
                 <% if current_user&.user_detail&.is_admin %>
-                  <%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning btn-sm mr-2' %>
-                  <%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', style: 'margin-top: 5px;' %>
+                  <%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning-custom btn-sm mr-2' %>
+                  <%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger-custom btn-sm', style: 'margin-top: 5px;' %>
                 <% end %>
               </div>
             </div>
