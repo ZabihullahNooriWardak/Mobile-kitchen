@@ -50,7 +50,7 @@
       <div class="col-md-8 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <h1>New Order</h1>
+            <h1>Order Now</h1>
           </div>
           <div class="card-body">
             <%= form_with model: @order, local: true do |form| %>
@@ -91,7 +91,7 @@
                   </div>
                   <div class="card-body">
                     <%= form.hidden_field :prebuilt_menu_id, value: @prebuilt_menu.id %>
-                    <%= image_tag @prebuilt_menu.image.variant(resize_to_limit: [400, 400]), class: 'img-fluid' if @prebuilt_menu.image.attached? %>
+                    <%= image_tag @prebuilt_menu.image, class: 'img-fluid' if @prebuilt_menu.image.attached? %>
                     <ul class="list-group mt-3">
                       <% @prebuilt_menu.foods.each do |food| %>
                         <li class="list-group-item"><%= food.name %></li>
