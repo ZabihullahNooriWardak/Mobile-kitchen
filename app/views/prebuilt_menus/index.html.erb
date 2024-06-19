@@ -9,58 +9,89 @@
 
   <!-- Include Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIqVSt2vFLK0Zs/6R1FZyM4lJX6b9sPv9M0p3xJdABY4p4f9jrs" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <style>
+    .card-custom {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-10px);
+    }
+
+    .card-body-custom {
+      padding: 1.5rem;
+    }
+
+    .img-thumbnail {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-custom {
+      margin: 0.2rem;
+    }
+  </style>
 </head>
 <body>
   <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-4">
       <h1>Prebuilt Menus</h1>
       <% if current_user&.user_detail&.is_admin %>
         <%= link_to 'New Prebuilt Menu', new_prebuilt_menu_path, class: "btn btn-primary" %>
       <% end %>
     </div>
 
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>Name</th>
-          <th>Cost</th>
-          <th>Image</th>
-          <th>Foods</th>
-          <% if !current_user&.user_detail&.is_admin %>
-            <th>Actions</th>
-          <% end %>
-          <% if current_user&.user_detail&.is_admin %>
-            <th colspan="3">Actions</th>
-          <% end %>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @prebuilt_menus.each do |prebuilt_menu| %>
-          <tr>
-            <td><%= prebuilt_menu.name %></td>
-            <td><%= number_to_currency(prebuilt_menu.cost) %></td>
-            <td><%= image_tag prebuilt_menu.image, class: 'img-thumbnail', size: '100x100' if prebuilt_menu.image.attached? %></td>
-            <td>
-              <ul>
-                <% prebuilt_menu.foods.each do |food| %>
-                  <li><%= food.name %></li>
+    <div class="row">
+      <% @prebuilt_menus.each do |prebuilt_menu| %>
+        <div class="col-md-4 mb-4">
+          <div class="card card-custom">
+            <% if prebuilt_menu.image.attached? %>
+              <%= image_tag prebuilt_menu.image, class: 'img-thumbnail' %>
+            <% else %>
+              <img src="https://via.placeholder.com/300x200?text=No+Image" class="img-thumbnail" alt="No Image Available">
+            <% end %>
+            <div class="card-body card-body-custom">
+              <h5 class="card-title"><%= prebuilt_menu.name %></h5>
+              <p class="card-text"><strong>Cost:</strong> <%= number_to_currency(prebuilt_menu.cost) %></p>
+              <p class="card-text"><strong>Foods:</strong>
+                <ul class="list-unstyled">
+                  <% prebuilt_menu.foods.each do |food| %>
+                    <li><%= food.name %></li>
+                  <% end %>
+                </ul>
+              </p>
+              <div class="d-flex justify-content-between">
+                <%= link_to 'Show', prebuilt_menu, class: 'btn btn-info btn-custom' %>
+                <% unless current_user&.user_detail&.is_admin %>
+                  <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success btn-custom' %>
                 <% end %>
-              </ul>
-            </td>
-            <td><%= link_to 'Show', prebuilt_menu, class: 'btn btn-info' %>
-            <% if !current_user&.user_detail&.is_admin %>
-            <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success' %>
-            <% end %>
-            </td>
-            <% if current_user&.user_detail&.is_admin %>
-              <td><%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning' %></td>
-              <td><%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+                <% if current_user&.user_detail&.is_admin %>
+                  <%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning btn-custom' %>
+                  <%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-custom' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <!-- Include Bootstrap JS -->

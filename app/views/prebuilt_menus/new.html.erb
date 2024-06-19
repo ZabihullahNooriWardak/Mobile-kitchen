@@ -1,9 +1,13 @@
 <!-- app/views/prebuilt_menus/new.html.erb -->
 
 <div class="container mt-5">
-  <h1>New Prebuilt Menu</h1>
-
-  <%= render 'form', prebuilt_menu: @prebuilt_menu %>
-
-  <%= link_to 'Back', prebuilt_menus_path, class: 'btn btn-secondary' %>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h1>New Prebuilt Menu</h1>
+    </div>
+    <div class="card-body">
+      <%= render 'form', prebuilt_menu: @prebuilt_menu %>
+      <%= link_to 'Back', prebuilt_menus_path, class: 'btn btn-secondary mt-3' %>
+    </div>
+  </div>
 </div>
