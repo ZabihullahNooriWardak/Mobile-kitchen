@@ -1,5 +1,9 @@
-<h1>Edit Prebuilt Menu</h1>
+<!-- app/views/prebuilt_menus/edit.html.erb -->
 
-<%= render 'form', prebuilt_menu: @prebuilt_menu %>
+<div class="container mt-5">
+  <h1>Edit Prebuilt Menu</h1>
 
-<%= link_to 'Back', prebuilt_menus_path, class: 'btn btn-secondary' %>
+  <%= render 'form', prebuilt_menu: @prebuilt_menu %>
+
+  <%= link_to 'Back', prebuilt_menus_path, class: 'btn btn-secondary' %>
+</div>

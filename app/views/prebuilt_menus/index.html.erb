@@ -1,41 +1,70 @@
-<h1>Prebuilt Menus</h1>
+<!-- app/views/prebuilt_menus/index.html.erb -->
 
-<% if current_user&.user_detail&.is_admin %>
-  <%= link_to 'New Prebuilt Menu', new_prebuilt_menu_path, class: "btn btn-primary" %>
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prebuilt Menus</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Cost</th>
-      <th>Image</th>
-      <th>Foods</th>
-      <th>ordernow</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIqVSt2vFLK0Zs/6R1FZyM4lJX6b9sPv9M0p3xJdABY4p4f9jrs" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1>Prebuilt Menus</h1>
+      <% if current_user&.user_detail&.is_admin %>
+        <%= link_to 'New Prebuilt Menu', new_prebuilt_menu_path, class: "btn btn-primary" %>
+      <% end %>
+    </div>
 
-  <tbody>
-    <% @prebuilt_menus.each do |prebuilt_menu| %>
-      <tr>
-        <td><%= prebuilt_menu.name %></td>
-        <td><%= number_to_currency(prebuilt_menu.cost) %></td>
-        <td><%= image_tag prebuilt_menu.image if prebuilt_menu.image.attached? %></td>
-        <td>
-          <ul>
-            <% prebuilt_menu.foods.each do |food| %>
-              <li><%= food.name %></li>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+          <th>Image</th>
+          <th>Foods</th>
+          <% if !current_user&.user_detail&.is_admin %>
+            <th>Actions</th>
+          <% end %>
+          <% if current_user&.user_detail&.is_admin %>
+            <th colspan="3">Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @prebuilt_menus.each do |prebuilt_menu| %>
+          <tr>
+            <td><%= prebuilt_menu.name %></td>
+            <td><%= number_to_currency(prebuilt_menu.cost) %></td>
+            <td><%= image_tag prebuilt_menu.image, class: 'img-thumbnail', size: '100x100' if prebuilt_menu.image.attached? %></td>
+            <td>
+              <ul>
+                <% prebuilt_menu.foods.each do |food| %>
+                  <li><%= food.name %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td><%= link_to 'Show', prebuilt_menu, class: 'btn btn-info' %>
+            <% if !current_user&.user_detail&.is_admin %>
+            <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success' %>
             <% end %>
-          </ul>
-        </td>
-        <td><%= link_to 'Show', prebuilt_menu %></td>
-        <td>         <%= link_to 'Order', new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success' %></td>
-        <% if current_user&.user_detail&.is_admin %>
-          <td><%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu) %></td>
-          <td><%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </td>
+            <% if current_user&.user_detail&.is_admin %>
+              <td><%= link_to 'Edit', edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning' %></td>
+              <td><%= button_to 'Destroy', prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgE7n+6fZF5SCR/tT0iP4Q76pDJhX4Xb1Kq1lB0W4AW4E5s/X2y" crossorigin="anonymous"></script>
+</body>
+</html>
