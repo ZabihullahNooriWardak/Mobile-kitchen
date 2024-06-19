@@ -9,7 +9,14 @@
         <div class="col-md-6">
           <p><strong>Full Name:</strong> <%= @order.full_name %></p>
           <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
-          <p><strong>Address:</strong> <%= @order.address %></p>
+          <p><strong>Address:</strong> 
+          <% if @order.address.start_with?('http') %>
+            <%= link_to 'View on Google Maps', @order.address, target: '_blank' %>
+          <% else %>
+            <%= @order.address %>
+          <% end %>
+        </p>
+        
         </div>
         <div class="col-md-6">
           <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
