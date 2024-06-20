@@ -1,23 +1,23 @@
 <div class="container mt-5">
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
-      <h1 class="mb-0">Your Orders</h1>
+      <h1 class="mb-0"><%=t("your_orders")%></h1>
     </div>
     <div class="card-body">
       <% @orders.each do |order| %>
         <div class="order-item mb-3 p-4 border rounded shadow-sm">
-          <h5>Order #<%= order.id %> - <%= order.full_name %>'s Order</h5>
+          <h5><%=t("order")%> #<%= order.id %> - <%= order.full_name %> <%=t("order")%></h5>
           <p>
-            Status: 
+            <%=t("status")%>: 
             <span class="badge bg-<%= order.status == 'pending' ? 'warning' : 'success' %>">
               <%= order.status.capitalize %>
             </span>
           </p>
           <div class="btn-group mt-3" role="group">
-            <%= link_to 'View Details', order_path(order), class: "btn btn-primary btn-sm custom-btn" %>
+            <%= link_to t("view_details") , order_path(order), class: "btn btn-primary btn-sm custom-btn" %>
             <% if order.status == 'pending' %>
-              <%= link_to 'Edit', edit_order_path(order), class: "btn btn-secondary btn-sm custom-btn" %>
-              <%= button_to 'Cancel', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm custom-btn" %>
+              <%= link_to t("edit"), edit_order_path(order), class: "btn btn-secondary btn-sm custom-btn" %>
+              <%= button_to t("cancel"), order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm custom-btn" %>
             <% end %>
           </div>
         </div>
