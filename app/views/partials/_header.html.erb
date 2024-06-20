@@ -99,6 +99,49 @@
       align-items: center;
       font-size: 12px;
     }
+      .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -137,7 +180,15 @@
     </ul>
     <div class="col-md-3 text-end">
       <% if user_signed_in? %>
-        <div class="d-flex text-end justify-content-end">
+      <div class="d-flex text-end justify-content-end">
+      <div class="dropdown">
+      <button class="dropdown-button"><%= t('select_language') %></button>
+      <div class="dropdown-content">
+        <%= link_to "English", locale: 'en' %>
+        <%= link_to "فارسی", locale: 'fa' %>
+        <%= link_to "پښتو", locale: 'ps' %>
+      </div>
+    </div>
           <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary me-2" %>
           <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4" %>
         </div>

@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <% if @cart %>
-        <h5>Total for a person: <%= number_to_currency(@cart.total_price) %></h5>
+        <h5>Total for a person: <%= @cart.total_price %> AFN</h5>
       <% end %>
 
       <% if @cart && @cart.cart_items.any? %>
@@ -22,7 +22,7 @@
               <% @cart.cart_items.each do |item| %>
                 <tr>
                   <td><%= item.food.name %></td>
-                  <td><%= number_to_currency(item.food.price) %></td>
+                  <td><%= item.food.price %> AFN</td>
                   <td><%= button_to 'Remove', cart_item_path(item), method: :delete, class: 'btn btn-danger btn-sm rounded-btn' %></td>
                 </tr>
               <% end %>

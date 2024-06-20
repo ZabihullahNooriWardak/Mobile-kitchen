@@ -10,6 +10,12 @@
 
   <!-- Custom CSS -->
   <style>
+  span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
     .card-custom {
       border: none;
       border-radius: 10px;
@@ -123,7 +129,7 @@
               <img src="https://via.placeholder.com/300x200.png?text=No+Image" class="card-img-top img-thumbnail-custom" alt="Placeholder Image">
             <% end %>
             <div class="card-body card-body-custom">
-              <h5 class="card-cost card-cost-custom"><%= number_to_currency(prebuilt_menu.cost) %></h5>
+              <h5 class="card-cost card-cost-custom"><%= prebuilt_menu.cost %> <span>AFN</span></h5>
               <p class="card-title card-title-custom"><%= prebuilt_menu.name %></p>
               <div class="text-center mt-4">
                 <%= link_to 'Show', prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
