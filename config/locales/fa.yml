@@ -114,7 +114,7 @@ fa:
   cost_per_person: "هزینه به ازای هر نفر"
   total_cost: "هزینه کل"
   update_status: "بروزرسانی وضعیت"
-  welcome_admin: "خوش آمدید، مدیر!"
+  welcome_admin: "ادمین صایب خوش آمدید"
   welcome_user: "خوش آمدید، %{user_name}!"
   about_header: "درباره آشپزخانه همراه"
   about_paragraph1: "راهکار شما برای وعده‌های غذایی راحت و خوشمزه که به درب منزل شما تحویل می‌شود"
