@@ -71,7 +71,7 @@
       <h1 class="mb-4"><%=t("foods")%></h1>
 
       <% if user_signed_in? && current_user.user_detail&.is_admin %>
-        <%= link_to 'New Food', new_food_path, class: "btn btn-primary mb-4" %>
+        <%= link_to t("new_food"), new_food_path, class: "btn btn-primary mb-4" %>
       <% end %>
 
       <% @foods.group_by(&:category).each do |category, foods| %>

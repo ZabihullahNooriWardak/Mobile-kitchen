@@ -15,6 +15,7 @@
       font-size: 1.5rem;
       color: #000;
     }
+    
     .btn {
       border-radius: 50px;
     }
@@ -107,11 +108,12 @@
     .dropdown-button {
       background-color: #007bff;
       color: white;
-      padding: 10px 20px;
+      padding: 6.5px 10px;
       font-size: 16px;
       border: none;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 50px;
+      margin-right: 3px;
     }
 
     .dropdown-button:hover {
@@ -171,11 +173,11 @@
         <% end %>
       <% else %>
       <%= link_to admin_orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-        Orders
+        <%=t("orders")%>
         <i class="fas fa-clipboard-list me-1"></i>
         <span class="cart-badge2"><%= @admin_order_n || 0%></span>
       <% end %>
-        <li><%= link_to 'Add food', new_food_path, class: "nav-link px-2 me-4" %></li>
+        <li><%= link_to t("add_food"), new_food_path, class: "nav-link px-2 me-4" %></li>
       <% end %>
       <li><%= link_to t("about"), about_path, class: "nav-link px-2 me-4" %></li>
     </ul>
@@ -183,7 +185,7 @@
       <% if user_signed_in? %>
       <div class="d-flex text-end justify-content-end">
       <div class="dropdown">
-      <button class="dropdown-button"><%= t('select_language') %></button>
+      <button class="dropdown-button "><%= t('select_language') %></button>
       <div class="dropdown-content">
         <%= link_to "English", locale: 'en' %>
         <%= link_to "فارسی", locale: 'fa' %>

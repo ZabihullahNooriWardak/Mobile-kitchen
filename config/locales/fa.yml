@@ -49,8 +49,11 @@ fa:
   edit_profile: "ویرایش پروفایل"
   logout: "خروج"
   prebuilt_menus: "منوهای از پیش ساخته شده"
-  new_prebuilt_menu: "منوی از پیش ساخته شده جدید"
+  all_orders: "همه سفارش‌ها"
+  new_prebuilt_menu: "اضافه کردن مینیو جدید"
+  select_foods: "انتخاب غذاها"
   afn: "افغانی"
+  edit_food: "ویرایش غذا"
   cheapest: "ارزان‌ترین منوی آشپزخانه پایتخت"
   most_wanted: "پرطرفدارترین منوی آشپزخانه پایتخت"
   proper_menu: "منوی مناسب آشپزخانه پایتخت"
@@ -124,5 +127,5 @@ fa:
   explore_menu: "بررسی منوی ما"
   devise:
    sessions:
-     signed_in: "شما وارد شدید با موفقیت!"
+     signed_in: "شما با موفقیت وارد شدید ."
      signed_out: "شما با موفقیت خارج شدید."

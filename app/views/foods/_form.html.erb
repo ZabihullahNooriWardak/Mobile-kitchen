@@ -11,26 +11,26 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :category, class: "form-label" %>
+    <%= form.label :category,t("category") ,class: "form-label" %>
     <%= form.text_field :category, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :price, class: "form-label" %>
+    <%= form.label :price,t("price") ,class: "form-label" %>
     <%= form.number_field :price, step: 1, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :name, class: "form-label" %>
+    <%= form.label :name, t("name"),class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :image, class: "form-label" %>
+    <%= form.label :image,t("image"),class: "form-label" %>
     <%= form.file_field :image, class: "form-control" %>
   </div>
 
   <div class="text-center">
-    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= form.submit t("save"), class: "btn btn-primary" %>
   </div>
 <% end %>
