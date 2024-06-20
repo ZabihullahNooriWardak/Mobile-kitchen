@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+gem 'i18n'
+gem 'i18n-js' # Optional: For JavaScript translation support

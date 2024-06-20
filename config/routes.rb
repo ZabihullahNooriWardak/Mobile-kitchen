@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  scope "(:locale)", locale: /en|fa|ps/ do
    get 'contact', to: 'static_pages#contact'
   get 'static_pages/contact'
   get 'admin_orders/index'
@@ -28,4 +29,5 @@ Rails.application.routes.draw do
   end
   resources :prebuilt_menus
   root 'foods#index'
+end 
 end
