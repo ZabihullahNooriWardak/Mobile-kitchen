@@ -58,21 +58,21 @@
       <div class="col-md-8 col-lg-6">
         <div class="card mb-4">
           <div class="card-body">
-            <h5 class="card-title  mb-4">Food Details</h5>
+            <h5 class="card-title  mb-4"><%=t("food_details")%></h5>
             
             <p class="card-text">
-              <strong>Name:</strong>
+              <strong><%=t("name")%>:</strong>
               <%= @food.name %>
             </p>
 
             <p class="card-text">
-              <strong>Category:</strong>
+              <strong><%=t("category")%>:</strong>
               <%= @food.category %>
             </p>
 
             <p class="card-text">
-              <strong>Price:</strong>
-              <%= number_to_currency(@food.price) %>
+              <strong><%=t("price")%>:</strong>
+              <%=@food.price %> <%=t("afn")%>
             </p>
 
             <div class="card-text mb-4">
@@ -85,11 +85,11 @@
 
             <div class="d-flex justify-content-right">
               <% if user_signed_in? && current_user.user_detail&.is_admin %>
-                <%= link_to 'Edit', edit_food_path(@food), class: "btn me-1 btn-primary" %>
+                <%= link_to t("edit"), edit_food_path(@food), class: "btn me-1 btn-primary" %>
                 <%else%>
-                <%= button_to 'Add to Cart', cart_items_path(food_id: @food.id), method: :post, class: "btn btn-primary me-1" %>
+                <%= button_to t("add_to_cart"), cart_items_path(food_id: @food.id), method: :post, class: "btn btn-primary me-1" %>
                 <% end %>
-              <%= link_to 'Back', foods_path, class: "btn btn-secondary" %>
+              <%= link_to t("back"), foods_path, class: "btn btn-secondary" %>
             </div>
           </div>
         </div>

@@ -68,7 +68,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1 class="mb-4">Foods</h1>
+      <h1 class="mb-4"><%=t("foods")%></h1>
 
       <% if user_signed_in? && current_user.user_detail&.is_admin %>
         <%= link_to 'New Food', new_food_path, class: "btn btn-primary mb-4" %>
@@ -89,19 +89,19 @@
                 <% end %>
                 <div class="card-body">
                   <h5 class="card-title"><%= food.name %></h5>
-                  <p class="card-text"><strong>Price:</strong> <%= food.price%> AFN</p>
+                  <p class="card-text"><strong><%=t("price")%></strong> <%= food.price%> <%=t("afn")%></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item ms-3"><strong>Category:</strong> <%= food.category %></li>
+                  <li class="list-group-item ms-3"><strong><%=t("category")%>:</strong> <%= food.category %></li>
                 </ul>
                 <div class="card-body">
-                  <%= link_to 'Show', food, class: "btn btn-primary mb-2" %>
+                  <%= link_to t("show"), food, class: "btn btn-primary mb-2" %>
                   <% if user_signed_in? && current_user.user_detail&.is_admin %>
-                    <%= link_to 'Edit', edit_food_path(food), class: "btn btn-secondary mb-2" %>
-                    <%= button_to 'Remove', food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
+                    <%= link_to t("edit"), edit_food_path(food), class: "btn btn-secondary mb-2" %>
+                    <%= button_to t("remove"), food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
                   <% end %>
                   <% if user_signed_in? && !current_user.user_detail&.is_admin %>
-                    <%= button_to 'Add to Cart', cart_items_path(food_id: food.id), method: :post, class: "btn btn-primary" %>
+                    <%= button_to t("add_to_cart"), cart_items_path(food_id: food.id), method: :post, class: "btn btn-primary" %>
                   <% end %>
                 </div>
               </div>
@@ -115,7 +115,7 @@
 
 <!-- Category Button -->
 <button class="btn btn-primary category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
-  Categories
+  <%=t("categories")%>
 </button>
 
 <!-- Category Drawer -->

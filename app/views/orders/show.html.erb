@@ -2,16 +2,16 @@
 <div class="container mt-5">
   <div class="card shadow">
     <div class="card-header bg-primary text-white">
-      <h1 class="mb-0">Order Details</h1>
+      <h1 class="mb-0"><%=t("order_details")%></h1>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <p><strong>Full Name:</strong> <%= @order.full_name %></p>
-          <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
-          <p><strong>Address:</strong> 
+          <p><strong><%=t("full_name")%>:</strong> <%= @order.full_name %></p>
+          <p><strong><%=t("phone_number")%>:</strong> <%= @order.phone_number %></p>
+          <p><strong><%=t("address")%>:</strong> 
           <% if @order.address.start_with?('http') %>
-            <%= link_to 'View on Google Maps', @order.address, target: '_blank' %>
+            <%= link_to t("view_on_google_maps"), @order.address, target: '_blank' %>
           <% else %>
             <%= @order.address %>
           <% end %>
@@ -19,13 +19,13 @@
         
         </div>
         <div class="col-md-6">
-          <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
-          <p><strong>Date:</strong> <%= @order.date %></p>
-          <p><strong>Description:</strong> <%= @order.description %></p>
+          <p><strong><%=t("guest_numbers")%>:</strong> <%= @order.guests_number %></p>
+          <p><strong><%=t("date")%>:</strong> <%= @order.date %></p>
+          <p><strong><%=t("description")%>:</strong> <%= @order.description %></p>
           <p>
-            <strong>Status:</strong> 
+            <strong><%=t("status")%>:</strong> 
             <span class="badge bg-<%= @order.status == 'pending' ? 'warning' : 'success' %>">
-              <%= @order.status.capitalize %>
+              <%= t('@order.status.capitalize') %>
             </span>
           </p>
         </div>
@@ -43,12 +43,12 @@
               <% end %>
             </div>
             <div class="col-md-6">
-              <p><strong>Cost per Person:</strong> <%= number_to_currency(@prebuilt_menu.cost) %></p>
-              <p><strong>Total Cost:</strong> <%= number_to_currency(@order.total_cost) %></p>
+              <p><strong><%=t("cost_per_person")%>:</strong> <%= @prebuilt_menu.cost %><%=t("afn")%></p>
+              <p><strong><%=t("total_cost")%>:</strong> <%=@order.total_cost %><%=t("afn")%></p>
             </div>
           </div>
 
-          <h3>Foods Included:</h3>
+          <h3><%=t("foods_included")%></h3>
           <ul>
             <% @prebuilt_menu.foods.each do |food| %>
               <li><%= food.name %></li>
@@ -71,7 +71,7 @@
       <% end %>
     </div>
     <div class="card-footer text-right">
-      <%= link_to 'Back to Orders', orders_path, class: 'btn btn-primary' %>
+      <%= link_to t("back_to_orders"), orders_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

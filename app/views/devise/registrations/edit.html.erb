@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
-      <h2 class="mb-4 ">Edit <%= resource_name.to_s.humanize %></h2>
+      <h2 class="mb-4 "><%=t("edit_user")%> </h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'needs-validation' }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
@@ -19,7 +19,7 @@
           <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', id: 'floatingPassword' %>
           <%= f.label :password, for: 'floatingPassword' %>
           <% if @minimum_password_length %>
-            <small class="form-text text-muted"><%= @minimum_password_length %> characters minimum</small>
+            <small class="form-text text-muted"><%= @minimum_password_length %> <%=t("characters_minimum")%></small>
           <% end %>
         </div>
 
@@ -34,17 +34,17 @@
         </div>
 
         <div class="mb-3">
-          <%= f.submit "Update", class: 'btn btn-primary w-100 py-2' %>
+          <%= f.submit t("update"), class: 'btn btn-primary w-100 py-2' %>
         </div>
       <% end %>
 
-      <h3 class="mt-4 text-center">Cancel my account</h3>
+      <h3 class="mt-4 text-center"><%=t("cancel_my_account")%></h3>
 
       <div class="mb-3">
-        <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger w-100 py-2' %></p>
+        <p><%= button_to t("cancel_my_account"), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger w-100 py-2' %></p>
       </div>
 
-      <%= link_to "Back", :back, class: 'btn btn-secondary w-100 py-2' %>
+      <%= link_to t("back"), :back, class: 'btn btn-secondary w-100 py-2' %>
     </div>
   </div>
 </div>
