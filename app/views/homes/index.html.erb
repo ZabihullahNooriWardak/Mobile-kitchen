@@ -4,7 +4,7 @@
   <div class="row mb-4">
     <div class="col-md-8 offset-md-2 text-center">
       <% if current_user.user_detail && current_user.user_detail.is_admin %>
-        <p class="welcome-message text-end"><%= t('welcome_admin') %></p>
+        <p class="welcome-message text-center"><%= t('welcome_admin') %></p>
       <% else %>
         <p class="welcome-message text-center"><%= t('welcome_user', user_name: user_name) %></p>
       <% end %>
