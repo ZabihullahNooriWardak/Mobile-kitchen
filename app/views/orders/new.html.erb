@@ -50,28 +50,29 @@
       <div class="col-md-8 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <h1>Order Now</h1>
+            <h1><%= t("order_now")%></h1>
           </div>
           <div class="card-body">
             <%= form_with model: @order, local: true do |form| %>
               <div class="form-group mb-3">
-                <%= form.label :full_name, class: "form-label" %>
-                <%= form.text_field :full_name, placeholder: 'Enter your full name', class: "form-control" %>
+              <%= form.label :full_name, t("full_name"), class: "form-label" %>
+              <%= form.text_field :full_name, placeholder: t("enter_your_full_name"), class: "form-control" %>
+              
               </div>
 
               <div class="form-group mb-3">
-                <%= form.label :phone_number, class: "form-label" %>
-                <%= form.text_field :phone_number, placeholder: 'Enter your phone number', class: "form-control" %>
+                <%= form.label :phone_number,t("phone_number"), class: "form-label" %>
+                <%= form.text_field :phone_number, placeholder: t("enter_your_phone_number"), class: "form-control" %>
               </div>
 
               <div class="form-group mb-3">
-                <%= form.label :address, class: "form-label" %>
-                <%= form.text_field :address, placeholder: 'Enter your address or Google Maps URL', class: "form-control" %>
+                <%= form.label :address,t("address") ,class: "form-label" %>
+                <%= form.text_field :address, placeholder: t("enter_your_address"), class: "form-control" %>
               </div>
 
               <div class="form-group mb-3">
-                <%= form.label :guests_number, class: "form-label" %>
-                <%= form.number_field :guests_number, placeholder: 'Enter number of guests', class: "form-control" %>
+                <%= form.label :guests_number,t("guest_numbers"), class: "form-label" %>
+                <%= form.number_field :guests_number, placeholder: t("enter_your_guest_numbers"), class: "form-control" %>
               </div>
 
               <div class="form-group mb-3">
@@ -80,14 +81,14 @@
               </div>
 
               <div class="form-group mb-4">
-                <%= form.label :description, 'Anything else?', class: "form-label" %>
-                <%= form.text_area :description, placeholder: 'Enter any additional details', class: "form-control", rows: 5 %>
+                <%= form.label :description, t("any_thing_else"), class: "form-label" %>
+                <%= form.text_area :description, placeholder: t("enter_any_additional_details"), class: "form-control", rows: 5 %>
               </div>
 
               <% if @prebuilt_menu %>
                 <div class="card mt-4">
                   <div class="card-header">
-                    <h3>You are ordering : <%= @prebuilt_menu.name %></h3>
+                    <h3><%= t("you_are_ordering")%> : <%= @prebuilt_menu.name %></h3>
                   </div>
                   <div class="card-body">
                     <%= form.hidden_field :prebuilt_menu_id, value: @prebuilt_menu.id %>
@@ -103,8 +104,8 @@
               <% end %>
 
               <div class="text-right mt-4">
-                <%= form.submit 'Place Order', class: "btn btn-primary me-2" %>
-                <%= link_to 'Back to Cart', cart_path, class: "btn btn-secondary btn-slightly-circular" %>
+                <%= form.submit t("place_order"), class: "btn btn-primary me-2" %>
+                <%= link_to t("back_to_cart"), cart_path, class: "btn btn-secondary btn-slightly-circular" %>
               </div>
             <% end %>
           </div>

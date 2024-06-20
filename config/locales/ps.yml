@@ -1,8 +1,121 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :ps
+#
+# This would use the information in config/locales/ps.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     ps:
+#       "yes": yup
+#       enabled: "ON"
+
 ps:
   hello: "سلام"
   contact_us: "موږ سره اړیکه ونیسئ"
   call_us: "موږ ته زنګ ووهئ"
-  chat_on_whatsapp: "په واتس اپ کې خبرې وکړئ"
-  address: "د قلعه کاشف کوچه کمپنی پنجمه ناحیه کابل "
-  connect_with_us: "موږ سره اړیکه ونیسئ"
+  chat_on_whatsapp: "په واتساپ خبرې وکړئ"
+  address: "قلا-کشيف سړک، پنځم ناحیه، کابل"
+  connect_with_us: "زموږ سره اړیکه ونیسئ"
+  mobile: "سیار"
+  kitchen: "پخلنځی"
+  our_custom_menus: "زموږ دودیز مینوګانې"
+  recommendation: "سپارښتنه"
+  foods: "خواړه"
+  order: "سپارش"
+  cost: "هزینه"
+  orders: "سفارشونه"
+  add_food: "خواړه اضافه کړئ"
+  about: "په اړه"
   select_language: "ژبه وټاکئ"
+  edit_profile: "پروفایل سمول"
+  logout: "وتل"
+  prebuilt_menus: "له مخکې جوړ شوي مینوګانې"
+  new_prebuilt_menu: "نوی له مخکې جوړ شوی مینو"
+  afn: "افغانۍ"
+  cheapest: "د پلازمینې پخلنځي تر ټولو ارزانه مینو"
+  most_wanted: "د پلازمینې پخلنځي تر ټولو غوښتل شوی مینو"
+  proper_menu: "د پلازمینې پخلنځي مناسب مینو"
+  show: "ښودل"
+  foods_included: "شامل خواره"
+  edit: "سمول"
+  destroy: "ورانول"
+  evening_menu: "د ماښام مینو"
+  new_food: "نوي خواړه"
+  price: "قیمت"
+  categories: "کتګورۍ"
+  category: "کتګورۍ"
+  name: "نوم"
+  image: "عکس"
+  save: "ژغورل"
+  back: "شاته"
+  admin: "ادمين"
+  add_to_cart: "په کارت کې اضافه کړئ"
+  food_details: "د خوړو جزئیات"
+  your_cart: "ستاسو کارت"
+  action: "عمل"
+  order_now: "اوس امر وکړئ"
+  back_to_foods: "بېرته خوړو ته"
+  remove: "لرې کول"
+  full_name: "بشپړ نوم"
+  enter_your_full_name: "بشپړ نوم مو ولیکئ"
+  phone_number: "د تیلیفون شمېره"
+  enter_your_phone_number: "خپله د تیلیفون شمېره ولیکئ"
+  address: "پته"
+  enter_your_address: "خپله پته یا د ګوګل نقشې لینک ولیکئ"
+  guest_numbers: "د مېلمنو شمېره"
+  enter_your_guest_numbers: "د خپلو مېلمنو شمېره ولیکئ"
+  date: "نیټه"
+  any_thing_else: "بل څه؟"
+  enter_any_additional_details: "هر اضافي جزئیات ولیکئ"
+  place_order: "امر کړئ"
+  back_to_cart: "بېرته کارت ته"
+  your_orders: "ستاسو امرونه"
+  status: "حالت"
+  pending: "په تمه کې"
+  in_progress: "په پرمختګ کې"
+  delivered: "تحویلی شوی"
+  view_details: "جزئیات وګورئ"
+  cancel: "لغوه کول"
+  order_details: "د امر جزئیات"
+  view_on_google_maps: "په ګوګل نقشې کې وګورئ"
+  description: "توضیحات"
+  back_to_orders: "بېرته امرونو ته"
+  cart: "کارت"
+  you_are_ordering: "تاسو امر کوئ"
+  cost_per_person: "د هر کس لپاره لګښت"
+  total_cost: "ټول لګښت"
+  update_status: "حالت تازه کړئ"
+  ps:
+  welcome_admin: "خوش آمدید، ادمین!"
+  welcome_user: "خوش آمدید، %{user_name}!"
+  about_header: "درباره کنډار همراه"
+  about_paragraph1: "ستاسو د چاپیرنو خوراکونو د مفید او خوش مزه لپاره یوه وړه حل برخه"
+  about_paragraph2: |
+    د کنډار همراه کې، زه معتقد یم چې په هر یوه وخت که څپر شوی خپلو زوړه پره کسانو د خوشه او مغذی خوراکو ته حق یې لري. زما وظیفه دا دی چې وخت د خوراک ګر چې په څه له ورځې څخه ساده او ژوند پرمختګ کړي"
+  about_paragraph3: |
+    موږ په خپله لاغره سره مختلفه خوراکو ګټه وګورئ، له ساده چائینی غذا څخه په نوآورانه آشپزخوا د تازه او زده کیتونو سره پرمختګ پرله نظر آویزې. زمونږ پخپلو آشپزانو د پخت و خوراک ته د خپلو ښه لیونکو ته مینه راوسته ورکووه"
+  about_paragraph4: |
+    که چې خپله ښاغلی خوراک، یوه خانواده شام، یا یوه خاص مناسبت لپاره پېژنئ، کنډار همراه ته د ما پورته لري. زمونږ د مینو اکتشاف کړئ، خپله زما سفارش واخلئ، او خپله خوند ته ښه خوراک وګورئ چې څه خپله دره خوند ورسره ترسره کړئ"
+  explore_menu: "زما مینو پیښول"
+  devise:
+   sessions:
+    signed_in: "تاسو په بریالیتوب سره دننه شوی "
+    signed_out: "تاسو په بریالیتوب سره ووتلی"

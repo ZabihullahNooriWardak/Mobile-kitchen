@@ -4,32 +4,34 @@
   <div class="row mb-4">
     <div class="col-md-8 offset-md-2 text-center">
       <% if current_user.user_detail && current_user.user_detail.is_admin %>
-        <p class="welcome-message">Welcome, Admin!</p>
+        <p class="welcome-message text-end"><%= t('welcome_admin') %></p>
       <% else %>
-        <p class="welcome-message">Welcome, <%= user_name %>!</p>
+        <p class="welcome-message text-center"><%= t('welcome_user', user_name: user_name) %></p>
       <% end %>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8 offset-md-2 text-center">
-      <h1 class="display-4">About Mobile Kitchen</h1>
-      <p class="lead">Your one-stop solution for convenient and delicious meals, delivered straight to your door.</p>
+      <h1 class="display-4"><%= t('about_header') %></h1>
+      <p class="lead text-end"><%= t('about_paragraph1') %></p>
       <hr class="my-4">
    
-      <img  src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Mobile Kitchen" class="img-fluid btn mb-4">
-      <p class="text-justify">
-        At Mobile Kitchen, we believe that everyone deserves a delicious and nutritious meal, no matter how busy their schedule. Our mission is to make meal time easier and more enjoyable for you and your family.
+      <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=900" alt="<%= t('kitchen') %>" class="img-fluid btn mb-4">
+      <p class="text-justify text-end">
+        <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
       </p>
-      <p class="text-justify">
-        We offer a wide variety of dishes, from classic comfort foods to innovative culinary creations, all made with fresh, high-quality ingredients. Our chefs are passionate about cooking and dedicated to providing you with the best dining experience possible.
+      <p class="text-justify text-end">
+        <%= t('about_paragraph3').gsub("\n", "<br>").html_safe %>
       </p>
-      <p class="text-justify">
-        Whether you're looking for a quick lunch, a family dinner, or catering for a special event, Mobile Kitchen has you covered. Explore our menu, place your order, and enjoy the convenience of having great food delivered right to your doorstep.
+      <p class="text-justify text-end">
+        <%= t('about_paragraph4').gsub("\n", "<br>").html_safe %>
       </p>
-      <a class="btn btn-primary btn-lg mt-4" href="<%= foods_path %>" role="button">Explore Our Menu</a>
+      <a class="btn btn-primary btn-lg mt-4" href="<%= foods_path %>" role="button"><%= t('explore_menu') %></a>
     </div>
   </div>
 </div>
+
+
 
 <style>
   .welcome-message {

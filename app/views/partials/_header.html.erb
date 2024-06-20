@@ -149,22 +149,23 @@
   <nav class="desktop-navbar d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom d-none d-md-flex">
     <div class="col-md-3 mb-2 mb-md-0 ms-4">
       <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-        Mobile <span class="ms-1 text-primary">Kitchen</span>
+      <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
+
       </h2>
     </div>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <%= link_to "Our custom menus", prebuilt_menus_path, class: "nav-link me-3" %>
-       <%= link_to "contact us", contact_path, class: "nav-link me-3" %>
-      <%= link_to "Recommendations", root_path, class: "nav-link me-3" %>
-      <%= link_to "Foods", foods_path, class: "nav-link px-2 me-3" %>
+    <%= link_to t("our_custom_menus"), prebuilt_menus_path, class: "nav-link me-3" %>
+       <%= link_to t("contact_us"), contact_path, class: "nav-link me-3" %>
+      <%= link_to t("recommendation"), root_path, class: "nav-link me-3" %>
+      <%= link_to t("foods"), foods_path, class: "nav-link px-2 me-3" %>
       <% if current_user && !current_user.user_detail&.is_admin %>
       <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-        Cart
+        <%= t("cart") %>
         <i class="fas fa-shopping-cart me-1"></i>
         <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count  if current_user.cart.present?  %></span>
       <% end %>
         <%= link_to orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-          Orders
+          <%=t("orders")%>
           <i class="fas fa-clipboard-list me-1"></i>
           <span class="cart-badge2"><%= @order_count || 0  %></span>
         <% end %>
@@ -176,7 +177,7 @@
       <% end %>
         <li><%= link_to 'Add food', new_food_path, class: "nav-link px-2 me-4" %></li>
       <% end %>
-      <li><%= link_to 'About', about_path, class: "nav-link px-2 me-4" %></li>
+      <li><%= link_to t("about"), about_path, class: "nav-link px-2 me-4" %></li>
     </ul>
     <div class="col-md-3 text-end">
       <% if user_signed_in? %>
@@ -189,8 +190,8 @@
         <%= link_to "پښتو", locale: 'ps' %>
       </div>
     </div>
-          <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary me-2" %>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4" %>
+          <%= link_to t("edit_profile"), edit_user_registration_path, class: "btn btn-primary me-2" %>
+          <%= button_to t("logout"), destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4" %>
         </div>
       <% else %>
         <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary me-2" %>
@@ -203,7 +204,8 @@
   <nav class="mobile-navbar d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0 ms-4">
       <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-        Mobile <span class="ms-1 text-primary">Kitchen</span>
+      <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
+
       </h2>
     </div>
     <!-- Custom Drawer Button -->

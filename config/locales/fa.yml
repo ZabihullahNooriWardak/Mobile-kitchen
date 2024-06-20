@@ -1,7 +1,120 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :fa
+#
+# This would use the information in config/locales/fa.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     fa:
+#       "yes": yup
+#       enabled: "ON"
+
 fa:
   hello: "سلام"
   contact_us: "تماس با ما"
   call_us: "با ما تماس بگیرید"
-  chat_on_whatsapp: "چت در واتساپ"
-  address: "کوچه قلعه کاشف کمپنی ناحیه پنجم کابل"
-  connect_with_us: "با ما در ارتباط باشید"
+  chat_on_whatsapp: "در واتساپ چت کنید"
+  address: "خیابان قلعه-کاشف، ناحیه پنجم، شرکت کابل"
+  connect_with_us: "با ما ارتباط برقرار کنید"
+  mobile: "سیار"
+  kitchen: "آشپزخانه"
+  our_custom_menus: "منوهای سفارشی ما"
+  recommendation: "توصیه"
+  foods_included: " :غذاها شامل"
+  order: "سفارش"
+  cost: "هزینه"
+  foods: "غذاها"
+  orders: "سفارش‌ها"
+  add_food: "افزودن غذا"
+  about: "درباره"
+  select_language: "انتخاب زبان"
+  edit_profile: "ویرایش پروفایل"
+  logout: "خروج"
+  prebuilt_menus: "منوهای از پیش ساخته شده"
+  new_prebuilt_menu: "منوی از پیش ساخته شده جدید"
+  afn: "افغانی"
+  cheapest: "ارزان‌ترین منوی آشپزخانه پایتخت"
+  most_wanted: "پرطرفدارترین منوی آشپزخانه پایتخت"
+  proper_menu: "منوی مناسب آشپزخانه پایتخت"
+  show: "نمایش"
+  edit: "ویرایش"
+  destroy: "حذف"
+  evening_menu: "منوی شب"
+  new_food: "غذای جدید"
+  price: "قیمت"
+  categories: "دسته‌بندی‌ها"
+  category: "دسته‌بندی"
+  name: "نام"
+  image: "تصویر"
+  save: "ذخیره"
+  back: "بازگشت"
+  admin: "مدیر"
+  add_to_cart: "افزودن به سبد"
+  food_details: "جزئیات غذا"
+  your_cart: "سبد خرید شما"
+  action: "عملیات"
+  order_now: "اکنون سفارش دهید"
+  back_to_foods: "بازگشت به غذاها"
+  remove: "حذف"
+  full_name: "نام کامل"
+  enter_your_full_name: "نام کامل خود را وارد کنید"
+  phone_number: "شماره تلفن"
+  enter_your_phone_number: "شماره تلفن خود را وارد کنید"
+  address: "آدرس"
+  enter_your_address: "آدرس خود یا لینک گوگل مپس را وارد کنید"
+  guest_numbers: "تعداد مهمانان"
+  enter_your_guest_numbers: "تعداد مهمانان خود را وارد کنید"
+  date: "تاریخ"
+  any_thing_else: "چیز دیگری؟"
+  enter_any_additional_details: "هر جزئیات اضافی را وارد کنید"
+  place_order: "سفارش دادن"
+  back_to_cart: "بازگشت به سبد"
+  your_orders: "سفارش‌های شما"
+  status: "وضعیت"
+  pending: "در انتظار"
+  in_progress: "در حال انجام"
+  delivered: "تحویل شده"
+  view_details: "مشاهده جزئیات"
+  cancel: "لغو"
+  order_details: "جزئیات سفارش"
+  view_on_google_maps: "مشاهده در گوگل مپس"
+  description: "توضیحات"
+  cart: "کارت"
+  back_to_orders: "بازگشت به سفارش‌ها"
+  you_are_ordering: "شما سفارش می‌دهید"
+  cost_per_person: "هزینه به ازای هر نفر"
+  total_cost: "هزینه کل"
+  update_status: "بروزرسانی وضعیت"
+  welcome_admin: "خوش آمدید، مدیر!"
+  welcome_user: "خوش آمدید، %{user_name}!"
+  about_header: "درباره آشپزخانه همراه"
+  about_paragraph1: "راهکار شما برای وعده‌های غذایی راحت و خوشمزه که به درب منزل شما تحویل می‌شود"
+  about_paragraph2: |
+    در آشپزخانه همراه، ما باور داریم که همه افراد حق غذای خوشمزه و مغذی را دارند، بدون در نظر گرفتن ازدحام زندگی شخصی‌شان. ماموریت ما این است که وقت غذا را برای شما و خانواده‌تان آسان‌تر و لذت‌بخش‌تر کنیم"
+  about_paragraph3: |
+    ما انواع غذاها را ارائه می‌دهیم؛ از غذاهای رایج تا ابداعات آشپزی نوآورانه، همه با استفاده از مواد اولیه تازه و با کیفیت. شف‌های ما عاشق پخت و پز هستند و به ارائه بهترین تجربه‌ی خوراکی به شما متعهدند"
+  about_paragraph4: |
+    آیا برای ناهار سریع، شام خانوادگی یا مراسم خاص، از خدمات آشپزخانه همراه استفاده می‌کنید؟ با ما همراه باشید، منوی ما را بررسی کنید، سفارش دهید و لذت خوردن از غذاهای عالی را در خانه‌تان تجربه کنید"
+  explore_menu: "بررسی منوی ما"
+  devise:
+   sessions:
+     signed_in: "شما وارد شدید با موفقیت!"
+     signed_out: "شما با موفقیت خارج شدید."
