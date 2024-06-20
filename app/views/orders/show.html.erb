@@ -57,17 +57,17 @@
         </div>
       <% else %>
         <div class="mt-4">
-          <h3>Foods</h3>
+          <h3><%=t("foods")%></h3>
           <ul class="list-group mb-4">
             <% @order.foods.each do |food| %>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <%= food.name %>
-                <span class="badge bg-primary rounded-pill"><%= food.price %> AFN</span>
+                <span class="badge bg-primary rounded-pill"><%= food.price %> <%=t("afn")%></span>
               </li>
             <% end %>
           </ul>
         </div>
-        <p class="h4"><strong>Total Cost:</strong> <%= @order.total_cost %> AFN</p>
+        <p class="h4"><strong><%=t("total_cost")%>:</strong> <%= @order.total_cost %> <%=t("afn")%></p>
       <% end %>
     </div>
     <div class="card-footer text-right">
