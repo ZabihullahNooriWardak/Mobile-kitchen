@@ -2,21 +2,21 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h1 class="text-center mb-4">Find a Good Menu for Yourself</h1>
+      <h1 class=" mb-4"><%= t("find_a_good_menu_for_yourself") %></h1>
 
       <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation' do %>
         <div class="form-group mb-3">
-          <%= label_tag :min_price, 'Minimum Price', class: 'form-label' %>
-          <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: 'Enter minimum price' %>
+          <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
+          <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
         </div>
 
         <div class="form-group mb-4">
-          <%= label_tag :max_price, 'Maximum Price', class: 'form-label' %>
-          <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: 'Enter maximum price' %>
+          <%= label_tag :max_price, t("maximum_price"), class: 'form-label' %>
+          <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: t("enter_maximum_price") %>
         </div>
 
         <div class="d-grid">
-          <%= submit_tag 'Find Menu', class: 'btn btn-primary btn-block' %>
+          <%= submit_tag t("find_menu"), class: 'btn btn-primary btn-block' %>
         </div>
       <% end %>
     </div>
