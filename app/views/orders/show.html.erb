@@ -25,7 +25,7 @@
           <p>
             <strong><%=t("status")%>:</strong> 
             <span class="badge bg-<%= @order.status == 'pending' ? 'warning' : 'success' %>">
-              <%= t('@order.status.capitalize') %>
+              <%= @order.status.capitalize %>
             </span>
           </p>
         </div>
