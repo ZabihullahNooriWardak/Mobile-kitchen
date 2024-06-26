@@ -71,7 +71,7 @@
     .offcanvas-body .nav-link:hover {
       color: #007bff;
     }
-    /* Custom Badge CSS */
+
     .cart-badge {
       position: relative;
       top: -30px;
@@ -86,6 +86,7 @@
       align-items: center;
       font-size: 12px;
     }
+
     .cart-badge2 {
       position: relative;
       top: -30px;
@@ -100,7 +101,8 @@
       align-items: center;
       font-size: 12px;
     }
-      .dropdown {
+
+    .dropdown {
       position: relative;
       display: inline-block;
     }
@@ -108,8 +110,8 @@
     .dropdown-button {
       background-color: #007bff;
       color: white;
-      padding: 10px 10px;
-      font-size: 16px;
+      padding: 5px 10px;
+      font-size: 14px;
       border: none;
       cursor: pointer;
       border-radius: 50px;
@@ -151,53 +153,52 @@
   <nav class="desktop-navbar d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom d-none d-md-flex">
     <div class="col-md-3 mb-2 mb-md-0 ms-4">
       <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-      <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
-
+        <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
       </h2>
     </div>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-    <%= link_to t("our_custom_menus"), prebuilt_menus_path, class: "nav-link me-3" %>
-       <%= link_to t("contact_us"), contact_path, class: "nav-link me-3" %>
+      <%= link_to t("our_custom_menus"), prebuilt_menus_path, class: "nav-link me-3" %>
+      <%= link_to t("contact_us"), contact_path, class: "nav-link me-3" %>
       <%= link_to t("recommendation"), root_path, class: "nav-link me-3" %>
       <%= link_to t("foods"), foods_path, class: "nav-link px-2 me-3" %>
       <% if current_user && !current_user.user_detail&.is_admin %>
-      <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-        <%= t("cart") %>
-        <i class="fas fa-shopping-cart me-1"></i>
-        <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count  if current_user.cart.present?  %></span>
-      <% end %>
+        <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
+          <%= t("cart") %>
+          <i class="fas fa-shopping-cart me-1"></i>
+          <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count  if current_user.cart.present?  %></span>
+        <% end %>
         <%= link_to orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-          <%=t("orders")%>
+          <%= t("orders") %>
           <i class="fas fa-clipboard-list me-1"></i>
-          <span class="cart-badge2"><%= @order_count || 0  %></span>
+          <span class="cart-badge2"><%= @order_count || 0 %></span>
         <% end %>
       <% else %>
-      <%= link_to admin_orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-        <%=t("orders")%>
-        <i class="fas fa-clipboard-list me-1"></i>
-        <span class="cart-badge2"><%= @admin_order_n || 0%></span>
-      <% end %>
+        <%= link_to admin_orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
+          <%= t("orders") %>
+          <i class="fas fa-clipboard-list me-1"></i>
+          <span class="cart-badge2"><%= @admin_order_n || 0 %></span>
+        <% end %>
         <li><%= link_to t("add_food"), new_food_path, class: "nav-link px-2 me-4" %></li>
       <% end %>
       <li><%= link_to t("about"), about_path, class: "nav-link px-2 me-4" %></li>
     </ul>
     <div class="col-md-3 text-end">
       <% if user_signed_in? %>
-      <div class="d-flex text-end justify-content-end">
-      <div class="dropdown">
-      <button class="dropdown-button "><%= t('select_language') %></button>
-      <div class="dropdown-content">
-        <%= link_to "English", locale: 'en' %>
-        <%= link_to "فارسی", locale: 'fa' %>
-        <%= link_to "پښتو", locale: 'ps' %>
-      </div>
-    </div>
-          <%= link_to t("edit_profile"), edit_user_registration_path, class: "btn btn-primary me-2" %>
-          <%= button_to t("logout"), destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4" %>
+        <div class="d-flex text-end justify-content-end">
+          <div class="dropdown">
+            <button class="dropdown-button"><%= t('select_language') %></button>
+            <div class="dropdown-content">
+              <%= link_to "English", locale: 'en' %>
+              <%= link_to "فارسی", locale: 'fa' %>
+              <%= link_to "پښتو", locale: 'ps' %>
+            </div>
+          </div>
+          <%= link_to t("edit_profile"), edit_user_registration_path, class: "btn btn-primary me-2 btn-sm" %>
+          <%= button_to t("logout"), destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4 btn-sm" %>
         </div>
       <% else %>
-        <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary me-2" %>
-        <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary me-4" %>
+        <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary me-2 btn-sm" %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary me-4 btn-sm" %>
       <% end %>
     </div>
   </nav>
@@ -206,8 +207,7 @@
   <nav class="mobile-navbar d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0 ms-4">
       <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-      <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
-
+        <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
       </h2>
     </div>
     <!-- Custom Drawer Button -->
@@ -225,7 +225,6 @@
           <%= link_to "Our prebuilt Menus", prebuilt_menus_path, class: "nav-link me-4" %>
           <%= link_to "Foods", foods_path, class: "nav-link me-4" %>
           <%= link_to "contact us", contact_path, class: "nav-link me-4" %>
-
           <%= link_to "Recommendations", root_path, class: "nav-link me-4" %>
           <% if current_user && !current_user.user_detail&.is_admin %>
             <li class="nav-item"><%= link_to 'View Cart', cart_path, class: "nav-link me-4" %></li>
