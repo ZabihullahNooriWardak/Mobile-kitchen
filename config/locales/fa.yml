@@ -28,6 +28,13 @@
 #       enabled: "ON"
 
 fa:
+  order_not_found: "سفارشی که به دنبال آن هستید پیدا نشد."
+  order_no_longer_editable: "سفارش دیگر قابل ویرایش یا لغو نیست."
+  please_proceed_from_cart_or_select_menu: "لطفا از صفحه سبد خرید ادامه دهید یا یک منوی آماده را انتخاب کنید."
+  your_cart_is_empty: "سبد خرید شما خالی است. لطفا قبل از ادامه اقلامی اضافه کنید."
+  order_placed_successfully: "سفارش با موفقیت ثبت شد."
+  order_updated_successfully: "سفارش با موفقیت به‌روز شد."
+  order_canceled: "سفارش لغو شد."
   hello: "سلام"
   contact_us: "تماس با ما"
   call_us: "با ما تماس بگیرید"

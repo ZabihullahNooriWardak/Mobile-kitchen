@@ -1,7 +1,7 @@
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :check_order_status, only: [:edit, :update, :destroy]
   before_action :check_cart_source, only: [:new]
   before_action :check_cart_presence, only: [:new]
@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = current_user.orders.includes(:order_items, { order_items: :food }).find(params[:id])
     @prebuilt_menu = @order.prebuilt_menu if @order.prebuilt_menu.present?
   end
 
@@ -35,29 +34,27 @@ class OrdersController < ApplicationController
         end
         current_user.cart.cart_items.destroy_all
       end
-      redirect_to orders_path, notice: 'Order placed successfully.'
+      redirect_to orders_path, notice: t('order_placed_successfully')
     else
       render :new
     end
   end
 
   def edit
-    @order = current_user.orders.find(params[:id])
+    # @order is already set by the set_order before_action
   end
 
   def update
-    @order = current_user.orders.find(params[:id])
     if @order.update(order_params)
-      redirect_to order_path(@order), notice: 'Order updated successfully.'
+      redirect_to order_path(@order), notice: t('order_updated_successfully')
     else
       render :edit
     end
   end
 
   def destroy
-    @order = current_user.orders.find(params[:id])
     @order.destroy
-    redirect_to orders_path, notice: 'Order canceled.'
+    redirect_to orders_path, notice: t('order_canceled')
   end
 
   private
@@ -67,28 +64,28 @@ class OrdersController < ApplicationController
   end
 
   def set_order
-    @order = Order.find(params[:id])
+    @order = current_user.orders.includes(:order_items, { order_items: :food }).find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "Order not found."
+    flash[:alert] = t('order_not_found')
     redirect_to orders_path
   end
 
   def check_order_status
     if @order.status != 'pending'
-      flash[:alert] = "Order can no longer be edited or canceled."
+      flash[:alert] = t('order_no_longer_editable')
       redirect_to orders_path
     end
   end
 
   def check_cart_source
     unless params[:from_cart] || params[:prebuilt_menu_id]
-      redirect_to cart_path, alert: "Please proceed from the cart page or select a prebuilt menu."
+      redirect_to cart_path, alert: t('please_proceed_from_cart_or_select_menu')
     end
   end
 
   def check_cart_presence
     if (current_user.cart.nil? || current_user.cart.foods.empty?) && params[:prebuilt_menu_id].nil?
-      redirect_to cart_path, alert: "Your cart is empty. Please add items before proceeding to checkout."
+      redirect_to cart_path, alert: t('your_cart_is_empty')
     end
   end
 end
