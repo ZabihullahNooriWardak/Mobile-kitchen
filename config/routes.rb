@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get 'orders/update'
   get 'orders/destroy'
   get 'about', to:'homes#index'
+  get 'recommendations', to: 'recommendations#new'
+  post 'recommendations', to: 'recommendations#create'
+
   resource :cart, only: [:show] do
     resources :cart_items, only: [:create, :destroy]
   end

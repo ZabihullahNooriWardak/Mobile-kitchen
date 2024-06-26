@@ -159,7 +159,7 @@
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <%= link_to t("our_custom_menus"), prebuilt_menus_path, class: "nav-link me-3" %>
       <%= link_to t("contact_us"), contact_path, class: "nav-link me-3" %>
-      <%= link_to t("recommendation"), root_path, class: "nav-link me-3" %>
+     <%= link_to 'Recommendations', recommendations_path, class: 'nav-link me-3' %>
       <%= link_to t("foods"), foods_path, class: "nav-link px-2 me-3" %>
       <% if current_user && !current_user.user_detail&.is_admin %>
         <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
