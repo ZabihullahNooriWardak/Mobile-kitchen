@@ -19,6 +19,17 @@
       max-width: 100%;
       height: auto;
     }
+    .img-container {
+      max-width: 100%;
+      height: 500px; /* Set a fixed height */
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .img-container img {
+      max-height: 100%;
+    }
     ul.list-group li.list-group-item {
       font-size: 0.875rem;
     }
@@ -36,18 +47,20 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">
-            <p><strong><%= t("cost")%>:</strong> <%= @prebuilt_menu.cost %> <%= t("afn")%></p>
+            <p><strong><%= t("cost") %>:</strong> <%= @prebuilt_menu.cost %> <%= t("afn") %></p>
           </div>
           <div class="col-md-6">
             <% if @prebuilt_menu.image.attached? %>
-              <%= image_tag @prebuilt_menu.image, class: 'img-fluid' %>
+              <div class="img-container">
+                <%= image_tag @prebuilt_menu.image, class: 'img-fluid' %>
+              </div>
             <% else %>
               <p>No image available</p>
             <% end %>
           </div>
         </div>
         <div class="mt-4">
-          <h3><%= t("foods_included")%></h3>
+          <h3><%= t("foods_included") %></h3>
           <ul class="list-group">
             <% @prebuilt_menu.foods.each do |food| %>
               <li class="list-group-item"><%= food.name %></li>
