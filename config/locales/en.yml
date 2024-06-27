@@ -95,6 +95,8 @@ en:
   order_canceled: "Order canceled."
   enter_your_guest_numbers: "Enter your guest numbers"
   date: "Date"
+  ask_a_question: "Ask a question..."
+  send: "Send"
   minimum_price: "Minimum Price"
   maximum_price: "Maximum Price"
   enter_minimum_price: "Enter minimum price"

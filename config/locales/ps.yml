@@ -48,6 +48,8 @@ ps:
   foods: "خواړه"
   order: "سپارش"
   minimum_price: " کمترین قیمت"
+  ask_a_question: "                 ...یوه پوشتنه ولیکئ"
+  send: "ولیژی"
   maximum_price: " بیشترین قیمت"
   enter_minimum_price: " کمترین قیمت وټاکئ"
   enter_maximum_price: " بیشترین قیمت وټاکئ"

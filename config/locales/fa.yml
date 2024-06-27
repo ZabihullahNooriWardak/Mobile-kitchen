@@ -57,6 +57,8 @@ fa:
   orders: "سفارشا"
   add_food: "افزودن غذا"
   about: "درباره"
+  ask_a_question: "                   ...یک سوال بپرسید"
+  send: "ارسال"
   select_language: "انتخاب زبان"
   edit_profile: "ویرایش پروفایل"
   logout: "خروج"
