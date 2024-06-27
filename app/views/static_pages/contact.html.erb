@@ -117,10 +117,12 @@
 
     #chatbox-input {
       flex: 1;
-      padding: 10px;
+      padding: 0px;
       border: 1px solid #ddd;
       border-radius: 10px;
       margin-right: 10px;
+      overflow: auto;
+      resize: none; /* Allow the textarea to resize vertically */
     }
 
     #chatbox-send {
@@ -214,7 +216,7 @@
     </div>
 
     <div class="mt-5 text-center">
-      <h2 class="section-title"><%=t("connect_with_us")%></h2>
+      <h2 class="section-title"><%= t("connect_with_us") %></h2>
       <div>
         <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
         <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -229,8 +231,8 @@
     <div id="chatbox">
       <div id="chatbox-messages"></div>
       <div class="chatbox-input-container">
-      <input type="text" id="chatbox-input" placeholder="<%= t('ask_a_question') %>">
-        <button id="chatbox-send"><%=t("send")%></button>
+        <textarea id="chatbox-input" placeholder="<%= t('ask_a_question') %>"></textarea>
+        <button id="chatbox-send"><%= t("send") %></button>
       </div>
     </div>
   </div>
@@ -279,6 +281,11 @@
 
         document.getElementById('chatbox-input').value = ''; // Clear the input field
       });
+    });
+
+    document.getElementById('chatbox-input').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
     });
   </script>
 </body>
