@@ -117,12 +117,13 @@
 
     #chatbox-input {
       flex: 1;
-      padding: 0px;
-      border: 1px solid #ddd;
+      padding: 1px;
+      border: 1px solid grey;
       border-radius: 10px;
       margin-right: 10px;
-      overflow: auto;
-      resize: none; /* Allow the textarea to resize vertically */
+      overflow-y: auto;
+      resize: none; /* Prevent resizing horizontally */
+      max-height: 100px; /* Limit maximum height */
     }
 
     #chatbox-send {
@@ -281,11 +282,6 @@
 
         document.getElementById('chatbox-input').value = ''; // Clear the input field
       });
-    });
-
-    document.getElementById('chatbox-input').addEventListener('input', function() {
-      this.style.height = 'auto';
-      this.style.height = this.scrollHeight + 'px';
     });
   </script>
 </body>
