@@ -2,14 +2,18 @@
 <div class="chatbot-container">
   <div id="chatbox">
     <div id="chatbox-messages"></div>
-    <input type="text" id="chatbox-input" placeholder="Ask a question...">
-    <button id="chatbox-send">Send</button>
+    <div class="chatbox-input-container">
+      <input type="text" id="chatbox-input" placeholder="Ask a question...">
+      <button id="chatbox-send">Send</button>
+    </div>
   </div>
 </div>
 
 <script>
   document.getElementById('chatbox-send').addEventListener('click', function() {
     var input = document.getElementById('chatbox-input').value;
+    if (input.trim() === '') return;
+
     fetch('/chatbot/respond', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,6 +22,7 @@
     .then(response => response.json())
     .then(data => {
       var chatboxMessages = document.getElementById('chatbox-messages');
+      
       var userMessage = document.createElement('div');
       userMessage.className = 'user-message';
       userMessage.textContent = input;
@@ -28,43 +33,84 @@
       botMessage.textContent = data.answer;
       chatboxMessages.appendChild(botMessage);
 
+      chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+
       document.getElementById('chatbox-input').value = ''; // Clear the input field
     });
   });
 </script>
-
 <style>
   .chatbot-container {
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
   }
+
   #chatbox {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 20px;
+    border-radius: 10px;
   }
+
   #chatbox-messages {
-    height: 200px;
+    height: 300px;
     overflow-y: scroll;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
   }
+
+  .chatbox-input-container {
+    display: flex;
+    align-items: center;
+  }
+
+  #chatbox-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+
+  #chatbox-send {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #chatbox-send:hover {
+    background-color: #0056b3;
+  }
+
+  .user-message, .bot-message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+
   .user-message {
     background-color: #e0e0e0;
-    padding: 5px;
-    margin: 5px 0;
-    border-radius: 5px;
+    align-self: flex-end;
+    margin-left: auto;
+    text-align: right;
   }
+
   .bot-message {
     background-color: #007bff;
     color: white;
-    padding: 5px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  #chatbox-input {
-    width: calc(100% - 50px);
-    padding: 5px;
-  }
-  #chatbox-send {
-    padding: 5px;
+    text-align: left;
   }
 </style>
