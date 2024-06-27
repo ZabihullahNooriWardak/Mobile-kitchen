@@ -29,6 +29,9 @@ class FoodsController < ApplicationController
     if @food.save
       redirect_to @food, notice: 'Food was successfully created.'
     else
+      if @food.errors[:name].include?("has already been taken")
+        flash.now[:alert] = 'Food with this name already exists.'
+      end
       render :new, status: :unprocessable_entity
     end
   end
