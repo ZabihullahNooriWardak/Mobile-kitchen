@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chatbot/index'
+  get 'chatbot/respond'
   scope "(:locale)", locale: /en|fa|ps/ do
    get 'contact', to: 'static_pages#contact'
   get 'static_pages/contact'
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   get 'orders/update'
   get 'orders/destroy'
   get 'about', to:'homes#index'
+  get 'chatbot', to: 'chatbot#index'
+  post 'chatbot/respond', to: 'chatbot#respond'
   get 'recommendations', to: 'recommendations#new'
   post 'recommendations', to: 'recommendations#create'
 

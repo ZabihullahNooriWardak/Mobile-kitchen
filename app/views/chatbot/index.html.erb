@@ -1,0 +1,70 @@
+<!-- app/views/chatbot/index.html.erb -->
+<div class="chatbot-container">
+  <div id="chatbox">
+    <div id="chatbox-messages"></div>
+    <input type="text" id="chatbox-input" placeholder="Ask a question...">
+    <button id="chatbox-send">Send</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('chatbox-send').addEventListener('click', function() {
+    var input = document.getElementById('chatbox-input').value;
+    fetch('/chatbot/respond', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: input })
+    })
+    .then(response => response.json())
+    .then(data => {
+      var chatboxMessages = document.getElementById('chatbox-messages');
+      var userMessage = document.createElement('div');
+      userMessage.className = 'user-message';
+      userMessage.textContent = input;
+      chatboxMessages.appendChild(userMessage);
+
+      var botMessage = document.createElement('div');
+      botMessage.className = 'bot-message';
+      botMessage.textContent = data.answer;
+      chatboxMessages.appendChild(botMessage);
+
+      document.getElementById('chatbox-input').value = ''; // Clear the input field
+    });
+  });
+</script>
+
+<style>
+  .chatbot-container {
+    width: 300px;
+    margin: 0 auto;
+  }
+  #chatbox {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  #chatbox-messages {
+    height: 200px;
+    overflow-y: scroll;
+  }
+  .user-message {
+    background-color: #e0e0e0;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  .bot-message {
+    background-color: #007bff;
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  #chatbox-input {
+    width: calc(100% - 50px);
+    padding: 5px;
+  }
+  #chatbox-send {
+    padding: 5px;
+  }
+</style>

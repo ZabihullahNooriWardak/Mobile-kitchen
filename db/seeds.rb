@@ -13,3 +13,11 @@ UserDetail.create!(user: admin1, phone_number: '1112223333', name: 'Admin', last
 UserDetail.create!(user: admin2, phone_number: '4445556666', name: 'Admin', last_name: 'Two', is_admin: true)
 
 puts "Seeded database with users and user details."
+# db/seeds.rb
+
+Faq.create([
+  { question: 'What is your return policy?', answer: 'Our return policy lasts 30 days...' },
+  { question: 'How do I track my order?', answer: 'You can track your order using the tracking link sent to your email...' },
+  # Add more FAQs here
+])
+
