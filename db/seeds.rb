@@ -17,6 +17,7 @@ puts "Seeded database with users and user details."
 
 Faq.create([
   { question: 'سلام ', answer: 'ع سلام' },
+{question: 'تشکر', answer: 'خواهش میکنم '},
   { question: 'چی خدمات یا خدمت دارین ', answer: 'ما اشپز خانه سیار استیم ' },
     {question: 'ایا بعد از رسید سفارش یا اردر خوده کنسل یا لغوه کرده میتانم ', answer: 'نخیر ممکن نیست چنین کاری '},
     {question: 'آیا میتوانم با یگ شخص فزیکی یا حضوری یا انسان واقعی مسچ کنم ', answer: 'بلی میتوانید شماره وتساپ ما ۰۷۷۶۵۷۸۶۰۳ است '},
@@ -122,6 +123,7 @@ Faq.create([
   { question: 'Can I cancel my order after delivery?', answer: 'No, it is not possible to cancel an order after delivery.' },
   { question: 'Can I use your services for mourning ceremonies?', answer: 'Yes, we offer services for mourning ceremonies.' },
   { question: 'Can you provide tea or coffee?', answer: 'Yes, we can.' },
+  {question: 'thank you ', answer: 'you are welcome '},
   { question: 'Do you offer generator rentals?', answer: 'Yes, we offer generator rentals.' },
   { question: 'Can I use your services for funeral ceremonies?', answer: 'Yes, we offer services for funeral ceremonies.' },
   { question: 'How can I cancel my order?', answer: 'You can cancel your order in the orders section.' },
@@ -157,6 +159,7 @@ Faq.create([
   { question: 'یوه مناسب قیمت مینیو ته وړاندیز وکړئ.', answer: 'یوه مناسب قیمت مینیو ۳۷۰ افغانی قیمت لري. تاسو کولای شئ دا په سپارښتنې برخه کې پیدا کړئ.' },
   { question: 'څنګه کولی شم د خدماتو سره اړیکه ونیسم؟', answer: 'تاسو کولای شئ زموږ سره د ایمیل له لارې اړیکه ونیسئ.' },
   { question: 'ستاسو پته څه ده؟', answer: 'زموږ پته کمپنۍ سړک، قلعه کاشف، کابل ده.' },
+  {question:'مننه ', answer: 'هیله کوم '},  
   { question: 'څنګه کولی شم له تخفیفونو او ځانګړو وړاندیزونو ګټه واخلم؟', answer: 'تاسو کولای شئ زموږ خبرپاڼې ته د ګډون له لارې له تخفیفونو او ځانګړو وړاندیزونو ګټه واخلئ.' },
   { question: 'آیا زه کولی شم خپل امر لغوه کړم؟', answer: 'هو، تاسو کولای شئ خپل امر لغوه کړئ که چیرې دا لا هم نه وي لیږدول شوی.' },
   { question: 'څنګه کولی شم د خپل امر وضعیت وګورم؟', answer: 'تاسو کولای شئ د خپل کارن پینل له لارې د خپل امر وضعیت وګورئ.' },
