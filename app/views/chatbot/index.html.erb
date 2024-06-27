@@ -9,46 +9,17 @@
   </div>
 </div>
 
-<script>
-  document.getElementById('chatbox-send').addEventListener('click', function() {
-    var input = document.getElementById('chatbox-input').value;
-    if (input.trim() === '') return;
-
-    fetch('/chatbot/respond', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question: input })
-    })
-    .then(response => response.json())
-    .then(data => {
-      var chatboxMessages = document.getElementById('chatbox-messages');
-      
-      var userMessage = document.createElement('div');
-      userMessage.className = 'user-message';
-      userMessage.textContent = input;
-      chatboxMessages.appendChild(userMessage);
-
-      var botMessage = document.createElement('div');
-      botMessage.className = 'bot-message';
-      botMessage.textContent = data.answer;
-      chatboxMessages.appendChild(botMessage);
-
-      chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
-
-      document.getElementById('chatbox-input').value = ''; // Clear the input field
-    });
-  });
-</script>
 <style>
   .chatbot-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
     background-color: #fff;
+    padding: 20px;
   }
 
   #chatbox {
@@ -57,7 +28,7 @@
   }
 
   #chatbox-messages {
-    height: 300px;
+    height: 400px;
     overflow-y: scroll;
     margin-bottom: 20px;
     padding: 10px;
@@ -114,3 +85,34 @@
     text-align: left;
   }
 </style>
+
+<script>
+  document.getElementById('chatbox-send').addEventListener('click', function() {
+    var input = document.getElementById('chatbox-input').value;
+    if (input.trim() === '') return;
+
+    fetch('/chatbot/respond', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: input })
+    })
+    .then(response => response.json())
+    .then(data => {
+      var chatboxMessages = document.getElementById('chatbox-messages');
+      
+      var userMessage = document.createElement('div');
+      userMessage.className = 'user-message';
+      userMessage.textContent = input;
+      chatboxMessages.appendChild(userMessage);
+
+      var botMessage = document.createElement('div');
+      botMessage.className = 'bot-message';
+      botMessage.textContent = data.answer;
+      chatboxMessages.appendChild(botMessage);
+
+      chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+
+      document.getElementById('chatbox-input').value = ''; // Clear the input field
+    });
+  });
+</script>

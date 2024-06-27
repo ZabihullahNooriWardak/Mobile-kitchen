@@ -16,7 +16,7 @@ puts "Seeded database with users and user details."
 # db/seeds.rb
 
 Faq.create([
-  { question: 'What is your return policy?', answer: 'Our return policy lasts 30 days...' },
+  { question: 'What is your return policy?', answer: 'Our return policy lasts 30 days no way we can not return you any thing and there fore we hope you are not sad from us' },
   { question: 'How do I track my order?', answer: 'You can track your order using the tracking link sent to your email...' },
   # Add more FAQs here
 ])

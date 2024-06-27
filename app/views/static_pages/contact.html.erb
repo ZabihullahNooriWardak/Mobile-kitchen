@@ -73,6 +73,113 @@
     .contact-info a:hover {
       text-decoration: underline;
     }
+
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      height: 400px;
+      z-index: 1000;
+    }
+
+    #chatbox {
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #chatbox-messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .chatbox-input-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #chatbox-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+
+    #chatbox-send {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #chatbox-send:hover {
+      background-color: #0056b3;
+    }
+
+    .user-message, .bot-message {
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #e0e0e0;
+      align-self: flex-end;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .bot-message {
+      background-color: #007bff;
+      color: white;
+      text-align: left;
+    }
+
+    .faq-button {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      font-size: 1.5rem;
+      z-index: 1001;
+    }
+
+    .faq-button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -117,9 +224,62 @@
     </div>
   </div>
 
+  <!-- Chatbot container -->
+  <div class="chatbot-container" id="chatbot-container">
+    <div id="chatbox">
+      <div id="chatbox-messages"></div>
+      <div class="chatbox-input-container">
+        <input type="text" id="chatbox-input" placeholder="Ask a question...">
+        <button id="chatbox-send">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Button -->
+  <button class="faq-button" id="faq-button">
+    <i class="fas fa-question"></i>
+  </button>
+
   <!-- Include Bootstrap JS and FontAwesome JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgE7n+6fZF5SCR/tT0iP4Q76pDJhX4Xb1Kq1lB0W4AW4E5s/X2y" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-6JB0VfyVEd0+vnRa/Jjq+PoJ8fVt+K3t1Q2Hf6slpUHgBNjR7dlt4dZZKB+maVwS/3tGp7Pk5JjRAkxkRjpfaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Chatbot JS -->
+  <script>
+    document.getElementById('faq-button').addEventListener('click', function() {
+      var chatbotContainer = document.getElementById('chatbot-container');
+      chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'flex' : 'none';
+    });
+
+    document.getElementById('chatbox-send').addEventListener('click', function() {
+      var input = document.getElementById('chatbox-input').value;
+      if (input.trim() === '') return;
+
+      fetch('/chatbot/respond', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: input })
+      })
+      .then(response => response.json())
+      .then(data => {
+        var chatboxMessages = document.getElementById('chatbox-messages');
+        
+        var userMessage = document.createElement('div');
+        userMessage.className = 'user-message';
+        userMessage.textContent = input;
+        chatboxMessages.appendChild(userMessage);
+
+        var botMessage = document.createElement('div');
+        botMessage.className = 'bot-message';
+        botMessage.textContent = data.answer;
+        chatboxMessages.appendChild(botMessage);
+
+        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+
+        document.getElementById('chatbox-input').value = ''; // Clear the input field
+      });
+    });
+  </script>
 </body>
 </html>
