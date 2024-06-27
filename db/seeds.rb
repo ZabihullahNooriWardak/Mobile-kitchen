@@ -22,6 +22,7 @@ Faq.create([
     {question: 'ایا بعد از رسید سفارش یا اردر خوده کنسل یا لغوه کرده میتانم ', answer: 'نخیر ممکن نیست چنین کاری '},
     {question: 'آیا میتوانم با یگ شخص فزیکی یا حضوری یا انسان واقعی مسچ کنم ', answer: 'بلی میتوانید شماره وتساپ ما ۰۷۷۶۵۷۸۶۰۳ است '},
     {question: 'شما کی هستید استید ', answer: 'من ربات استم '},
+
     {question: 'وظیفه شما چی است یا چیست ', answer: 'پاسخ به سوالات شما '},
     {question: 'آیا شما احساسات دارید ', answer: 'نخیر من احساس ندارم فقط یگ برنامه کمپیوتری استم '},
     {question: 'نام یا اسم شما چیست ', answer: 'نام مشخص ندارم '},
@@ -77,6 +78,7 @@ Faq.create([
     {question: 'آیا میتوانم از خدمات شما در مراسمات مذهبی استفاده کنم ', answer: 'بلی ما در مراسمات مذهبی هم خدمات را ارائه میکنیم '},
     {question: 'چطور میتوانم سفارش خوده خودرا خود را پیگیری کنم یا سی کنم بیبینم ', answer: 'شما میتوانید از بخش سفارش ها انرا پیگیری کنید '},
     { question: 'Hello', answer: 'Hi' },
+    {question:'Hi', answer: 'Hello' },
   { question: 'What services do you offer?', answer: 'We are a mobile kitchen.' },
   { question: 'Can I cancel my order after it is placed?', answer: 'No, it is not possible to cancel an order after it is placed.' },
   { question: 'Can I speak with a real person?', answer: 'Yes, you can contact us on WhatsApp at 0776578603.' },
