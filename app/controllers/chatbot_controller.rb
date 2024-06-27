@@ -1,4 +1,3 @@
-# app/controllers/chatbot_controller.rb
 class ChatbotController < ApplicationController
   protect_from_forgery with: :null_session # Add this to handle JSON requests
 
@@ -7,10 +6,31 @@ class ChatbotController < ApplicationController
 
   def respond
     user_question = params[:question]
-    faq = Faq.find_by('question LIKE ?', "%#{user_question}%")
+    faqs = Faq.all.to_a # Load all FAQs into memory for processing
 
-    if faq
-      render json: { answer: faq.answer }
+    # Split user question into words
+    user_words = user_question.downcase.split(/[^\p{Alnum}]+/)
+
+    # Track matches and scores
+    matches = []
+
+    # Calculate match scores based on number of matched words
+    faqs.each do |faq|
+      faq_words = faq.question.downcase.split(/[^\p{Alnum}]+/)
+      match_count = (user_words & faq_words).length # Number of common words
+
+      if match_count > 0
+        matches << { faq: faq, match_count: match_count }
+      end
+    end
+
+    # Sort matches by descending match count
+    matches.sort_by! { |match| -match[:match_count] }
+
+    if matches.any?
+      # Select the FAQ with the highest match count
+      best_match = matches.first[:faq]
+      render json: { answer: best_match.answer }
     else
       render json: { answer: 'I can\'t answer your question. Please email us at support@example.com.' }
     end
