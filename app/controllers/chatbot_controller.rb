@@ -1,38 +1,29 @@
 class ChatbotController < ApplicationController
-  protect_from_forgery with: :null_session # Add this to handle JSON requests
+  protect_from_forgery with: :null_session
 
   def index
   end
 
   def respond
     user_question = params[:question]
-    faqs = Faq.all.to_a # Load all FAQs into memory for processing
+    faqs = Faq.all
 
-    # Split user question into words
-    user_words = user_question.downcase.split(/[^\p{Alnum}]+/)
+    # Prepare the TF-IDF model
+    documents = faqs.map { |faq| TfIdfSimilarity::Document.new(faq.question) }
+    model = TfIdfSimilarity::TfIdfModel.new(documents)
+    user_document = TfIdfSimilarity::Document.new(user_question)
 
-    # Track matches and scores
-    matches = []
+    # Calculate cosine similarity between user question and each FAQ question
+    similarities = model.similarities(user_document)
+    faq_similarities = faqs.each_with_index.map { |faq, index| [faq, similarities[index]] }
 
-    # Calculate match scores based on number of matched words
-    faqs.each do |faq|
-      faq_words = faq.question.downcase.split(/[^\p{Alnum}]+/)
-      match_count = (user_words & faq_words).length # Number of common words
+    # Find the FAQ with the highest similarity score
+    best_match = faq_similarities.max_by { |faq, similarity| similarity }
 
-      if match_count > 0
-        matches << { faq: faq, match_count: match_count }
-      end
-    end
-
-    # Sort matches by descending match count
-    matches.sort_by! { |match| -match[:match_count] }
-
-    if matches.any?
-      # Select the FAQ with the highest match count
-      best_match = matches.first[:faq]
-      render json: { answer: best_match.answer }
+    if best_match && best_match[1] > 0.1 # Adjust the threshold as needed
+      render json: { answer: best_match[0].answer }
     else
-      render json: { answer: 'I can\'t answer your question. Please email us at support@example.com.' }
+      render json: { answer: "I can't answer your question. Please email us at support@example.com." }
     end
   end
 end
