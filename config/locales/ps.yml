@@ -51,6 +51,7 @@ ps:
   ask_a_question: "...یوه پوشتنه ولیکئ"
   send: "ولیژی"
   maximum_price: " بیشترین قیمت"
+  your_cart_is_empty: 'ستاسو کارت تش دی  '
   enter_minimum_price: " کمترین قیمت وټاکئ"
   enter_maximum_price: " بیشترین قیمت وټاکئ"
   find_menu: "مینیوپیدا کری"

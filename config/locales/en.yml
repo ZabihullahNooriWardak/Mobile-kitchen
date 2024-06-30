@@ -97,6 +97,7 @@ en:
   date: "Date"
   ask_a_question: "Ask a question..."
   send: "Send"
+  your_cart_is_empty: 'Your cart is empty.'
   minimum_price: "Minimum Price"
   maximum_price: "Maximum Price"
   enter_minimum_price: "Enter minimum price"

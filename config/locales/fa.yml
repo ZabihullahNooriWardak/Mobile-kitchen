@@ -59,6 +59,7 @@ fa:
   about: "درباره"
   ask_a_question: " ...یک سوال بپرسید"
   send: "ارسال"
+  your_cart_is_empty: 'کارت شما خالی است '
   select_language: "انتخاب زبان"
   edit_profile: "ویرایش پروفایل"
   logout: "خروج"
