@@ -74,6 +74,9 @@
           <%= button_to t("destroy"), @prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         <% end %>
         <%= link_to t("back"), prebuilt_menus_path, class: 'btn btn-secondary' %>
+        <% unless current_user&.user_detail&.is_admin %>
+        <%= link_to t("order"), new_order_path(prebuilt_menu_id: @prebuilt_menu.id), class: 'btn btn-success' %>
+      <% end %>
       </div>
     </div>
   </div>
