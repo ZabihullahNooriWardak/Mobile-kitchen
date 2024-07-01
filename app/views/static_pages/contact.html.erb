@@ -159,6 +159,7 @@
       background-color: #007bff;
       color: white;
       text-align: left;
+      position: relative;
     }
 
     .faq-button {
@@ -192,8 +193,8 @@
       border-radius: 50%;
       border-left-color: #007bff;
       animation: spin 1s linear infinite;
-      display: none;
-      margin-left: 10px;
+      display: inline-block;
+      margin: auto;
     }
 
     @keyframes spin {
@@ -252,7 +253,6 @@
       <div class="chatbox-input-container">
         <textarea id="chatbox-input" placeholder="<%= t('ask_a_question') %>"></textarea>
         <button id="chatbox-send"><%= t("send") %></button>
-        <div class="spinner" id="spinner"></div> <!-- Spinner element -->
       </div>
     </div>
   </div>
@@ -285,9 +285,15 @@
       userMessage.textContent = input;
       chatboxMessages.appendChild(userMessage);
 
-      // Show spinner
-      var spinner = document.getElementById('spinner');
-      spinner.style.display = 'inline-block';
+      // Show spinner in bot response area
+      var botMessage = document.createElement('div');
+      botMessage.className = 'bot-message';
+      var spinner = document.createElement('div');
+      spinner.className = 'spinner';
+      botMessage.appendChild(spinner);
+      chatboxMessages.appendChild(botMessage);
+
+      chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
 
       // Simulate bot "thinking" for 1 second
       setTimeout(function() {
@@ -298,13 +304,9 @@
         })
         .then(response => response.json())
         .then(data => {
-          // Hide spinner
-          spinner.style.display = 'none';
-
-          var botMessage = document.createElement('div');
-          botMessage.className = 'bot-message';
+          // Remove spinner and show bot response
+          botMessage.removeChild(spinner);
           botMessage.textContent = data.answer;
-          chatboxMessages.appendChild(botMessage);
 
           chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
 
