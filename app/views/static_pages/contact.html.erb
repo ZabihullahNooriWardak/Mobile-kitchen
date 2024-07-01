@@ -259,29 +259,32 @@
       var input = document.getElementById('chatbox-input').value;
       if (input.trim() === '') return;
 
-      fetch('/chatbot/respond', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: input })
-      })
-      .then(response => response.json())
-      .then(data => {
-        var chatboxMessages = document.getElementById('chatbox-messages');
-        
-        var userMessage = document.createElement('div');
-        userMessage.className = 'user-message';
-        userMessage.textContent = input;
-        chatboxMessages.appendChild(userMessage);
+      // Show user message immediately
+      var chatboxMessages = document.getElementById('chatbox-messages');
+      var userMessage = document.createElement('div');
+      userMessage.className = 'user-message';
+      userMessage.textContent = input;
+      chatboxMessages.appendChild(userMessage);
 
-        var botMessage = document.createElement('div');
-        botMessage.className = 'bot-message';
-        botMessage.textContent = data.answer;
-        chatboxMessages.appendChild(botMessage);
+      // Simulate bot "thinking" for 1 second
+      setTimeout(function() {
+        fetch('/chatbot/respond', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: input })
+        })
+        .then(response => response.json())
+        .then(data => {
+          var botMessage = document.createElement('div');
+          botMessage.className = 'bot-message';
+          botMessage.textContent = data.answer;
+          chatboxMessages.appendChild(botMessage);
 
-        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+          chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
 
-        document.getElementById('chatbox-input').value = ''; // Clear the input field
-      });
+          document.getElementById('chatbox-input').value = ''; // Clear the input field
+        });
+      }, 1000); // 1 second delay
     });
   </script>
 </body>
