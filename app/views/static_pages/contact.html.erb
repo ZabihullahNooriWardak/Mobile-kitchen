@@ -183,6 +183,24 @@
     .faq-button:hover {
       background-color: #0056b3;
     }
+
+    /* Spinner Styles */
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #007bff;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
@@ -234,6 +252,7 @@
       <div class="chatbox-input-container">
         <textarea id="chatbox-input" placeholder="<%= t('ask_a_question') %>"></textarea>
         <button id="chatbox-send"><%= t("send") %></button>
+        <div class="spinner" id="spinner"></div> <!-- Spinner element -->
       </div>
     </div>
   </div>
@@ -266,6 +285,10 @@
       userMessage.textContent = input;
       chatboxMessages.appendChild(userMessage);
 
+      // Show spinner
+      var spinner = document.getElementById('spinner');
+      spinner.style.display = 'inline-block';
+
       // Simulate bot "thinking" for 1 second
       setTimeout(function() {
         fetch('/chatbot/respond', {
@@ -275,6 +298,9 @@
         })
         .then(response => response.json())
         .then(data => {
+          // Hide spinner
+          spinner.style.display = 'none';
+
           var botMessage = document.createElement('div');
           botMessage.className = 'bot-message';
           botMessage.textContent = data.answer;
