@@ -32,7 +32,7 @@ class ChatbotController < ApplicationController
       best_match = matches.first[:faq]
       render json: { answer: best_match.answer }
     else
-      render json: { answer: 'I can\'t answer your question. Please email us at support@example.com.' }
+      render json: { answer: 'من نمی توانم به این سوال شما پاسخ دهم لطفا به این ایمیل سوال خود را روان کنید  zabih@gmail.com' }
     end
   end
 end
