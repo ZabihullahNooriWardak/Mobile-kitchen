@@ -1,3 +1,5 @@
+
+# db/seeds.rb
 # Create regular users
 user1 = User.create!(email: 'user1@example.com', password: 'password', password_confirmation: 'password')
 user2 = User.create!(email: 'user2@example.com', password: 'password', password_confirmation: 'password')
@@ -13,11 +15,13 @@ UserDetail.create!(user: admin1, phone_number: '1112223333', name: 'Admin', last
 UserDetail.create!(user: admin2, phone_number: '4445556666', name: 'Admin', last_name: 'Two', is_admin: true)
 
 puts "Seeded database with users and user details."
-# db/seeds.rb
-
 Faq.create([
   { question: 'سلام ', answer: 'ع سلام' },
-{question: 'تشکر', answer: 'خواهش میکنم '},
+  {question: 'لیست غذاها مینو ها ', answer: 'شما میتوانید آنرا از بخش مینو دیده میتوانید'},
+  {question: 'ظروف یا ظرف های تان کرایی است', answer: 'نخیر بطور یکبار آورده میشود'},
+  {question: 'کیفیت غذا چطور است ؟', answer: 'کیفیت غذا ما عالی است '},
+  {question: 'با قیمت مناسب یگ مینو پیشنهاد بتی ', answer: 'به قیمت مناسب شما میتوانید از بخش ریکومندیشن فلتر کنید '} ,
+   {question: 'تشکر', answer: 'خواهش میکنم '},
   { question: ' خدمات یا خدمت دارین ', answer: 'ما اشپز خانه سیار استیم ' },
     {question: ' بعد از رسید سفارش یا اردر خوده کنسل یا لغوه کرده میتانم ', answer: 'نخیر ممکن نیست چنین کاری '},
     {question: 'میتوانم با یگ شخص  یا حضوری یا انسان واقعی مسچ کنم ', answer: 'بلی میتوانید شماره وتساپ ما ۰۷۷۶۵۷۸۶۰۳ است '},
