@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get 'chatbot/index'
   get 'chatbot/respond'
   scope "(:locale)", locale: /en|fa|ps/ do
@@ -35,6 +36,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :update, :destroy]
   end
   resources :prebuilt_menus
-  root 'foods#index'
+  get 'foods/index'
 end 
 end
