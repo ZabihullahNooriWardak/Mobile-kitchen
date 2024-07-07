@@ -57,6 +57,7 @@ fa:
   orders: "سفارشا"
   add_food: "افزودن غذا"
   about: "درباره"
+  create_your_own_menu: 'مینو تان را بسازید'
   ask_a_question: " ...یک سوال بپرسید"
   send: "ارسال"
   your_cart_is_empty: 'کارت شما خالی است '
