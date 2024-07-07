@@ -2,87 +2,156 @@
 <html>
 <head>
   <title>Kitchen Page</title>
-  <link rel="stylesheet" href="<%= asset_path 'application.css' %>">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    .kitchen-info {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
     }
-    .card {
+    .kitchen-info, .menus-section, .create-menu, .reviews, .contact-info {
+      background: #fff;
       padding: 20px;
-      background: #f8f9fa;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
     }
-    .menus {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
+    .kitchen-info .info {
+      max-width: 50%;
     }
-    .menu-item {
-      min-width: 200px;
-      margin-right: 20px;
-    }
-    .scroll-buttons {
-      display: flex;
-      justify-content: space-between;
+    .kitchen-info .card img {
       width: 100%;
+      height: 50%;
+      border-radius: 10px;
     }
-    .scroll-buttons button {
-      background: none;
+    .menus-section h1, .create-menu h1, .reviews h2, .contact-info h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .menu-item h3 {
+      margin-top: 0;
+    }
+    .create-menu button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background: #007bff;
+      color: #fff;
       border: none;
-      font-size: 2em;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .reviews {
-      margin: 20px 0;
+    .review-card {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #e9ecef;
+      border-radius: 10px;
     }
-    .contact-info {
-      margin: 20px 0;
+    .review-card img {
+      border-radius: 50%;
+      margin-right: 10px;
+      width: 50px; /* Ensure consistent image size */
+      height: 50px;
+    }
+    .review-card h4 {
+      font-weight: bold; /* Make user name text bolder */
+      color: #333; /* Darken the text for better visibility */
+    }
+    .contact-info p {
+      margin: 5px 0;
+    }
+    /* Carousel */
+    .carousel-item img {
+      object-fit: cover;
+      height: 400px; /* Adjust carousel image height */
+    }
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: #fff; /* White text color */
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .carousel-caption h5 {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .carousel-control-prev, .carousel-control-next {
+      width: 3%;
+      color: #007bff;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      font-size: 2rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="kitchen-info">
-      <div class="info">
+    <div class="kitchen-info row">
+      <div class="info col-md-6">
         <h2>About Our Kitchen</h2>
-        <p>Some information about the kitchen...</p>
+        <p>We pride ourselves on offering the finest and freshest ingredients to make your dining experience unforgettable. Our kitchen is a place of passion and culinary excellence.</p>
       </div>
-      <div class="card">
-        <img src="path/to/kitchen-image.jpg" alt="Kitchen Image">
+      <div class="card col-md-6">
+        <img src="/assets/pic3.jpg" alt="Kitchen Image">
       </div>
     </div>
 
     <div class="menus-section">
       <h1>Our Menus</h1>
-      <div class="scroll-buttons">
-        <button onclick="scrollLeft()">&#10094;</button>
-        <button onclick="scrollRight()">&#10095;</button>
-      </div>
-      <div class="menus" id="menu-container">
-        <% @prebuilt_menus.each do |menu| %>
-          <div class="card menu-item">
-            <h3><%= menu.name %></h3>
-            <p>descriptions</p>
-            <button onclick="location.href='<%= new_user_session_path %>'">Order Now</button>
-          </div>
-        <% end %>
-      </div>
-    </div>
 
-    <div class="create-menu">
-      <h1>Create Your Own Menu</h1>
-      <button onclick="location.href='<%= new_user_session_path %>'">Create Menu</button>
+      <div id="carouselExampleDark" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <% @prebuilt_menus.each_with_index do |prebuilt_menu, index| %>
+            <li data-target="#carouselExampleDark" data-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>"></li>
+          <% end %>
+        </ol>
+        <div class="carousel-inner">
+          <% @prebuilt_menus.each_with_index do |prebuilt_menu, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <% if prebuilt_menu.image.attached? %>
+                <%= image_tag prebuilt_menu.image, class: 'd-block w-100', alt: 'Menu Image' %>
+              <% else %>
+                <img src="https://via.placeholder.com/800x400.png?text=No+Image" class="d-block w-100" alt="Placeholder Image">
+              <% end %>
+              <div class="carousel-caption d-none d-md-block">
+                <h5><%= prebuilt_menu.name %></h5>
+                <p><%= prebuilt_menu.cost %> <span><%= t("afn") %></span></p>
+                <div class="text-center mt-4">
+                  <%= link_to t("show"), prebuilt_menu, class: 'btn btn-primary btn-sm mr-2' %>
+                  <% unless current_user&.user_detail&.is_admin %>
+                    <%= link_to t("order"), new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success btn-sm' %>
+                  <% end %>
+                  <% if current_user&.user_detail&.is_admin %>
+                    <%= link_to t("edit"), edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning btn-sm mr-2' %>
+                    <%= button_to t("destroy"), prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm', style: 'margin-top: 5px;' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleDark" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </div>
 
     <div class="reviews">
       <h2>User Reviews</h2>
-      <div class="card">
-        <img src="path/to/user-image.jpg" alt="User Image">
-        <h4>User Name</h4>
-        <p>Great service and delicious food!</p>
+      <div class="review-card">
+        <img src="path/to/user-image.jpg" alt="User Image" width="50" height="50">
+        <div>
+          <h4>User Name</h4>
+          <p>Great service and delicious food!</p>
+        </div>
       </div>
       <!-- Add more reviews as needed -->
     </div>
@@ -96,27 +165,8 @@
     </div>
   </div>
 
-  <script>
-    function scrollLeft() {
-      document.getElementById('menu-container').scrollBy({
-        left: -200,
-        behavior: 'smooth'
-      });
-    }
-
-    function scrollRight() {
-      document.getElementById('menu-container').scrollBy({
-        left: 200,
-        behavior: 'smooth'
-      });
-    }
-
-    setInterval(() => {
-      document.getElementById('menu-container').scrollBy({
-        left: 200,
-        behavior: 'smooth'
-      });
-    }, 3000);
-  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
