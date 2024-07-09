@@ -1,253 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your App</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-
-  .btn{
-    border-radius: 20px;
-  }
-    .custom-toggler {
-      border: none;
-      background: transparent;
-      font-size: 1.5rem;
-      color: #000;
-    }
-    
-
-    .desktop-navbar h2 {
-      font-size: 1.75rem;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .desktop-navbar h2 .text-primary {
-      color: #007bff;
-    }
-
-    .desktop-navbar .nav-link {
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s ease-in-out;
-    }
-
-    .desktop-navbar .nav-link:hover {
-      color: #007bff;
-    }
-
-    .btn-primary {
-      background-color: #007bff;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background-color: #0056b3;
-    }
-
-    .btn-outline-primary {
-      border-color: #007bff;
-    }
-
-    .btn-outline-primary:hover {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    .offcanvas-header {
-      background-color: #f8f9fa;
-      border-bottom: 1px solid #dee2e6;
-    }
-
-    .offcanvas-body .nav-link {
-      color: #333;
-      transition: color 0.3s ease-in-out;
-    }
-
-    .offcanvas-body .nav-link:hover {
-      color: #007bff;
-    }
-
-    .cart-badge {
-      position: relative;
-      top: -30px;
-      left: 42px;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 50%;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-    }
-
-    .cart-badge2 {
-      position: relative;
-      top: -30px;
-      left: 55px;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 50%;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-button {
-      background-color: #007bff;
-      color: white;
-      padding: 5px 10px;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      border-radius: 50px;
-      margin-right: 3px;
-    }
-
-    .dropdown-button:hover {
-      background-color: #0056b3;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 5px;
-    }
-
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <!-- Desktop Navbar -->
-  <nav class="desktop-navbar d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom d-none d-md-flex">
-    <div class="col-md-3 mb-2 mb-md-0 ms-4">
-      <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-        <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
-      </h2>
-    </div>
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <%= link_to t("our_custom_menus"), prebuilt_menus_path, class: "nav-link me-3" %>
-      <%= link_to t("contact_us"), contact_path, class: "nav-link me-3" %>
-     <%= link_to t("recommendation"), recommendations_path, class: 'nav-link me-3' %>
-      <%= link_to t("foods"), foods_path, class: "nav-link px-2 me-3" %>
-      <% if current_user && !current_user.user_detail&.is_admin %>
-        <%= link_to cart_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-          <%= t("cart") %>
-          <i class="fas fa-shopping-cart me-1"></i>
-          <span id="cart-badge" class="cart-badge"><%=@cart.cart_items.count  if current_user.cart.present?  %></span>
-        <% end %>
-        <%= link_to orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-          <%= t("orders") %>
-          <i class="fas fa-clipboard-list me-1"></i>
-          <span class="cart-badge2"><%= @order_count || 0 %></span>
-        <% end %>
-      <% else %>
-        <%= link_to admin_orders_path, class: "nav-link me-4 link-with-icon position-relative" do %>
-          <%= t("orders") %>
-          <i class="fas fa-clipboard-list me-1"></i>
-          <span class="cart-badge2"><%= @admin_order_n || 0 %></span>
-        <% end %>
-        <li><%= link_to t("add_food"), new_food_path, class: "nav-link px-2 me-4" %></li>
-      <% end %>
-      <li><%= link_to t("about"), about_path, class: "nav-link px-2 me-4" %></li>
-    </ul>
-    <div class="col-md-3 text-end">
-      <% if user_signed_in? %>
-        <div class="d-flex text-end justify-content-end">
-          <div class="dropdown">
-            <button class="dropdown-button"><%= t('select_language') %></button>
-            <div class="dropdown-content">
-              <%= link_to "English", locale: 'en' %>
-              <%= link_to "فارسی", locale: 'fa' %>
-              <%= link_to "پښتو", locale: 'ps' %>
-            </div>
-          </div>
-          <%= link_to t("edit_profile"), edit_user_registration_path, class: "btn btn-primary me-2 btn-sm" %>
-          <%= button_to t("logout"), destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-4 btn-sm" %>
-        </div>
-      <% else %>
-        <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary me-2 btn-sm" %>
-        <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-primary me-4 btn-sm" %>
-      <% end %>
-    </div>
-  </nav>
-
-  <!-- Mobile Navbar -->
-  <nav class="mobile-navbar d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
-    <div class="col-md-3 mb-2 mb-md-0 ms-4">
-      <h2 class="d-inline-flex link-body-emphasis text-decoration-none">
-        <%= t("mobile") %> <span class="ms-1 text-primary"><%= t("kitchen") %></span>
-      </h2>
-    </div>
-    <!-- Custom Drawer Button -->
-    <button class="custom-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileDrawer" aria-controls="mobileDrawer">
+<aside id="sidebar">
+  <div class="d-flex">
+    <button class="toggle-btn" type="button">
       <i class="fas fa-bars"></i>
     </button>
-    <!-- Mobile Drawer -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileDrawer" aria-labelledby="mobileDrawerLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="mobileDrawerLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav">
-          <%= link_to "Our prebuilt Menus", prebuilt_menus_path, class: "nav-link me-4" %>
-          <%= link_to "Foods", foods_path, class: "nav-link me-4" %>
-          <%= link_to "contact us", contact_path, class: "nav-link me-4" %>
-          <%= link_to "Recommendations", root_path, class: "nav-link me-4" %>
-          <% if current_user && !current_user.user_detail&.is_admin %>
-            <li class="nav-item"><%= link_to 'View Cart', cart_path, class: "nav-link me-4" %></li>
-            <li class="nav-item"><%= link_to 'Orders', orders_path, class: "nav-link me-4" %></li>
-          <% else %>
-            <li class="nav-item"><%= link_to 'Orders', admin_orders_path, class: "nav-link me-4" %></li>
-            <li class="nav-item"><%= link_to 'Add food', new_food_path, class: "nav-link me-4" %></li>
-          <% end %>
-          <li class="nav-item"><%= link_to 'About', about_path, class: "nav-link me-4" %></li>
-          <% if user_signed_in? %>
-            <li class="nav-item"><%= link_to 'Edit Profile', edit_user_registration_path, class: "nav-link me-4" %></li>
-            <li class="nav-item"><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-none nav-link me-4" %></li>
-          <% else %>
-            <li class="nav-item"><%= link_to 'Login', new_user_session_path, class: "nav-link me-4" %></li>
-            <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link me-4" %></li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="sidebar-logo">
+      <%= link_to root_path do %>
+        MyKitchen
+      <% end %>
     </div>
-  </nav>
-
-  <!-- Bootstrap JavaScript and dependencies -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  </div>
+  <ul class="sidebar-nav">
+    <% if current_user && !current_user.user_detail&.is_admin %>
+      <li class="sidebar-item">
+        <%= link_to cart_path, class: "sidebar-link position-relative" do %>
+          <i class="fas fa-shopping-cart"></i>
+          <span><%= t("cart") %></span>
+          <span id="cart-badge" class="cart-badge"><%= @cart.cart_items.count if current_user.cart.present? %></span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to orders_path, class: "sidebar-link position-relative" do %>
+          <i class="fas fa-clipboard-list"></i>
+          <span><%= t("orders") %></span>
+          <span class="cart-badge2"><%= @order_count || 0 %></span>
+        <% end %>
+      </li>
+    <% else %>
+      <li class="sidebar-item">
+        <%= link_to admin_orders_path, class: "sidebar-link position-relative" do %>
+          <i class="fas fa-clipboard-list"></i>
+          <span><%= t("orders") %></span>
+          <span class="cart-badge2"><%= @admin_order_n || 0 %></span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to all_orders_path, class: "sidebar-link" do %>
+          <i class="fas fa-clipboard-check"></i>
+          <span><%= t("all_orders") %></span>
+        <% end %>
+      </li>
+    <% end %>
+    <% if current_user && current_user.user_detail&.is_admin %>
+      <li class="sidebar-item">
+        <%= link_to admin_dashboard_path, class: "sidebar-link" do %>
+          <i class="fas fa-tachometer-alt"></i>
+          <span><%= t("admin_dashboard") %></span>
+        <% end %>
+      </li>
+    <% end %>
+    <% if current_user %>
+      <li class="sidebar-item">
+        <%= link_to edit_user_registration_path, class: "sidebar-link" do %>
+          <i class="fas fa-user-cog"></i>
+          <span><%= t("settings") %></span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to destroy_user_session_path, method: :delete, class: "sidebar-link" do %>
+          <i class="fas fa-sign-out-alt"></i>
+          <span><%= t("logout") %></span>
+        <% end %>
+      </li>
+    <% else %>
+      <li class="sidebar-item">
+        <%= link_to new_user_session_path, class: "sidebar-link" do %>
+          <i class="fas fa-sign-in-alt"></i>
+          <span><%= t("login") %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</aside>
