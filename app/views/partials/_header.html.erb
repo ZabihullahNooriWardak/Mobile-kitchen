@@ -1,73 +1,226 @@
-<aside id="sidebar">
-  <div class="d-flex">
-    <button class="toggle-btn" type="button">
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="sidebar-logo">
-      <%= link_to root_path do %>
-        MyKitchen
-      <% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your App</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    .btn {
+      border-radius: 20px;
+    }
+
+    #sidebar {
+      width: 250px;
+      background: #333;
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      transition: all 0.3s;
+    }
+
+    #sidebar.collapsed {
+      width: 80px;
+    }
+
+    .sidebar-logo {
+      padding: 15px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-item {
+      padding: 10px 20px;
+    }
+
+    .sidebar-link {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar-link i {
+      margin-right: 10px;
+    }
+
+    .sidebar-link:hover {
+      background: #444;
+    }
+
+    .cart-badge, .cart-badge2 {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-button {
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50px;
+      margin-right: 3px;
+    }
+
+    .dropdown-button:hover {
+      background-color: #0056b3;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Vertical Sidebar -->
+  <aside id="sidebar">
+    <div class="d-flex">
+      <button class="toggle-btn custom-toggler" type="button">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="sidebar-logo">
+        <%= link_to root_path do %>
+          MyKitchen
+        <% end %>
+      </div>
     </div>
-  </div>
-  <ul class="sidebar-nav">
-    <% if current_user && !current_user.user_detail&.is_admin %>
+    <ul class="sidebar-nav">
       <li class="sidebar-item">
-        <%= link_to cart_path, class: "sidebar-link position-relative" do %>
-          <i class="fas fa-shopping-cart"></i>
-          <span><%= t("cart") %></span>
-          <span id="cart-badge" class="cart-badge"><%= @cart.cart_items.count if current_user.cart.present? %></span>
+        <%= link_to prebuilt_menus_path, class: "sidebar-link" do %>
+          <i class="fas fa-utensils"></i>
+          <span><%= t("our_custom_menus") %></span>
         <% end %>
       </li>
       <li class="sidebar-item">
-        <%= link_to orders_path, class: "sidebar-link position-relative" do %>
-          <i class="fas fa-clipboard-list"></i>
-          <span><%= t("orders") %></span>
-          <span class="cart-badge2"><%= @order_count || 0 %></span>
-        <% end %>
-      </li>
-    <% else %>
-      <li class="sidebar-item">
-        <%= link_to admin_orders_path, class: "sidebar-link position-relative" do %>
-          <i class="fas fa-clipboard-list"></i>
-          <span><%= t("orders") %></span>
-          <span class="cart-badge2"><%= @admin_order_n || 0 %></span>
+        <%= link_to contact_path, class: "sidebar-link" do %>
+          <i class="fas fa-envelope"></i>
+          <span><%= t("contact_us") %></span>
         <% end %>
       </li>
       <li class="sidebar-item">
-        <%= link_to all_orders_path, class: "sidebar-link" do %>
-          <i class="fas fa-clipboard-check"></i>
-          <span><%= t("all_orders") %></span>
-        <% end %>
-      </li>
-    <% end %>
-    <% if current_user && current_user.user_detail&.is_admin %>
-      <li class="sidebar-item">
-        <%= link_to admin_dashboard_path, class: "sidebar-link" do %>
-          <i class="fas fa-tachometer-alt"></i>
-          <span><%= t("admin_dashboard") %></span>
-        <% end %>
-      </li>
-    <% end %>
-    <% if current_user %>
-      <li class="sidebar-item">
-        <%= link_to edit_user_registration_path, class: "sidebar-link" do %>
-          <i class="fas fa-user-cog"></i>
-          <span><%= t("settings") %></span>
+        <%= link_to recommendations_path, class: "sidebar-link" do %>
+          <i class="fas fa-star"></i>
+          <span><%= t("recommendation") %></span>
         <% end %>
       </li>
       <li class="sidebar-item">
-        <%= link_to destroy_user_session_path, method: :delete, class: "sidebar-link" do %>
-          <i class="fas fa-sign-out-alt"></i>
-          <span><%= t("logout") %></span>
+        <%= link_to foods_path, class: "sidebar-link" do %>
+          <i class="fas fa-hamburger"></i>
+          <span><%= t("foods") %></span>
         <% end %>
       </li>
-    <% else %>
+      <% if current_user && !current_user.user_detail&.is_admin %>
+        <li class="sidebar-item">
+          <%= link_to cart_path, class: "sidebar-link position-relative" do %>
+            <i class="fas fa-shopping-cart"></i>
+            <span><%= t("cart") %></span>
+            <span id="cart-badge" class="cart-badge"><%= @cart.cart_items.count if current_user.cart.present? %></span>
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to orders_path, class: "sidebar-link position-relative" do %>
+            <i class="fas fa-clipboard-list"></i>
+            <span><%= t("orders") %></span>
+            <span class="cart-badge2"><%= @order_count || 0 %></span>
+          <% end %>
+        </li>
+      <% else %>
+        <li class="sidebar-item">
+          <%= link_to admin_orders_path, class: "sidebar-link position-relative" do %>
+            <i class="fas fa-clipboard-list"></i>
+            <span><%= t("orders") %></span>
+            <span class="cart-badge2"><%= @admin_order_n || 0 %></span>
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to new_food_path, class: "sidebar-link" do %>
+            <i class="fas fa-plus-circle"></i>
+            <span><%= t("add_food") %></span>
+          <% end %>
+        </li>
+      <% end %>
       <li class="sidebar-item">
-        <%= link_to new_user_session_path, class: "sidebar-link" do %>
-          <i class="fas fa-sign-in-alt"></i>
-          <span><%= t("login") %></span>
+        <%= link_to about_path, class: "sidebar-link" do %>
+          <i class="fas fa-info-circle"></i>
+          <span><%= t("about") %></span>
         <% end %>
       </li>
-    <% end %>
-  </ul>
-</aside>
+      <% if current_user %>
+        <li class="sidebar-item">
+          <%= link_to edit_user_registration_path, class: "sidebar-link" do %>
+            <i class="fas fa-user-cog"></i>
+            <span><%= t("settings") %></span>
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= button_to destroy_user_session_path, method: :delete, class: "sidebar-link" do %>
+            <i class="fas fa-sign-out-alt"></i>
+            <span><%= t("logout") %></span>
+          <% end %>
+        </li>
+      <% else %>
+        <li class="sidebar-item">
+          <%= link_to new_user_session_path, class: "sidebar-link" do %>
+            <i class="fas fa-sign-in-alt"></i>
+            <span><%= t("login") %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+
+  <!-- Bootstrap JavaScript and dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sidebarToggle = document.querySelector(".toggle-btn");
+      const sidebar = document.getElementById("sidebar");
+
+      sidebarToggle.addEventListener("click", function() {
+        sidebar.classList.toggle("collapsed");
+      });
+    });
+  </script>
+</body>
+</html>
