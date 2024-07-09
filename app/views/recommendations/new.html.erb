@@ -1,153 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Kitchen</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
-        .hero {
-            background: url('path/to/your/image.jpg') no-repeat center center;
-            background-size: cover;
-            height: 100vh;
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-        }
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
+<!-- app/views/recommendations/new.html.erb -->
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="row justify-content-center w-100" style="margin-top: -50px;">
+    <div class="col-md-6">
+      <h2 class="mb-4"><%= t("find_a_good_menu_for_yourself") %></h2>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">My Kitchen</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#menu">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
+      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation' do %>
+        <div class="form-group mb-3">
+          <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
+          <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Welcome to My Kitchen</h1>
-            <p>Experience the Best Culinary Delights</p>
-            <a href="#menu" class="btn btn-custom">Explore Menu</a>
+        <div class="form-group mb-4">
+          <%= label_tag :max_price, t("maximum_price"), class: 'form-label' %>
+          <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: t("enter_maximum_price") %>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>About Our Kitchen</h2>
-                    <p>We pride ourselves on offering the finest and freshest ingredients to make your dining experience unforgettable. Our kitchen is a place of passion and culinary excellence.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="path/to/about-image.jpg" class="img-fluid rounded" alt="About Image">
-                </div>
-            </div>
+        <div class="d-grid">
+          <%= submit_tag t("find_menu"), class: 'btnn btn-primary btn-block' %>
         </div>
-    </section>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center">Our Menus</h2>
-            <div class="row">
-                <!-- Menu Item -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="path/to/menu-image1.jpg" class="card-img-top" alt="Menu Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Menu Item 1</h5>
-                            <p class="card-text">Description of menu item 1.</p>
-                            <a href="#" class="btn btn-primary">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- More Menu Items -->
-            </div>
-        </div>
-    </section>
+<style>
+  .form-control {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-5">
-        <div class="container">
-            <h2 class="text-center">Contact Us</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Address</h5>
-                    <p>Your Address Here</p>
-                    <h5>Phone</h5>
-                    <p>Your Phone Number Here</p>
-                    <h5>Email</h5>
-                    <p>Your Email Here</p>
-                </div>
-                <div class="col-md-6">
-                    <h5>Send us a message</h5>
-                    <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+  .form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 8px rgba(128, 189, 255, 0.6);
+  }
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  .btnn {
+    width: 30%;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+  }
+
+  .form-label {
+    font-weight: bold;
+  }
+</style>
