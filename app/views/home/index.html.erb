@@ -82,7 +82,6 @@
         .contact-info p {
             margin: 5px 0;
         }
-
         /* Carousel */
         .carousel-item img {
             object-fit: cover;
@@ -132,8 +131,8 @@
                     the world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
                     responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Menus</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Order one</button>
+                    <button  type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn btn-dark btn-lg px-4 gap-3"/>Menus</button>
+                    <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn btn-outline-secondary btn-lg px-4">Order one</button>
                 </div>
             </div>
         </div>
@@ -192,7 +191,7 @@
 
         <div class="create-menu text-center">
             <h1>Create Your Own Menu</h1>
-            <button onclick="location.href='<%= new_user_session_path %>'" class="btn btn-primary">Create Menu</button>
+            <button  style="border-radius:23px;background-color: black;"  onclick="location.href='<%= new_user_session_path %>'",class="btn btn-dark">Create Menu</button>
         </div>
 
         <div class="reviews">
