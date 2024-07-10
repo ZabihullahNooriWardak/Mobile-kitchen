@@ -6,7 +6,7 @@
       <div class="card-body">
         <p class="card-text"><%=t("order")%> #<%= order.id %></p>
         <%=t("status")%>:  <p class="card-text badge bg-<%= order.status == 'pending' ? 'warning' : order.status == 'in_progress' ? 'info' : 'success' %>"> <%= order.status %></p> <br>
-        <%= link_to t("view_details"), admin_order_path(order), class: "btn btn-primary me-2 mb-1" %> 
+        <%= link_to t("view_details"), admin_order_path(order), class: "btn btn-dark me-2 mb-1" %> 
         <%= button_to t("remove"), admin_order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
       </div>
     </div>
