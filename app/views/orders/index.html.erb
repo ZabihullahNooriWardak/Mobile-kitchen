@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="card shadow-sm">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-dark text-white">
       <h1 class="mb-0"><%=t("your_orders")%></h1>
     </div>
     <div class="card-body">
@@ -14,7 +14,7 @@
             </span>
           </p>
           <div class="btn-group mt-3" role="group">
-            <%= link_to t("view_details") , order_path(order), class: "btn btn-primary btn-sm custom-btn" %>
+            <%= link_to t("view_details") , order_path(order), class: "btn btn-dark btn-sm custom-btn" %>
             <% if order.status == 'pending' %>
               <%= link_to t("edit"), edit_order_path(order), class: "btn btn-secondary btn-sm custom-btn" %>
               <%= button_to t("cancel"), order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm custom-btn" %>
