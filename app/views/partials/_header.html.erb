@@ -215,6 +215,25 @@
 </li>
 
       <% end %>
+        
+      <!-- Language Selection Dropdown -->
+      <li class="sidebar-item">
+        <a href="#" class="sidebar-link collapsed has-dropdown" id="language-toggle">
+          <i class="fas fa-globe"></i>
+          <span>Language</span>
+        </a>
+        <ul id="language" class="sidebar-dropdown list-unstyled collapse">
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">English</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">Spanish</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">French</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </aside>
 
@@ -227,6 +246,15 @@
 
       sidebarToggle.addEventListener("click", function() {
         sidebar.classList.toggle("collapsed");
+      });
+
+      // Toggle language dropdown
+      const languageToggle = document.getElementById("language-toggle");
+      const languageDropdown = document.getElementById("language");
+
+      languageToggle.addEventListener("click", function(event) {
+        event.preventDefault();
+        languageDropdown.classList.toggle("show");
       });
     });
   </script>
