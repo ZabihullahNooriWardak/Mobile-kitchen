@@ -53,6 +53,7 @@
   </style>
 </head>
 <body>
+<br><br>
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
@@ -87,7 +88,7 @@
               <% if user_signed_in? && current_user.user_detail&.is_admin %>
                 <%= link_to t("edit"), edit_food_path(@food), class: "btn me-1 btn-primary" %>
                 <%else%>
-                <%= button_to t("add_to_cart"), cart_items_path(food_id: @food.id), method: :post, class: "btn btn-primary me-1" %>
+                <%= button_to t("add_to_cart"), cart_items_path(food_id: @food.id), method: :post, class: "btn btn-dark me-1" %>
                 <% end %>
               <%= link_to t("back"), foods_path, class: "btn btn-secondary" %>
             </div>

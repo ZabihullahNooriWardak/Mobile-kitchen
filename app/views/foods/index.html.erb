@@ -63,6 +63,9 @@
     color: #007bff;
     text-decoration: none;
   }
+  .card{
+    background-color: #f8f9fa;
+  }
 </style>
 
 <div class="container">
@@ -71,7 +74,7 @@
       <h1 class="mb-4"><%=t("foods")%></h1>
 
       <% if user_signed_in? && current_user.user_detail&.is_admin %>
-        <%= link_to t("new_food"), new_food_path, class: "btn btn-primary mb-4" %>
+        <%= link_to t("new_food"), new_food_path, class: "btn btn-success mb-4" %>
       <% end %>
 
       <% @foods.group_by(&:category).each do |category, foods| %>
@@ -95,13 +98,13 @@
                   <li class="list-group-item ms-3"><strong><%=t("category")%>:</strong> <%= food.category %></li>
                 </ul>
                 <div class="card-body">
-                  <%= link_to t("show"), food, class: "btn btn-primary mb-2" %>
+                  <%= link_to t("show"), food, class: "btn btn-dark mb-2" %>
                   <% if user_signed_in? && current_user.user_detail&.is_admin %>
                     <%= link_to t("edit"), edit_food_path(food), class: "btn btn-secondary mb-2" %>
                     <%= button_to t("remove"), food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
                   <% end %>
                   <% if user_signed_in? && !current_user.user_detail&.is_admin %>
-                    <%= button_to t("add_to_cart"), cart_items_path(food_id: food.id), method: :post, class: "btn btn-primary" %>
+                    <%= button_to t("add_to_cart"), cart_items_path(food_id: food.id), method: :post, class: "btn btn-dark" %>
                   <% end %>
                 </div>
               </div>
@@ -114,7 +117,7 @@
 </div>
 
 <!-- Category Button -->
-<button class="btn btn-primary category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
+<button class="btn btn-dark category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
   <%=t("categories")%>
 </button>
 
