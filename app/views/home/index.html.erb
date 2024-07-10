@@ -165,7 +165,7 @@
                             <h5><%= prebuilt_menu.name %></h5>
                             <p><%= prebuilt_menu.cost %> <span><%= t("afn") %></span></p>
                             <div class="text-center mt-4">
-                                <%= link_to t("show"), prebuilt_menu, class: 'btn btn-primary btn-sm mr-2' %>
+                                <%= link_to t("show"), prebuilt_menu, class: 'btn btn-dark btn-sm mr-2'%>
                                 <% unless current_user&.user_detail&.is_admin %>
                                 <%= link_to t("order"), new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success btn-sm' %>
                                 <% end %>
