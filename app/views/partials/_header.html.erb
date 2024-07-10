@@ -194,7 +194,7 @@
           <% end %>
         </li>
         <li class="sidebar-item">
-          <%= link_to destroy_user_session_path, method: :delete, class: "sidebar-link" do %>
+          <%= link_to signout_path, method: :delete, class: "sidebar-link" do %>
             <i class="fas fa-sign-out-alt"></i>
             <span><%= t("logout") %></span>
           <% end %>

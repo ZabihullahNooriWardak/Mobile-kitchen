@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :foods
   devise_for :users
+  devise_scope :user do
+    get "/user/signout", to: "devise/sessions#destroy", as: "signout"
+    end
   resource :user_detail, only: [:new, :create, :edit, :update, :show]
   
   namespace :admin do
