@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="card shadow-sm rounded">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-dark text-white">
       <h1 class="mb-0"><%=t("your_cart")%></h1>
     </div>
     <div class="card-body">
@@ -10,7 +10,7 @@
 
       <% if @cart && @cart.cart_items.any? %>
         <div class="table-responsive rounded">
-          <table class="table table-striped mb-0">
+          <table class="table table-striped mb-0 rounded-table">
             <thead class="thead-dark">
               <tr>
                 <th scope="col"><%=t("foods")%></th>
@@ -31,12 +31,12 @@
         </div>
 
         <div class="d-flex justify-content-start mt-4">
-          <%= link_to   t("order_now"), new_order_path(from_cart: true), class: "btn btn-success custom-btn me-2" %>
-          <%= link_to t('back_to_foods'), foods_path, class: 'btn btn-secondary custom-btn' %>
+          <%= link_to   t("order_now"), new_order_path(from_cart: true), class: "btn btn-success custom-btn custom-btn-success me-2" %>
+          <%= link_to t('back_to_foods'), foods_path, class: 'btn btn-secondary custom-btn custom-btn-secondary' %>
         </div>
       <% else %>
         <div class="alert alert-info mt-3">
-   <%=t("your_cart_is_empty") %>
+          <%=t("your_cart_is_empty") %>
         </div>
       <% end %>
     </div>
@@ -44,9 +44,19 @@
 </div>
 
 <style>
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+  }
+
   .card {
     border: none;
     border-radius: 15px;
+    transition: transform 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
   }
 
   .card-header {
@@ -64,7 +74,7 @@
   .custom-btn {
     border: none;
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -131,5 +141,10 @@
   .btn-group .btn {
     margin-right: 0.5rem;
     border-radius: 20px !important;
+  }
+
+  .alert {
+    border-radius: 15px;
+    font-size: 1.1rem;
   }
 </style>
