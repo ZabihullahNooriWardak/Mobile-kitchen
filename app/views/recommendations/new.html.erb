@@ -1,197 +1,189 @@
 <!-- app/views/recommendations/new.html.erb -->
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <div class="row justify-content-center w-100" style="margin-top: -50px;">
-    <div class="col-md-6">
-      <h2 class="mb-4"><%= t("find_a_good_menu_for_yourself") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prebuilt Menus</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation', data: { turbo_frame: "_top" } do %>
-        <div class="form-group mb-3">
-          <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
-          <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
-        </div>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIqVSt2vFLK0Zs/6R1FZyM4lJX6b9sPv9M0p3xJdABY4p4f9jrs" crossorigin="anonymous">
 
-        <div class="form-group mb-4">
-          <%= label_tag :max_price, t("maximum_price"), class: 'form-label' %>
-          <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: t("enter_maximum_price") %>
-        </div>
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
 
-        <div class="d-grid">
-          <%= submit_tag t("find_menu"), class: 'btn btn-dark' %>
-        </div>
+    h1 {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      border: none;
+      color: #fff;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary-custom:hover {
+      background: linear-gradient(45deg, #2575fc, #6a11cb);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-custom {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background-color: #ffffff;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-middle {
+      border: 2px solid #007bff;
+      padding: 20px;
+      height: 400px; /* Adjust height to make it shorter */
+    }
+
+    .card-body-custom {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .img-thumbnail-custom {
+      max-width: 100%;
+      height: 200px; /* Adjust image height as needed */
+      object-fit: cover; /* Ensure images retain aspect ratio */
+      border-radius: 15px;
+    }
+
+    .card-title-custom {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 1rem;
+    }
+
+    .card-cost-custom {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .card-text-custom {
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    .btn-custom {
+      background-color: grey ;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-success-custom {
+      background-color: black;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .btn-success-custom:hover {
+      background-color: #218838;
+    }
+
+    .btn-warning-custom {
+      background-color: #ffc107;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .btn-warning-custom:hover {
+      background-color: #e0a800;
+    }
+
+    .btn-danger-custom {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .btn-danger-custom:hover {
+      background-color: #c82333;
+    }
+
+    .mb-4-custom {
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4-custom">
+      <h1><%= t("prebuilt_menus") %></h1>
+      <% if current_user&.user_detail&.is_admin %>
+        <%= link_to t("new_prebuilt_menu"), new_prebuilt_menu_path, class: "btn btn-primary-custom" %>
       <% end %>
+    </div>
 
-      <div id="prebuilt_menus_list">
-        <%= render partial: 'prebuilt_menus_list', locals: { prebuilt_menus: @prebuilt_menus } %>
+    <%= form_with url: recommendations_path, method: :post, data: { turbo_frame: "prebuilt_menus_list" }, class: 'needs-validation' do %>
+      <div class="form-group mb-3">
+        <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
+        <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
       </div>
+
+      <div class="form-group mb-4">
+        <%= label_tag :max_price, t("maximum_price"), class: 'form-label' %>
+        <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: t("enter_maximum_price") %>
+      </div>
+
+      <div class="d-grid">
+        <%= submit_tag t("find_menu"), class: 'btn btn-dark' %>
+      </div>
+    <% end %>
+
+    <div id="prebuilt_menus_list">
+      <%= render partial: 'prebuilt_menus_list', locals: { prebuilt_menus: @prebuilt_menus } %>
     </div>
   </div>
-</div>
 
-<style>
-  .form-control {
-    max-width: 80%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  }
-
-  .form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 8px rgba(128, 189, 255, 0.6);
-  }
-
-  .btn {
-    width: 20%;
-    border-radius: 23px;
-    color: white;
-    font-size:20px;
-    padding: 3px 0px;
-  }
-
-  .form-label {
-    font-weight: bold;
-  }
-
-  body {
-    background-color: #f8f9fa;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-  }
-
-  h1 {
-    font-weight: bold;
-    color: #333;
-  }
-
-  .btn-primary-custom {
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
-    border: none;
-    color: #fff;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-
-  .btn-primary-custom:hover {
-    background: linear-gradient(45deg, #2575fc, #6a11cb);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-custom {
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    background-color: #ffffff;
-    margin-bottom: 30px;
-    position: relative;
-  }
-
-  .card-custom:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-middle {
-    border: 2px solid #007bff;
-    padding: 20px;
-    height: 500px; /* Adjust height to make it taller */
-  }
-
-  .card-body-custom {
-    padding: 1.5rem;
-    text-align: center;
-  }
-
-  .img-thumbnail-custom {
-    max-width: 100%;
-    height: 200px; /* Adjust image height as needed */
-    object-fit: cover; /* Ensure images retain aspect ratio */
-    border-radius: 15px;
-  }
-
-  .card-title-custom {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-top: 1rem;
-  }
-
-  .card-cost-custom {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #007bff;
-  }
-
-  .card-text-custom {
-    font-size: 1.2rem;
-    color: #666;
-  }
-
-  .btn-custom {
-    background-color: grey ;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .btn-custom:hover {
-    background-color: #0056b3;
-  }
-
-  .btn-success-custom {
-    background-color: black;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .btn-success-custom:hover {
-    background-color: #218838;
-  }
-
-  .btn-warning-custom {
-    background-color: #ffc107;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .btn-warning-custom:hover {
-    background-color: #e0a800;
-  }
-
-  .btn-danger-custom {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .btn-danger-custom:hover {
-    background-color: #c82333;
-  }
-
-  .mb-4-custom {
-    margin-bottom: 1.5rem;
-  }
-</style>
+  <!-- Include Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgE7n+6fZF5SCR/tT0iP4Q76pDJhX4Xb1Kq1lB0W4AW4E5s/X2y" crossorigin="anonymous"></script>
+</body>
+</html>
