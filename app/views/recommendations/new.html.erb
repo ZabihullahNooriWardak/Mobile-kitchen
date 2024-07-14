@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <h2 class="mb-4"><%= t("find_a_good_menu_for_yourself") %></h2>
 
-      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation' do %>
+      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation', data: { turbo_frame: "_top" } do %>
         <div class="form-group mb-3">
           <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
           <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
@@ -19,6 +19,10 @@
           <%= submit_tag t("find_menu"), class: 'btn btn-dark' %>
         </div>
       <% end %>
+
+      <div id="prebuilt_menus_list">
+        <%= render partial: 'prebuilt_menus_list', locals: { prebuilt_menus: @prebuilt_menus } %>
+      </div>
     </div>
   </div>
 </div>
@@ -49,5 +53,145 @@
 
   .form-label {
     font-weight: bold;
+  }
+
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  h1 {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .btn-primary-custom {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .btn-primary-custom:hover {
+    background: linear-gradient(45deg, #2575fc, #6a11cb);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-custom {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-middle {
+    border: 2px solid #007bff;
+    padding: 20px;
+    height: 500px; /* Adjust height to make it taller */
+  }
+
+  .card-body-custom {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .img-thumbnail-custom {
+    max-width: 100%;
+    height: 200px; /* Adjust image height as needed */
+    object-fit: cover; /* Ensure images retain aspect ratio */
+    border-radius: 15px;
+  }
+
+  .card-title-custom {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 1rem;
+  }
+
+  .card-cost-custom {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .card-text-custom {
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .btn-custom {
+    background-color: grey ;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .btn-custom:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-success-custom {
+    background-color: black;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .btn-success-custom:hover {
+    background-color: #218838;
+  }
+
+  .btn-warning-custom {
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .btn-warning-custom:hover {
+    background-color: #e0a800;
+  }
+
+  .btn-danger-custom {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .btn-danger-custom:hover {
+    background-color: #c82333;
+  }
+
+  .mb-4-custom {
+    margin-bottom: 1.5rem;
   }
 </style>

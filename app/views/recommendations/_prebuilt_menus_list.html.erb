@@ -1,0 +1,18 @@
+<!-- app/views/recommendations/_prebuilt_menus_list.html.erb -->
+<% if prebuilt_menus.any? %>
+  <div class="row justify-content-center">
+    <% prebuilt_menus.each do |menu| %>
+      <div class="col-md-4">
+        <div class="card card-custom card-middle">
+          <%= image_tag menu.image, class: 'img-thumbnail-custom' if menu.image.attached? %>
+          <div class="card-body card-body-custom">
+            <h5 class="card-title card-title-custom"><%= menu.name %></h5>
+            <p class="card-cost card-cost-custom">$<%= menu.cost %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= t("no_menu_found") %></p>
+<% end %>
