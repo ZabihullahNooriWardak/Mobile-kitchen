@@ -141,6 +141,14 @@ li.sidebar-item a {
           <span><%= t("contact_us") %></span>
         <% end %>
       </li>
+      <% if current_user && current_user.user_detail&.is_admin %>
+      <li class="sidebar-item">
+        <%= link_to reviews_path, class: "sidebar-link" do %>
+          <i class="fas fa-comments"></i>
+          <span>All Reviews</span>
+        <% end %>
+      </li>
+    <% end %>
       <li class="sidebar-item">
         <%= link_to recommendations_path, class: "sidebar-link" do %>
           <i class="fas fa-star"></i>
