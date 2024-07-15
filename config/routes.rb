@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   root 'home#index'
   get 'chatbot/index'
   get 'chatbot/respond'
@@ -41,4 +42,10 @@ Rails.application.routes.draw do
   resources :prebuilt_menus
   get 'foods/index'
 end 
+resources :orders do
+  member do
+    get :rate
+  end
+  resources :reviews, only: [:create]
+end
 end

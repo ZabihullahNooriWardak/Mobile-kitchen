@@ -1,7 +1,7 @@
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :rate]
   before_action :check_order_status, only: [:edit, :update, :destroy]
   before_action :check_cart_source, only: [:new]
   before_action :check_cart_presence, only: [:new]
@@ -56,6 +56,16 @@ class OrdersController < ApplicationController
     @order.destroy
     redirect_to orders_path, notice: t('order_canceled')
   end
+
+
+# app/controllers/orders_controller.rb
+def rate
+  @order = Order.find(params[:id])
+  @review = @order.build_review
+  @review.rating ||= 0
+end
+
+
 
   private
 

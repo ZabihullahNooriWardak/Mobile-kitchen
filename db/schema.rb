@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_032724) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_15_031135) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -111,6 +111,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_032724) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "order_id", null: false
+    t.integer "rating"
+    t.text "feedback"
+    t.text "suggestion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_reviews_on_order_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "user_details", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "phone_number"
@@ -143,5 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_032724) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "prebuilt_menus"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "orders"
+  add_foreign_key "reviews", "users"
   add_foreign_key "user_details", "users"
 end

@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :prebuilt_menu, optional: true
   has_many :order_items, dependent: :destroy
   has_many :foods, through: :order_items
+  has_one :review, dependent: :destroy
 
   validates :address, :guests_number, :full_name, :phone_number, :date, presence: true
 

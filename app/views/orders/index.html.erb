@@ -1,3 +1,4 @@
+# app/views/orders/index.html.erb
 <div class="container mt-5">
   <div class="card shadow-sm">
     <div class="card-header bg-dark text-white">
@@ -19,6 +20,9 @@
               <%= link_to t("edit"), edit_order_path(order), class: "btn btn-secondary btn-sm custom-btn" %>
               <%= button_to t("cancel"), order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm custom-btn" %>
             <% end %>
+            <% if order.status == 'delivered' && order.review.nil? && !current_user.user_detail&.is_admin %>
+              <%= link_to t("rate_our_service"), rate_order_path(order), class: "btn btn-primary custom-btn" %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -30,63 +34,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .order-item {
-    background-color: #f8f9fa;
-    border-left: 5px solid #007bff;
-  }
-  .order-item h5 {
-    font-weight: bold;
-  }
-  .order-item p {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-  .btn-group .btn {
-    margin-right: 0.5rem;
-    border-radius: 20px !important; /* Ensure border-radius is applied */
-  }
-  .card-header {
-    background-color: #007bff;
-    color: white;
-  }
-  .card {
-    border: none;
-  }
-  .card-body {
-    padding: 2rem;
-  }
-
-  .custom-btn {
-    border: none;
-    color: white;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    margin: 0.25rem 0;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-
-  .custom-btn:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-primary.custom-btn {
-    background: linear-gradient(45deg, #007bff, #0056b3);
-    border-radius: 20px;
-  }
-
-  .btn-secondary.custom-btn {
-    background: linear-gradient(45deg, #6c757d, #495057);
-    border-radius: 20px;
-  }
-
-  .btn-danger.custom-btn {
-    background: linear-gradient(45deg, #dc3545, #b21f2d);
-    border-radius: 20px;
-  }
-</style>

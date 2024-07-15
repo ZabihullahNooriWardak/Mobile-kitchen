@@ -1,0 +1,11 @@
+# app/views/orders/rate.html.erb
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h1 class="mb-0"><%= t("rate_our_service") %></h1>
+    </div>
+    <div class="card-body">
+      <%= render 'reviews/form', order: @order, review: @review %>
+    </div>
+  </div>
+</div>
