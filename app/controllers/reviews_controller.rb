@@ -2,9 +2,10 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:create]
+  before_action :set_review, only: [:destroy]
   # before_action :set_order  
   def index
-@reviews= Review.all
+  @reviews= Review.all
   end
 
   def create
@@ -17,6 +18,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+
+  def destroy 
+    @review.destroy
+    redirect_to reviews_url, notice: 'The Review was successfully destroyed.'
+  end 
   private
 
   # def set_order
@@ -26,7 +32,9 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:rating, :feedback, :suggestion)
   end
-
+  def set_review
+    @review = Review.find(params[:id])
+  end
   def set_order
     @order = Order.find(params[:order_id])
   end
