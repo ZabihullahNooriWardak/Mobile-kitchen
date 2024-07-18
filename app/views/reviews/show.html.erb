@@ -1,19 +1,23 @@
+<!-- app/views/orders/show.html.erb -->
 <div class="container mt-4">
-  <div class="card">
-    <div class="card-body">
-      <h2 class="card-title">Review Details</h2>
-      <p class="card-text">
-        <strong>Rating:</strong> <%= @review.rating %><br>
-        <strong>Feedback:</strong> <%= @review.feedback %><br>
-        <strong>Suggestion:</strong> <%= @review.suggestion %>
-      </p>
+  <h1>Order Details</h1>
+  <p><strong>Address:</strong> <%= @order.address %></p>
+  <p><strong>Full Name:</strong> <%= @order.full_name %></p>
+  <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
+  <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
+  <p><strong>Date:</strong> <%= @order.date %></p>
+  <p><strong>Description:</strong> <%= @order.description %></p>
 
-      <div class="mt-3">
-        <%= link_to "Back to reviews", reviews_path, class: "btn btn-secondary me-2" %>
-        <% if current_user.user_detail&.is_admin %>
-          <%= button_to "Destroy this review", @review, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <h2>Order Items</h2>
+  <ul>
+    <% @order.order_items.each do |item| %>
+      <li><%= item.food.name %> - <%= item.food.price %></li>
+    <% end %>
+  </ul>
+
+  <% if @prebuilt_menu.present? %>
+    <h2>Prebuilt Menu</h2>
+    <p><strong>Name:</strong> <%= @prebuilt_menu.name %></p>
+    <p><strong>Cost:</strong> <%= @prebuilt_menu.cost %></p>
+  <% end %>
 </div>

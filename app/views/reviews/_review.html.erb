@@ -1,12 +1,18 @@
+<!-- app/views/reviews/_review.html.erb -->
 <div id="<%= dom_id review %>">
   <p>
     <strong>User:</strong>
-    <%= review.user_id %>
+    <%= review.user.email %>
   </p>
 
   <p>
-    <strong>Order:</strong>
-    <%= review.order_id %>
+    <strong>Order Address:</strong>
+    <%= review.order.address %>
+  </p>
+
+  <p>
+    <strong>Order Full Name:</strong>
+    <%= review.order.full_name %>
   </p>
 
   <p>

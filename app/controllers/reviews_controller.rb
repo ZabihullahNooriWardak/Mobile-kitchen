@@ -7,6 +7,10 @@ class ReviewsController < ApplicationController
   def index
   @reviews= Review.all
   end
+  
+  def show
+    @order = @review.order
+  end
 
   def create
     @review = @order.build_review(review_params.merge(user: current_user))
