@@ -1,10 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Review Details</h2>
+      <p class="card-text">
+        <strong>Rating:</strong> <%= @review.rating %><br>
+        <strong>Feedback:</strong> <%= @review.feedback %><br>
+        <strong>Suggestion:</strong> <%= @review.suggestion %>
+      </p>
 
-
-
-<div>
-  
-  <%= link_to "Back to reviews", reviews_path %>
-
-  <%= button_to "Destroy this review", @review, method: :delete %>
+      <div class="mt-3">
+        <%= link_to "Back to reviews", reviews_path, class: "btn btn-secondary me-2" %>
+        <% if current_user.user_detail&.is_admin %>
+          <%= button_to "Destroy this review", @review, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

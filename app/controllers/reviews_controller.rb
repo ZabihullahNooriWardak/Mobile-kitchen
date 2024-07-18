@@ -2,7 +2,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:create]
-  before_action :set_review, only: [:destroy]
+  before_action :set_review, only: [:destroy,:show]
   # before_action :set_order  
   def index
   @reviews= Review.all
