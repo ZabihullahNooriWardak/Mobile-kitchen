@@ -2,32 +2,35 @@
 <div class="container mt-5">
   <div class="card shadow">
     <div class="card-header bg-dark text-white">
-      <h1 class="mb-0"><%=t("order_details")%></h1>
+      <h1 class="mb-0"><%= t("order_details") %></h1>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <p><strong><%=t("full_name")%>:</strong> <%= @order.full_name %></p>
-          <p><strong><%=t("phone_number")%>:</strong> <%= @order.phone_number %></p>
-          <p><strong><%=t("address")%>:</strong> 
-          <% if @order.address.start_with?('http') %>
-            <%= link_to t("view_on_google_maps"), @order.address, target: '_blank' %>
-          <% else %>
-            <%= @order.address %>
-          <% end %>
-        </p>
-        
+          <p><strong><%= t("full_name") %>:</strong> <%= @order.full_name %></p>
+          <p><strong><%= t("phone_number") %>:</strong> <%= @order.phone_number %></p>
+          <p><strong><%= t("address") %>:</strong>
+            <% if @order.address.start_with?('http') %>
+              <%= link_to t("view_on_google_maps"), @order.address, target: '_blank' %>
+            <% else %>
+              <%= @order.address %>
+            <% end %>
+          </p>
         </div>
         <div class="col-md-6">
-          <p><strong><%=t("guest_numbers")%>:</strong> <%= @order.guests_number %></p>
-          <p><strong><%=t("date")%>:</strong> <%= @order.date %></p>
-          <p><strong><%=t("description")%>:</strong> <%= @order.description %></p>
+          <p><strong><%= t("guest_numbers") %>:</strong> <%= @order.guests_number %></p>
+          <p><strong><%= t("date") %>:</strong> <%= @order.date %></p>
+          <p><strong><%= t("description") %>:</strong> <%= @order.description %></p>
           <p>
-            <strong><%=t("status")%>:</strong> 
+            <strong><%= t("status") %>:</strong>
             <span class="badge bg-<%= @order.status == 'pending' ? 'warning' : 'success' %>">
               <%= @order.status.capitalize %>
             </span>
           </p>
+        <% if @prebuilt_menu.present? %>
+          <p><strong><%= t("cost_per_person") %>:</strong> <%= @prebuilt_menu.cost %> <%= t("afn") %></p>
+          <p><strong><%= t("total_cost") %>:</strong> <%= @order.total_cost %> <%= t("afn") %></p>
+          <%end%>
         </div>
       </div>
 
@@ -37,18 +40,15 @@
           <div class="row">
             <div class="col-md-6">
               <% if @prebuilt_menu.image.attached? %>
-                <%= image_tag @prebuilt_menu.image %>
+                <%= image_tag @prebuilt_menu.image, style: "width: 100%; height: auto; max-height: 300px; object-fit: cover;" %>
               <% else %>
                 <p>No image available</p>
               <% end %>
             </div>
-            <div class="col-md-6">
-              <p><strong><%=t("cost_per_person")%>:</strong> <%= @prebuilt_menu.cost %><%=t("afn")%></p>
-              <p><strong><%=t("total_cost")%>:</strong> <%=@order.total_cost %><%=t("afn")%></p>
-            </div>
+           
           </div>
 
-          <h3><%=t("foods_included")%></h3>
+          <h3><%= t("foods_included") %></h3>
           <ul>
             <% @prebuilt_menu.foods.each do |food| %>
               <li><%= food.name %></li>
@@ -57,17 +57,17 @@
         </div>
       <% else %>
         <div class="mt-4">
-          <h3><%=t("foods")%></h3>
+          <h3><%= t("foods") %></h3>
           <ul class="list-group mb-4">
             <% @order.foods.each do |food| %>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <%= food.name %>
-                <span class="badge bg-dark rounded-pill"><%= food.price %> <%=t("afn")%></span>
+                <span class="badge bg-dark rounded-pill"><%= food.price %> <%= t("afn") %></span>
               </li>
             <% end %>
           </ul>
         </div>
-        <p class="h4"><strong><%=t("total_cost")%>:</strong> <%= @order.total_cost %> <%=t("afn")%></p>
+        <p class="h4"><strong><%= t("total_cost") %>:</strong> <%= @order.total_cost %> <%= t("afn") %></p>
       <% end %>
     </div>
     <div class="card-footer text-right">
