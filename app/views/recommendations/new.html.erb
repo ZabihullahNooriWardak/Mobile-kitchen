@@ -1,175 +1,118 @@
-<!-- app/views/recommendations/new.html.erb -->
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <div class="row justify-content-center w-100" style="margin-top: -50px;">
-    <div class="col-md-6">
-      <h2 class="mb-4 text-center"><%= t("find_a_good_menu_for_yourself") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find a Good Menu</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation', data: { turbo: false } do %>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-pzjw8f+ua7Kw1TIqVSt2vFLK0Zs/6R1FZyM4lJX6b9sPv9M0p3xJdABY4p4f9jrs" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .form-container {
+      position: sticky;
+      top: 20px;
+      z-index: 1000;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      max-width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      transition: box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
+
+    .form-control:focus {
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 8px rgba(128, 189, 255, 0.6);
+    }
+
+    .btn {
+      width: 100%;
+      border-radius: 5px;
+      color: white;
+      font-size: 20px;
+      padding: 10px 0;
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .img-container {
+      max-width: 100%;
+      height: 200px; /* Adjusted for better fit */
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    .img-container img {
+      max-height: 100%;
+      width: auto;
+    }
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="form-container">
+      <h2 class="mb-4 text-center"><%= t("find_a_good_menu_for_yourself") %></h2>
+      <%= form_with url: recommendations_path, method: :post, local: true, data: { turbo: false } do %> <!-- Disabled Turbo -->
         <div class="form-group mb-3">
           <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
           <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
         </div>
-
         <div class="form-group mb-4">
           <%= label_tag :max_price, t("maximum_price"), class: 'form-label' %>
           <%= number_field_tag :max_price, nil, class: 'form-control', min: 0, placeholder: t("enter_maximum_price") %>
         </div>
-
         <div class="d-grid">
           <%= submit_tag t("find_menu"), class: 'btn btn-dark' %>
         </div>
       <% end %>
     </div>
+
+    <div id="menus" class="mt-5">
+      <!-- Menus will be displayed here -->
+      <% if @prebuilt_menus %>
+        <%= render partial: 'menus', locals: { prebuilt_menus: @prebuilt_menus } %>
+      <% end %>
+    </div>
   </div>
 
-  <div id="menus" class="mt-5 w-100">
-    <!-- Menus will be displayed here -->
-    <% if @prebuilt_menus %>
-      <%= render partial: 'menus', locals: { prebuilt_menus: @prebuilt_menus } %>
-    <% end %>
-  </div>
-</div>
-
-<style>
-  .form-control {
-    max-width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  }
-
-  .form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 8px rgba(128, 189, 255, 0.6);
-  }
-
-  .btn {
-    width: 100%;
-    border-radius: 5px;
-    color: white;
-    font-size: 20px;
-    padding: 10px 0;
-  }
-
-  .form-label {
-    font-weight: bold;
-  }
-
-  .card {
-    border: none;
-    border-radius: 15px;
-    transition: transform 0.3s;
-  }
-
-  .card:hover {
-    transform: scale(1.02);
-  }
-
-  .card-header {
-    background-color: #007bff;
-    color: white;
-    padding: 1.5rem;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-
-  .card-body {
-    padding: 2rem;
-  }
-
-  .card-footer {
-    border-top: none;
-    padding: 1.5rem;
-    background-color: #f8f9fa;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-
-  .card-footer .btn {
-    margin-top: 10px;
-    border-radius: 20px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-
-  .card-footer .btn-primary {
-    background: linear-gradient(45deg, #007bff, #0056b3);
-    border: none;
-  }
-
-  .card-footer .btn-primary:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-footer .btn-danger {
-    background: linear-gradient(45deg, #dc3545, #c82333);
-    border: none;
-  }
-
-  .card-footer .btn-danger:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-footer .btn-secondary {
-    background: linear-gradient(45deg, #6c757d, #495057);
-    border: none;
-  }
-
-  .card-footer .btn-secondary:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-footer .btn-success {
-    background: linear-gradient(45deg, #28a745, #218838);
-    border: none;
-  }
-
-  .card-footer .btn-success:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .img-container {
-    max-width: 100%;
-    height: 400px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    margin-bottom: 1.5rem;
-  }
-
-  .img-container img {
-    max-height: 100%;
-    width: auto;
-  }
-
-  ul.list-group {
-    margin-top: 1rem;
-  }
-
-  ul.list-group li.list-group-item {
-    font-size: 1rem;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    background-color: #f8f9fa;
-  }
-
-  ul.list-group li.list-group-item:nth-child(odd) {
-    background-color: #e9ecef;
-  }
-
-  h1, h3 {
-    margin-bottom: 1rem;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  .badge {
-    font-size: 0.875rem;
-  }
-</style>
+  <!-- Include Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-B4gt1jrGC7Jh4AgE7n+6fZF5SCR/tT0iP4Q76pDJhX4Xb1Kq1lB0W4AW4E5s/X2y" crossorigin="anonymous"></script>
+</body>
+</html>
