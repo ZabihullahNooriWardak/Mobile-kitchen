@@ -1,16 +1,18 @@
 <!-- app/views/recommendations/_menus.html.erb -->
-<div class="container">
+<div class="container mt-5">
   <h3 class="mb-4 text-center"><%= t("available_menus") %></h3>
   <div class="row justify-content-center">
     <% prebuilt_menus.each do |menu| %>
       <div class="col-md-4 mb-4 d-flex align-items-stretch">
-        <div class="card h-100">
+        <div class="card h-100 shadow">
           <% if menu.image.attached? %>
-            <%= image_tag menu.image, class: 'card-img-top' %>
+            <div class="img-container">
+              <%= image_tag menu.image, class: 'img-fluid' %>
+            </div>
           <% else %>
-            <div class="card-img-top" style="height: 200px; background-color: #f8f9fa;"></div>
+            <div class="img-container" style="background-color: #f8f9fa;"></div>
           <% end %>
-          <div class="card-body">
+          <div class="card-body text-center">
             <h5 class="card-title"><%= menu.name %></h5>
             <p class="card-text"><strong><%= t("cost_per_person") %>:</strong> <%= menu.cost %> <%= t("afn") %></p>
             <%= link_to t("view_menu"), prebuilt_menu_path(menu), class: "btn btn-primary mt-2" %>

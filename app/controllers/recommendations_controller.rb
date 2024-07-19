@@ -1,7 +1,6 @@
 # app/controllers/recommendations_controller.rb
 class RecommendationsController < ApplicationController
   def new
-    @prebuilt_menus = []
   end
 
   def create
@@ -10,16 +9,16 @@ class RecommendationsController < ApplicationController
 
     # Validation checks
     if min_price.zero? && max_price.zero?
-      flash.now[:alert] = "Please fill out the values for minimum and maximum prices."
-      render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash") and return
+      flash[:alert] = "Please fill out the values for minimum and maximum prices."
+      redirect_to recommendations_path and return
     end
 
     if min_price.positive? && max_price.positive? && min_price > max_price
-      flash.now[:alert] = "Minimum price cannot be greater than maximum price."
-      render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash") and return
+      flash[:alert] = "Minimum price cannot be greater than maximum price."
+      redirect_to recommendations_path and return
     end
 
-    # Find menus based on the provided values
+    # Find menu based on the provided values
     if min_price.positive? && max_price.positive?
       @prebuilt_menus = PrebuiltMenu.where("cost >= ? AND cost <= ?", min_price, max_price)
     elsif min_price.positive?
@@ -28,11 +27,11 @@ class RecommendationsController < ApplicationController
       @prebuilt_menus = PrebuiltMenu.where("cost <= ?", max_price)
     end
 
-    if @prebuilt_menus.present?
-      render turbo_stream: turbo_stream.update("menus", partial: "recommendations/menus", locals: { prebuilt_menus: @prebuilt_menus })
+    if @prebuilt_menus.any?
+      render :new
     else
-      flash.now[:alert] = "No menu found for the specified price range."
-      render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash")
+      flash[:alert] = "No menu found for the specified price. Please enter valid minimum and maximum values."
+      redirect_to recommendations_path
     end
   end
 end
