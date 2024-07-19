@@ -2,8 +2,8 @@
   <h3 class="mb-4 text-center"><%= t("available_menus") %></h3>
   <div class="row justify-content-center">
     <% prebuilt_menus.each do |menu| %>
-      <div class="col-md-8 mb-4 d-flex align-items-stretch"> <!-- Changed col-md-4 to col-md-8 to accommodate wider cards -->
-        <div class="card h-100 shadow" style="width: 200%; height: 70%;"> <!-- Adjusted card width and height -->
+      <div class="col-md-4 mb-4 d-flex align-items-stretch">
+        <div class="card h-100 shadow">
           <% if menu.image.attached? %>
             <div class="img-container">
               <%= image_tag menu.image, class: 'img-fluid' %>
