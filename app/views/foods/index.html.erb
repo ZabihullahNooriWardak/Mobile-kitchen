@@ -1,186 +1,199 @@
-<style>
-  .custom-card-spacing .card {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Kitchen</title>
+  <style>
+    .custom-card-spacing .card {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-  .custom-card-spacing .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
+    .custom-card-spacing .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
 
-  .custom-card-spacing .card-body {
-    padding: 1rem;
-  }
+    .custom-card-spacing .card-body {
+      padding: 1rem;
+    }
 
-  .custom-card-spacing .card-img-top {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
+    .custom-card-spacing .card-img-top {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
 
-  .custom-card-spacing .card-title {
-    font-weight: bold;
-  }
+    .custom-card-spacing .card-title {
+      font-weight: bold;
+    }
 
-  .custom-card-spacing .list-group-item {
-    border: none;
-    padding-left: 0;
-  }
+    .custom-card-spacing .list-group-item {
+      border: none;
+      padding-left: 0;
+    }
 
-  .category-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
+    .category-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
 
-  .btn {
-    border-radius: 50px;
-  }
+    .btn {
+      border-radius: 50px;
+    }
 
-  .offcanvas-header {
-    background-color: #f8f9fa;
-  }
+    .offcanvas-header {
+      background-color: #f8f9fa;
+    }
 
-  .offcanvas-body ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
+    .offcanvas-body ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-  .offcanvas-body .nav-item {
-    margin-bottom: 1rem;
-  }
+    .offcanvas-body .nav-item {
+      margin-bottom: 1rem;
+    }
 
-  .offcanvas-body .nav-link {
-    color: #495057;
-    font-weight: bold;
-  }
+    .offcanvas-body .nav-link {
+      color: #495057;
+      font-weight: bold;
+    }
 
-  .offcanvas-body .nav-link:hover {
-    color: #007bff;
-    text-decoration: none;
-  }
-  .card{
-    background-color: #f8f9fa;
-  }
-</style>
+    .offcanvas-body .nav-link:hover {
+      color: #007bff;
+      text-decoration: none;
+    }
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1 class="mb-4"><%=t("foods")%></h1>
+    .card {
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="mb-4"><%= t("foods") %></h1>
 
-      <% if user_signed_in? && current_user.user_detail&.is_admin %>
-        <%= link_to t("new_food"), new_food_path, class: "btn btn-success mb-4" %>
-      <% end %>
+        <% if user_signed_in? && current_user.user_detail&.is_admin %>
+          <%= link_to t("new_food"), new_food_path, class: "btn btn-success mb-4" %>
+        <% end %>
 
-      <% @foods.group_by(&:category).each do |category, foods| %>
-        <h2 class="mb-4" id="<%= category.parameterize %>"><%= category.capitalize %></h2>
-        <div class="row custom-card-spacing">
-          <% foods.each do |food| %>
-            <div class="col-md-3 mb-4">
-              <div class="card" style="width: 18rem;">
-                <% if food.image.attached? %>
-                  <%= link_to food do %>
-                    <%= image_tag food.image, class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
+        <% @foods.group_by(&:category).each do |category, foods| %>
+          <h2 class="mb-4" id="<%= category.parameterize %>"><%= category.capitalize %></h2>
+          <div class="row custom-card-spacing">
+            <% foods.each do |food| %>
+              <div class="col-md-3 mb-4">
+                <div class="card" style="width: 18rem;">
+                  <% if food.image.attached? %>
+                    <%= link_to food do %>
+                      <%= image_tag food.image, class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
+                    <% end %>
+                  <% else %>
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="No image available" style="object-fit: cover; height: 200px; width: 100%;">
                   <% end %>
-                <% else %>
-                  <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="No image available" style="object-fit: cover; height: 200px; width: 100%;">
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= food.name %></h5>
-                  <p class="card-text"><strong><%=t("price")%></strong> <%= food.price%> <%=t("afn")%></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item ms-3"><strong><%=t("category")%>:</strong> <%= food.category %></li>
-                </ul>
-                <div class="card-body">
-                  <%= link_to t("show"), food, class: "btn btn-dark mb-2" %>
-                  <% if user_signed_in? && current_user.user_detail&.is_admin %>
-                    <%= link_to t("edit"), edit_food_path(food), class: "btn btn-secondary mb-2" %>
-                    <%= button_to t("remove"), food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
-                  <% end %>
-                  <% if user_signed_in? && !current_user.user_detail&.is_admin %>
-                    <%= button_to t("add_to_cart"), cart_items_path(food_id: food.id), method: :post, class: "btn btn-dark" %>
-                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= food.name %></h5>
+                    <p class="card-text"><strong><%= t("price") %></strong> <%= food.price %> <%= t("afn") %></p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item ms-3"><strong><%= t("category") %>:</strong> <%= food.category %></li>
+                  </ul>
+                  <div class="card-body">
+                    <%= link_to t("show"), food, class: "btn btn-dark mb-2" %>
+                    <% if user_signed_in? && current_user.user_detail&.is_admin %>
+                      <%= link_to t("edit"), edit_food_path(food), class: "btn btn-secondary mb-2" %>
+                      <%= button_to t("remove"), food, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mb-2" %>
+                    <% end %>
+                    <% if user_signed_in? && !current_user.user_detail&.is_admin %>
+                      <%= button_to t("add_to_cart"), cart_items_path(food_id: food.id), method: :post, class: "btn btn-dark" %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Category Button -->
-<button class="btn btn-dark category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
-  <%=t("categories")%>
-</button>
+  <!-- Category Button -->
+  <button class="btn btn-dark category-button" data-bs-toggle="offcanvas" data-bs-target="#categoryDrawer" aria-controls="categoryDrawer">
+    <%= t("categories") %>
+  </button>
 
-<!-- Category Drawer -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="categoryDrawer" aria-labelledby="categoryDrawerLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="categoryDrawerLabel">Categories</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <!-- Category Drawer -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="categoryDrawer" aria-labelledby="categoryDrawerLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="categoryDrawerLabel">Categories</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav">
+        <% @foods.group_by(&:category).each do |category, foods| %>
+          <li class="nav-item">
+            <a href="#<%= category.parameterize %>" class="nav-link link-secondary" onclick="scrollToCategory(event, '<%= category.parameterize %>')"><%= category.capitalize %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <div class="offcanvas-body">
-    <ul class="navbar-nav">
-      <% @foods.group_by(&:category).each do |category, foods| %>
-        <li class="nav-item">
-          <a href="#<%= category.parameterize %>" class="nav-link link-secondary" onclick="scrollToCategory(event, '<%= category.parameterize %>')"><%= category.capitalize %></a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
 
-<!-- Bootstrap JavaScript and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-  function scrollToCategory(event, category) {
-    event.preventDefault();
-    var element = document.getElementById(category);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => {
-        var categoryDrawer = document.getElementById('categoryDrawer');
-        var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(categoryDrawer);
-        if (bootstrapOffcanvas) {
-          bootstrapOffcanvas.hide();
-        }
-      }, 500);
+  <!-- Bootstrap JavaScript and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    function scrollToCategory(event, category) {
+      event.preventDefault();
+      var element = document.getElementById(category);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          var categoryDrawer = document.getElementById('categoryDrawer');
+          var bootstrapOffcanvas = bootstrap.Offcanvas.getInstance(categoryDrawer);
+          if (bootstrapOffcanvas) {
+            bootstrapOffcanvas.hide();
+          }
+        }, 500);
+      }
     }
-  }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const offCanvasElems = document.querySelectorAll('.offcanvas');
-    offCanvasElems.forEach(offCanvasEl => {
-      offCanvasEl.addEventListener('hidden.bs.offcanvas', removeBackdrop);
-    });
-    
-    // Disable the backdrop for offcanvas
-    offCanvasElems.forEach(offCanvasEl => {
-      new bootstrap.Offcanvas(offCanvasEl, {
-        backdrop: false
+    document.addEventListener('DOMContentLoaded', () => {
+      const offCanvasElems = document.querySelectorAll('.offcanvas');
+      
+      offCanvasElems.forEach(offCanvasEl => {
+        const bootstrapOffcanvas = new bootstrap.Offcanvas(offCanvasEl, {
+          backdrop: false
+        });
+
+        // Manually hide the backdrop if it gets created
+        offCanvasEl.addEventListener('shown.bs.offcanvas', removeBackdrop);
+        offCanvasEl.addEventListener('hidden.bs.offcanvas', removeBackdrop);
       });
+
+      // Initial check and removal of any existing backdrops
+      removeBackdrop();
     });
-  });
 
-  function removeBackdrop() {
-    var backdrop = document.querySelector('.offcanvas-backdrop');
-    if (backdrop) {
-      backdrop.parentNode.removeChild(backdrop);
+    function removeBackdrop() {
+      const backdrop = document.querySelector('.offcanvas-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
     }
-  }
 
-  document.addEventListener('click', (event) => {
-    var target = event.target;
-    if (target && target.classList.contains('offcanvas-backdrop')) {
-      target.remove();
-    }
-  });
-</script>
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target && target.classList.contains('offcanvas-backdrop')) {
+        target.remove();
+      }
+    });
+  </script>
+</body>
+</html>
