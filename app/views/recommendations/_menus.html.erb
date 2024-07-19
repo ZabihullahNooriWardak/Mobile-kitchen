@@ -1,24 +1,22 @@
 <!-- app/views/recommendations/_menus.html.erb -->
-<% if prebuilt_menus.any? %>
-  <h3><%= t("available_menus") %></h3>
-  <div class="row">
+<div class="container">
+  <h3 class="mb-4 text-center"><%= t("available_menus") %></h3>
+  <div class="row justify-content-center">
     <% prebuilt_menus.each do |menu| %>
-      <div class="col-md-6 mb-4">
-        <div class="card">
+      <div class="col-md-4 mb-4 d-flex align-items-stretch">
+        <div class="card h-100">
           <% if menu.image.attached? %>
-            <%= image_tag menu.image, class: 'card-img-top', style: "height: 200px; object-fit: cover;" %>
+            <%= image_tag menu.image, class: 'card-img-top' %>
           <% else %>
             <div class="card-img-top" style="height: 200px; background-color: #f8f9fa;"></div>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= menu.name %></h5>
             <p class="card-text"><strong><%= t("cost_per_person") %>:</strong> <%= menu.cost %> <%= t("afn") %></p>
-            <%= link_to t("view_menu"), prebuilt_menu_path(menu), class: "btn btn-primary" %>
+            <%= link_to t("view_menu"), prebuilt_menu_path(menu), class: "btn btn-primary mt-2" %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-<% else %>
-  <p>No menus available in the specified price range.</p>
-<% end %>
+</div>

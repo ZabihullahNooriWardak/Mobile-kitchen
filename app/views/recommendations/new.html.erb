@@ -2,9 +2,9 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
   <div class="row justify-content-center w-100" style="margin-top: -50px;">
     <div class="col-md-6">
-      <h2 class="mb-4"><%= t("find_a_good_menu_for_yourself") %></h2>
+      <h2 class="mb-4 text-center"><%= t("find_a_good_menu_for_yourself") %></h2>
 
-      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation', data: { turbo_stream: true } do %>
+      <%= form_with url: recommendations_path, method: :post, local: true, class: 'needs-validation' do %>
         <div class="form-group mb-3">
           <%= label_tag :min_price, t("minimum_price"), class: 'form-label' %>
           <%= number_field_tag :min_price, nil, class: 'form-control', min: 0, placeholder: t("enter_minimum_price") %>
@@ -21,12 +21,15 @@
       <% end %>
     </div>
   </div>
-  <div id="menus" class="mt-5"></div>
+
+  <div id="menus" class="mt-5 w-100">
+    <!-- Menus will be displayed here -->
+  </div>
 </div>
 
 <style>
   .form-control {
-    max-width: 80%;
+    max-width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ced4da;
@@ -41,14 +44,41 @@
   }
 
   .btn {
-    width: 20%;
-    border-radius: 23px;
+    width: 100%;
+    border-radius: 5px;
     color: white;
     font-size: 20px;
-    padding: 3px 0px;
+    padding: 10px 0;
   }
 
   .form-label {
     font-weight: bold;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
   }
 </style>
