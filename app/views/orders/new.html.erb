@@ -33,10 +33,10 @@
       font-weight: bold;
     }
 
+    .btn-dark {
+      border-radius: 25px;
+    }
 
-.btn-dark{
-  border-radius:25px;
-}
     .btn-primary:hover {
       background-color: #0056b3;
     }
@@ -59,7 +59,7 @@
 
               <div class="form-group mb-3">
                 <%= form.label :phone_number, t("phone_number"), class: "form-label" %>
-                <%= form.number_field :phone_number, placeholder: t("enter_your_phone_number"), class: "form-control", required: true, id: 'phone_number' %>
+                <%= form.text_field :phone_number, placeholder: t("enter_your_phone_number"), class: "form-control", required: true, id: 'phone_number' %>
                 <div id="phone-error" class="text-danger" style="display:none;">Invalid phone number format</div>
               </div>
 
