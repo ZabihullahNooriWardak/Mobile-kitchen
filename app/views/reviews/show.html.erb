@@ -1,23 +1,84 @@
-<!-- app/views/orders/show.html.erb -->
-<div class="container mt-4">
-  <h1>Order Details</h1>
-  <p><strong>Address:</strong> <%= @order.address %></p>
-  <p><strong>Full Name:</strong> <%= @order.full_name %></p>
-  <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
-  <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
-  <p><strong>Date:</strong> <%= @order.date %></p>
-  <p><strong>Description:</strong> <%= @order.description %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background-color: #343a40;
+      color: white;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-body p {
+      margin: 0 0 10px;
+    }
+    h1, h2 {
+      color: white;
+    }
+    .list-group-item {
+      border: none;
+      padding: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h1>Order Details</h1>
+      </div>
+      <div class="card-body">
+        <p><strong>Address:</strong> <%= @order.address %></p>
+        <p><strong>Full Name:</strong> <%= @order.full_name %></p>
+        <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
+        <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
+        <p><strong>Date:</strong> <%= @order.date %></p>
+        <p><strong>Description:</strong> <%= @order.description %></p>
+      </div>
+    </div>
 
-  <h2>Order Items</h2>
-  <ul>
-    <% @order.order_items.each do |item| %>
-      <li><%= item.food.name %> - <%= item.food.price %></li>
+    <div class="card">
+      <div class="card-header">
+        <h2>Order Items</h2>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% @order.order_items.each do |item| %>
+            <li class="list-group-item"><%= item.food.name %> - <%= number_to_currency(item.food.price) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <% if @prebuilt_menu.present? %>
+      <div class="card">
+        <div class="card-header">
+          <h2>Prebuilt Menu</h2>
+        </div>
+        <div class="card-body">
+          <p><strong>Name:</strong> <%= @prebuilt_menu.name %></p>
+          <p><strong>Cost:</strong> <%= number_to_currency(@prebuilt_menu.cost) %></p>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 
-  <% if @prebuilt_menu.present? %>
-    <h2>Prebuilt Menu</h2>
-    <p><strong>Name:</strong> <%= @prebuilt_menu.name %></p>
-    <p><strong>Cost:</strong> <%= @prebuilt_menu.cost %></p>
-  <% end %>
-</div>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
