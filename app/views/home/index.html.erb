@@ -79,7 +79,7 @@
           /* Carousel */
           .carousel-item img {
               object-fit: cover;
-              height: 400px;
+              height: 600px;
           }
   
           .carousel-caption {
@@ -102,8 +102,7 @@
   
           .im {
               border-radius: 10%;
-              width: 80%;
-              height: 80%;
+         
           }
   
           .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -118,7 +117,13 @@
                   <div class="px-4 py-5 text-center">
                       <h1 class="display-5 fw-bold text-body-emphasis">Mobile Kitchen</h1>
                       <div class="col-lg-10 mx-auto">
-                          <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                      <p class="text-justify text-end lead ">
+                      <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
+                    </p>
+                    <p class="text-justify text-end lead">
+                      <%= t('about_paragraph3').gsub("\n", "<br>").html_safe %>
+                    </p>
+              
                           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                               <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn btn-dark btn-lg px-4 gap-3">Menus</button>
                               <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn btn-outline-secondary btn-lg px-4">Order one</button>
@@ -127,7 +132,7 @@
                   </div>
               </div>
               <div class="col-md-6 text-center">
-                  <img src="/assets/cook.jpg" class="im img-fluid" alt="Kitchen Image">
+                  <img src="/assets/cook.jpg" class="im img-fluid" alt="Kitchen Image" style="height:500px;">
               </div>
           </div>
   
@@ -178,7 +183,7 @@
   
           <div class="create-menu text-center">
               <h1>Create Your Own Menu</h1>
-              <button style="border-radius:23px;background-color: black;" onclick="location.href='<%= new_user_session_path %>'" class="btn btn-dark">Create Menu</button>
+              <button style="border-radius:23px;background-color: black;" onclick="location.href='<%= foods_path %>'" class="btn btn-dark">Create Menu</button>
           </div>
   
           <div class="reviews">
