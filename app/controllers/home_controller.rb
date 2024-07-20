@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @prebuilt_menus = PrebuiltMenu.all
+    @reviews = Review.includes(:user).all # Assuming each review belongs to a user
   end
 
   def order_menu
