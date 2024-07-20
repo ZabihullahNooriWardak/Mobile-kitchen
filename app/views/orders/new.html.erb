@@ -12,8 +12,8 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .btn-slightly-circular {
-      border-radius: 25px; /* Adjust this value for the desired roundness */
-      padding: 6px 10px; /* Adjust these values as needed */
+      border-radius: 25px;
+      padding: 6px 10px;
     }
     
     .card-header {
@@ -48,7 +48,7 @@
       <div class="col-md-8 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <h1><%= t("order_now")%></h1>
+            <h1><%= t("order_now") %></h1>
           </div>
           <div class="card-body">
             <%= form_with model: @order, local: true, id: 'order-form' do |form| %>
@@ -121,7 +121,8 @@
       const phoneNumber = document.getElementById('phone_number').value;
       const phoneError = document.getElementById('phone-error');
       
-      const afghanPhonePattern = /^((07\d{8})|(\+93\d{9}))$/;
+      // Regular expression to match Afghan phone number formats
+      const afghanPhonePattern = /^(07\d{8}|\+93\d{9})$/;
 
       if (!afghanPhonePattern.test(phoneNumber)) {
         phoneError.style.display = 'block';
@@ -129,6 +130,11 @@
       } else {
         phoneError.style.display = 'none';
       }
+    });
+
+    // Restrict input to numbers, +, (, and )
+    document.getElementById('phone_number').addEventListener('input', function(event) {
+      this.value = this.value.replace(/[^0-9\+\(\)]/g, '');
     });
   </script>
 </body>
