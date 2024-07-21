@@ -18,6 +18,7 @@ li.sidebar-item a {
   text-decoration:none;
 }
     #sidebar {
+      z-index:300;
       width: 50px;
       background: rgb(19,26,36);
       color: #fff;
@@ -104,6 +105,22 @@ li.sidebar-item a {
       text-decoration: none;
       display: block;
     }
+    .icon-circle {
+  background-color: black; /* Background color */
+  color: white; /* Text color */
+  font-size:25px;
+  border-radius: 55%; /* Makes it circular */
+  width: 45px; /* Width of the circle */
+  height: 40px; /* Height of the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:fixed;
+  z-index:200;
+  text-align: center;
+  line-height: 40px; /* Vertically centers the text/icon */
+}
+
 
     .dropdown-content a:hover {
       background-color: #f1f1f1;
@@ -116,6 +133,8 @@ li.sidebar-item a {
 </head>
 <body>
   <!-- Vertical Sidebar -->
+  <i class="mt-2 ms-3 lni lni-grid-alt icon-circle" id="showing"></i>
+
   <aside id="sidebar">
     <div class="d-flex">
       <button class="toggle-btn custom-toggler" type="button">
@@ -274,6 +293,19 @@ li.sidebar-item a {
         languageDropdown.classList.toggle("show");
       });
     });
+    document.getElementsByClassName("d-flex")[0].addEventListener('click', function() {
+  var sidebarNav = document.getElementById("sidebar")
+  if (sidebarNav.style.display == "none") {
+    sidebarNav.style.display = "inline-block";
+  } else {
+    sidebarNav.style.display = "none";
+  }
+});
+document.getElementById("showing").addEventListener('click',function(){
+  var sidebarNav = document.getElementById("sidebar");
+  sidebarNav.style.display = "inline-block";
+})
+
   </script>
 </body>
 </html>
