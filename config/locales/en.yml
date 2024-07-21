@@ -131,6 +131,9 @@ en:
   update: "Update"
   update_order: "Update Order"
   welcome_admin: "Welcome, Admin!"
+  mobile_kitchen: "Mobile Kitchen"
+  setting: "Setting"
+  language: 'language'
   welcome_user: "Welcome, %{user_name}!"
   about_header: "About Mobile Kitchen"
   about_paragraph1: "Your one-stop solution for convenient and delicious meals, delivered straight to your door."

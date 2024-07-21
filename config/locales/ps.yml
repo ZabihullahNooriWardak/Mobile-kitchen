@@ -46,7 +46,10 @@ ps:
   our_custom_menus: "زموږ دودیز مینوګانې"
   recommendation: "وراندیز"
   foods: "خواړه"
+  setting: 'تنظیمات'
+  language: 'ژبه'
   order: "سپارش"
+  mobile_kitchen: "سیار آشپزخانه"
   minimum_price: " کمترین قیمت"
   ask_a_question: "...یوه پوشتنه ولیکئ"
   send: "ولیژی"

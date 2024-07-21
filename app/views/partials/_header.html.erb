@@ -123,7 +123,7 @@ li.sidebar-item a {
       </button>
       <div class="sidebar-logo">
         <%= link_to root_path do %>
-          MyKitchen
+          <%=t("mobile_kitchen")%>
         <% end %>
       </div>
     </div>
@@ -208,7 +208,7 @@ li.sidebar-item a {
         <li class="sidebar-item">
           <%= link_to edit_user_registration_path, class: "sidebar-link" do %>
             <i class="fas fa-user-cog"></i>
-            <span><%= t("settings") %></span>
+            <span><%= t("setting") %></span>
           <% end %>
         </li>
         <li class="sidebar-item">
@@ -237,7 +237,7 @@ li.sidebar-item a {
       <li class="sidebar-item">
         <a href="#" class="sidebar-link collapsed has-dropdown" id="language-toggle">
           <i class="fas fa-globe"></i>
-          <span>Language</span>
+          <span><%= t("language") %></span>
         </a>
         <ul id="language" class="sidebar-dropdown list-unstyled collapse">
           <li class="sidebar-item">

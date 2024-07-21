@@ -55,6 +55,9 @@ fa:
   find_menu: " پیدا کردن منو"
   find_a_good_menu_for_yourself: "منوی خوبی برای خود پیدا کنید"
   orders: "سفارشا"
+  setting: 'تنظیمات'
+  language: 'زبان'
+  mobile_kitchen: 'آشپزخانه سیار'
   add_food: "افزودن غذا"
   about: "درباره"
   create_your_own_menu: 'مینو تان را بسازید'
