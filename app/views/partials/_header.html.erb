@@ -193,7 +193,7 @@ li.sidebar-item a {
    <li class="sidebar-item">
   <%= link_to new_prebuilt_menu_path, class: "sidebar-link" do %>
     <i class="fas fa-plus-square"></i>
-    <span>Add Menu</span>
+    <span><%=t("add_menu")%></span>
   <% end %>
 </li>
 
@@ -227,7 +227,7 @@ li.sidebar-item a {
 <li class="sidebar-item">
   <%= link_to new_user_registration_path, class: "sidebar-link" do %>
     <i class="fas fa-user-plus"></i>
-    <span><%= t("signup") %></span>
+    <span><%= t("sign_up") %></span>
   <% end %>
 </li>
 

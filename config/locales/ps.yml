@@ -46,11 +46,25 @@ ps:
   our_custom_menus: "زموږ دودیز مینوګانې"
   recommendation: "وراندیز"
   foods: "خواړه"
+  menus: 'مینو گانی '
   setting: 'تنظیمات'
   language: 'ژبه'
+  email: "ایمیل :‌"
+  whatsapp: 'وتساپ :‌'
+  phone: "تلیفون:"
+  login: 'ننوتل'
   order: "سپارش"
+  sign_up: 'راجستر کول'
+  add_menu: 'نوی مینو اضافه کری'
+  our_menus: 'زمونژ مینوگانی '
+  contact_us: 'زمونژ سره په اریکه کی شی '
+  order_one: 'غوشتنه ولیگی '
+  user_review: 'داستفاده کونگو نظرونه '
+  address: 'پته :‌'
   mobile_kitchen: "سیار آشپزخانه"
   minimum_price: " کمترین قیمت"
+  create_menu: 'مینو جوره کری'
+  create_your_own_menu: " خپله مینو خپله جوره کری "
   ask_a_question: "...یوه پوشتنه ولیکئ"
   send: "ولیژی"
   create_your_own_menu: 'خپله مینو خپله جوره کری'

@@ -55,14 +55,24 @@ fa:
   find_menu: " پیدا کردن منو"
   find_a_good_menu_for_yourself: "منوی خوبی برای خود پیدا کنید"
   orders: "سفارشا"
+  menus: "مینو ها"
   setting: 'تنظیمات'
   language: 'زبان'
+  Our Menus: "مینو های ما"
+  contact_us: 'با ما به تماس شوید'
+  order_one: "سفارش دهید"
+  user_review: 'نظرات کاربران'
+  address: 'آدرس: '
   mobile_kitchen: 'آشپزخانه سیار'
   add_food: "افزودن غذا"
+  create_menu: 'مینو را بسازید'
+  create_your_own_menu: "مینو خود را خودتان بسازید"
   about: "درباره"
+  our_menus: 'مینو های ما '
   create_your_own_menu: 'مینو تان را بسازید'
   ask_a_question: " ...یک سوال بپرسید"
   send: "ارسال"
+  login: 'ورود'
   your_cart_is_empty: 'کارت شما خالی است '
   select_language: "انتخاب زبان"
   edit_profile: "ویرایش پروفایل"
@@ -73,6 +83,7 @@ fa:
   select_foods: "انتخاب غذاها"
   recommendation: "پیشنهاد"
   afn: "افغانی"
+  sign_up: 'ثبت نام'
   edit_food: "ویرایش غذا"
   cheapest: "ارزان‌ترین منوی آشپزخانه پایتخت"
   most_wanted: "پرطرفدارترین منوی آشپزخانه پایتخت"
@@ -89,7 +100,9 @@ fa:
   name: "نام"
   image: "تصویر"
   characters_minimum: "حداقل حروف"
-  email: "ایمیل"
+  email: "ایمیل ‌"
+  whatsapp: 'وتساپ :‌'
+  phone : "تلیفون:"
   update: "بروزرسانی"
   cancel_my_account: "لغو حساب کاربری من"
   save: "ذخیره"
@@ -98,6 +111,7 @@ fa:
   admin: "مدیر"
   add_to_cart: "افزودن به سبد"
   food_details: "جزئیات غذا"
+  add_menu: 'مینو اضافه کنید'
   your_cart: "سبد خرید شما"
   action: "عملیات"
   order_now: "اکنون سفارش دهید"
