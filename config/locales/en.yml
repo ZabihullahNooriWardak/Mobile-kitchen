@@ -77,11 +77,13 @@ en:
   show: "Show"
   password_confirmation: 'Password confirmation'
   edit: "Edit"
-  destroy: "Destroy"
+  destroy: "Delete"
   evening_menu: "Evening Menu"
   new_food: "New Food"
-  rating: "Rating"
+  rating: "Rating:"
   all_reviews: 'All Reviews'
+  order_address: 'Order Address:'
+  user: "User:"
   submit_review: 'Submit Review'
   price: "Price"
   feedback: 'Feedback'
@@ -119,6 +121,7 @@ en:
   order_placed_successfully: "Order placed successfully."
   order_updated_successfully: "Order updated successfully."
   order_canceled: "Order canceled."
+  order_items: 'Order Items'
   enter_your_guest_numbers: "Enter your guest numbers"
   date: "Date"
   ask_a_question: "Ask a question..."

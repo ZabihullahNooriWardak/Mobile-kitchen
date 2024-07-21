@@ -40,21 +40,21 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h1>Order Details</h1>
+        <h1><%=t("order_details")%></h1>
       </div>
       <div class="card-body">
-        <p><strong>Address:</strong> <%= @order.address %></p>
-        <p><strong>Full Name:</strong> <%= @order.full_name %></p>
-        <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
-        <p><strong>Guests Number:</strong> <%= @order.guests_number %></p>
-        <p><strong>Date:</strong> <%= @order.date %></p>
-        <p><strong>Description:</strong> <%= @order.description %></p>
+        <p><strong><%=t("address")%></strong> <%= @order.address %></p>
+        <p><strong><%=t("full_name")%></strong> <%= @order.full_name %></p>
+        <p><strong><%=t("phone")%></strong> <%= @order.phone_number %></p>
+        <p><strong><%=t("guest_numbers")%></strong> <%= @order.guests_number %></p>
+        <p><strong><%=t("date")%></strong> <%= @order.date %></p>
+        <p><strong><%=t("description")%></strong> <%= @order.description %></p>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <h2>Order Items</h2>
+        <h2><%=t("order_items")%></h2>
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">

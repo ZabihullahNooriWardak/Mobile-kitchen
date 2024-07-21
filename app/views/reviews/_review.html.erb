@@ -1,32 +1,32 @@
 <!-- app/views/reviews/_review.html.erb -->
 <div id="<%= dom_id review %>">
   <p>
-    <strong>User:</strong>
+    <strong><%=t("user")%></strong>
     <%= review.user.email %>
   </p>
 
   <p>
-    <strong>Order Address:</strong>
+    <strong><%=t("order_address")%></strong>
     <%= review.order.address %>
   </p>
 
   <p>
-    <strong>Order Full Name:</strong>
+    <strong><%=t("full_name")%></strong>
     <%= review.order.full_name %>
   </p>
 
   <p>
-    <strong>Rating:</strong>
-    <%= review.rating %>
+    <strong><%=t("rating")%></strong>
+    <%= review.rating %> 
   </p>
 
   <p>
-    <strong>Feedback:</strong>
+    <strong><%=t("feedback")%></strong>
     <%= review.feedback %>
   </p>
 
   <p>
-    <strong>Suggestion:</strong>
+    <strong><%=t("suggestion")%></strong>
     <%= review.suggestion %>
   </p>
 

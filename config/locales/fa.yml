@@ -114,11 +114,14 @@ fa:
   add_menu: 'مینو اضافه کنید'
   your_cart: "سبد خرید شما"
   action: "عملیات"
+  order_address: 'آدرس سفارش :‌'
+  user: 'کاربر:'
   sign_in: 'ورود'
   all_reviews: 'نظرات و پیشنهادات'
   feedback: 'نظر'
-  rating: 'امتیاز دهی '
+  rating: "امتیاز دهی :‌"
   submit_review: 'ارسال فورم'
+  order_items: 'مواد شامل در سفارش'
   send_me_reset_password_instruction: " رهنمایی تنظیم دوباره پسورد را روان کنید"
   password_confirmation: "تایید پسورد"
   suggestion: 'پیشنهاد'

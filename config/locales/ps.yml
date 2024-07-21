@@ -66,6 +66,8 @@ ps:
   all_review: 'تول نظرونه'
   user_review: 'داستفاده کونگو نظرونه '
   address: 'پته :‌'
+  order_address: 'د غوشتنی والا پته '
+  user: 'د غوشتنی والا ایمیل'
   feedback: 'نظر'
   mobile_kitchen: "سیار آشپزخانه"
   suggestion: 'پیشنهاد'
@@ -116,6 +118,7 @@ ps:
   image: "عکس"
   save: "ژغورل"
   back: "شاته"
+  order_items: 'د غوشتنی شامل خواره'
   admin: "ادمين"
   add_to_cart: "په کارت کې اضافه کړئ"
   food_details: "د خوړو جزئیات"
