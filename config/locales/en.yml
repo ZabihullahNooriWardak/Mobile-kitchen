@@ -75,14 +75,22 @@ en:
   most_wanted: "Most wanted menu of Pytakht kitchen"
   proper_menu: "Proper menu of Pytakht kitchen"
   show: "Show"
+  password_confirmation: 'Password confirmation'
   edit: "Edit"
   destroy: "Destroy"
   evening_menu: "Evening Menu"
   new_food: "New Food"
+  rating: "Rating"
+  all_reviews: 'All Reviews'
+  submit_review: 'Submit Review'
   price: "Price"
+  feedback: 'Feedback'
+  suggestion: 'Suggestion'
   categories: "Categories"
+  rate_our_service: 'Rate Our Service'
   category: "Category"
   name: "Name"
+  send_me_reset_password_instruction: "Send me reset password instructions"
   image: "Image"
   save: "Save"
   back: "Back"

@@ -115,8 +115,16 @@ fa:
   your_cart: "سبد خرید شما"
   action: "عملیات"
   sign_in: 'ورود'
+  all_reviews: 'نظرات و پیشنهادات'
+  feedback: 'نظر'
+  rating: 'امتیاز دهی '
+  submit_review: 'ارسال فورم'
+  send_me_reset_password_instruction: " رهنمایی تنظیم دوباره پسورد را روان کنید"
+  password_confirmation: "تایید پسورد"
+  suggestion: 'پیشنهاد'
   forgot_your_password: 'پسورد خود را فراموش کردید ؟'
   order_now: "اکنون سفارش دهید"
+  rate_our_service: 'خدمات ما را ارزیابی کنید'
   please_sign_in: 'لطفا داخل شوید'
   back_to_foods: "بازگشت به غذاها"
   remember_me: 'به یاد داشته باش'

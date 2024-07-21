@@ -61,13 +61,21 @@ ps:
   sign_in: 'ننوتل'
   remember_me: 'په یاد ولری'
   contact_us: 'زمونژ سره په اریکه کی شی '
+  password_confirmation: 'د پسورد تایید'
   order_one: 'غوشتنه ولیگی '
+  all_review: 'تول نظرونه'
   user_review: 'داستفاده کونگو نظرونه '
   address: 'پته :‌'
+  feedback: 'نظر'
   mobile_kitchen: "سیار آشپزخانه"
+  suggestion: 'پیشنهاد'
+  rating: 'نمری ورکول'
+  submit_review: 'د فورم لیژل'
+  rate_our_service: 'زمونژ خدمت ارزونه وکری'
   minimum_price: " کمترین قیمت"
   create_menu: 'مینو جوره کری'
   create_your_own_menu: " خپله مینو خپله جوره کری "
+  send_me_reset_password_instruction: " د کود د دویم وار د تنظیم رهنمایی راته ولیژه "
   ask_a_question: "...یوه پوشتنه ولیکئ"
   send: "ولیژی"
   create_your_own_menu: 'خپله مینو خپله جوره کری'
