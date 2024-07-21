@@ -56,17 +56,21 @@ en:
   phone: "Phone:"
   whatsapp: "Whatsapp:"
   email: "Email:"
+  please_sign_in: 'Please sign in'
   address: "Address:"
   create_your_own_menu: "Create Your Own Menu"
   order_one: "Order one"
   add_menu: 'Add Menu'
+  remember_me: 'Remember me'
   create_menu: "Create Menu"
   logout: "Logout"
   login: 'Login'
   prebuilt_menus: "Prebuilt Menus"
   new_prebuilt_menu: "New Prebuilt Menu"
   afn: "AFN"
-  sign_up: 'signup'
+  sign_up: 'sign up'
+  sign_in: "Sign in"
+  forgot_your_password: 'Forgot your passowrd?'
   cheapest: "Cheapest menu of Pytakht kitchen"
   most_wanted: "Most wanted menu of Pytakht kitchen"
   proper_menu: "Proper menu of Pytakht kitchen"

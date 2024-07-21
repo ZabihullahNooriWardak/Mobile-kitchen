@@ -57,6 +57,9 @@ ps:
   sign_up: 'راجستر کول'
   add_menu: 'نوی مینو اضافه کری'
   our_menus: 'زمونژ مینوگانی '
+  please_sign_in: 'لطفا ننوزی'
+  sign_in: 'ننوتل'
+  remember_me: 'په یاد ولری'
   contact_us: 'زمونژ سره په اریکه کی شی '
   order_one: 'غوشتنه ولیگی '
   user_review: 'داستفاده کونگو نظرونه '
@@ -69,6 +72,7 @@ ps:
   send: "ولیژی"
   create_your_own_menu: 'خپله مینو خپله جوره کری'
   maximum_price: " بیشترین قیمت"
+  forgot_your_password: ' خپل کود مو هیر کری دی ؟'
   your_cart_is_empty: 'ستاسو کارت تش دی  '
   enter_minimum_price: " کمترین قیمت وټاکئ"
   enter_maximum_price: " بیشترین قیمت وټاکئ"

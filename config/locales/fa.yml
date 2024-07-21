@@ -114,8 +114,12 @@ fa:
   add_menu: 'مینو اضافه کنید'
   your_cart: "سبد خرید شما"
   action: "عملیات"
+  sign_in: 'ورود'
+  forgot_your_password: 'پسورد خود را فراموش کردید ؟'
   order_now: "اکنون سفارش دهید"
+  please_sign_in: 'لطفا داخل شوید'
   back_to_foods: "بازگشت به غذاها"
+  remember_me: 'به یاد داشته باش'
   remove: "حذف"
   full_name: "نام کامل"
   enter_your_full_name: "نام کامل خود را وارد کنید"
