@@ -130,10 +130,6 @@
                     <p class="text-justify text-end lead ">
                     <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
                   </p>
-                  <p class="text-justify text-end lead">
-                    <%= t('about_paragraph3').gsub("\n", "<br>").html_safe %>
-                  </p>
-            
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                             <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn btn-dark btn-lg px-4 gap-3"><%=t("menus")%></button>
                             <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn btn-outline-secondary btn-lg px-4"><%=t("order_one")%></button>
