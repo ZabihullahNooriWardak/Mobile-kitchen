@@ -293,18 +293,27 @@ li.sidebar-item a {
         languageDropdown.classList.toggle("show");
       });
     });
-    document.getElementsByClassName("d-flex")[0].addEventListener('click', function() {
-  var sidebarNav = document.getElementById("sidebar")
-  if (sidebarNav.style.display == "none") {
-    sidebarNav.style.display = "inline-block";
-  } else {
-    sidebarNav.style.display = "none";
-  }
-});
-document.getElementById("showing").addEventListener('click',function(){
-  var sidebarNav = document.getElementById("sidebar");
-  sidebarNav.style.display = "inline-block";
-})
+    function setupSidebarToggle() {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.getElementsByClassName("d-flex")[0].addEventListener('click', function() {
+          var sidebarNav = document.getElementById("sidebar");
+          if (sidebarNav.style.display == "none") {
+            sidebarNav.style.display = "inline-block";
+          } else {
+            sidebarNav.style.display = "none";
+          }
+        });
+  
+        document.getElementById("showing").addEventListener('click', function() {
+          var sidebarNav = document.getElementById("sidebar");
+          sidebarNav.style.display = "inline-block";
+        });
+      }
+    }
+  
+    window.addEventListener('resize', setupSidebarToggle);
+     setupSidebarToggle();
+
 
   </script>
 </body>
