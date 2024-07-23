@@ -11,6 +11,7 @@
             padding: 0;
             background: linear-gradient(to bottom, #d3d3d3, #b0e0e6) no-repeat center center fixed;
             background-size: cover;
+            overflow-x: hidden;
         }
 
         .kitchen-info, .menus-section, .create-menu, .reviews, .contact-info {
@@ -19,6 +20,39 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .kitchen-info { transform: translateX(-100%); }
+        .menus-section { transform: translateX(100%); }
+        .create-menu { transform: translateY(100%); }
+        .reviews { transform: translateY(-100%); }
+        .contact-info { transform: translateX(-100%); }
+
+        .animate {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        .animate-left {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        .animate-right {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        .animate-top {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .animate-bottom {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .kitchen-info .info {
@@ -127,11 +161,11 @@
                 <div class="px-4 py-5 text-center">
                     <h1 class="display-5 mb-3 fw-bold text-body-emphasis"><%=t("mobile_kitchen")%></h1>
                     <div class="col-lg-10 mx-auto">
-                    <p class="text-justify text-end lead ">
-                    <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
-                  </p>
+                        <p class="text-justify text-end lead ">
+                            <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
+                        </p>
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                            <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn mt-3  btn-dark btn-lg px-4 gap-3"><%=t("menus")%></button>
+                            <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn mt-3 btn-dark btn-lg px-4 gap-3"><%=t("menus")%></button>
                             <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn mt-3 btn-outline-secondary btn-lg px-4"><%=t("order_one")%></button>
                         </div>
                     </div>
@@ -196,36 +230,70 @@
         </div>
 
         <div class="reviews">
-            <h2><%=t("user_review")%></h2>
-            <% @reviews.each do |review| %>
-                <div class="review-card">
-                    <% if false %>
-                        <%= image_tag review.user.avatar, alt: 'User Image', class: 'rounded-circle', width: '50', height: '50' %>
-                    <% else %>
-                        <img src="https://via.placeholder.com/50" alt="User Image" class="rounded-circle">
-                    <% end %>
-                    <div>
-                        <h4><%= review.order.full_name %></h4>
-                        <p><%= review.feedback %></p>
-                    </div>
+        <h2><%=t("user_review")%></h2>
+        <% @reviews.each do |review| %>
+            <div class="review-card">
+                <% if false %>
+                    <%= image_tag review.user.avatar, alt: 'User Image', class: 'rounded-circle', width: '50', height: '50' %>
+                <% else %>
+                    <img src="https://via.placeholder.com/50" alt="User Image" class="rounded-circle">
+                <% end %>
+                <div>
+                    <h4><%= review.order.full_name %></h4>
+                    <p><%= review.feedback %></p>
                 </div>
-            <% end %>
-        </div>
-
-        <div class="contact-info">
-            <h2><%=t("contact_us")%></h2>
-            <ul class="list-unstyled">
-                <li><i class="fas fa-map-marker-alt"></i> <%=t("address")%><a href="https://maps.google.com/?q=123+Main+Street%2C+City%2C+Country" target="_blank">kampany 5th district kabul afghanistan</a></li>
-                <li><i class="fas fa-phone-alt"></i> <%=t("phone")%> <a href="tel:+123456789">+93(0)776578675</a></li>
-                <li><i class="fab fa-whatsapp"></i> <%=t("whatsapp") %><a href="https://wa.me/123456789" target="_blank">+93(0)773883833</a></li>
-                <li><i class="far fa-envelope"></i> <%=t("email") %> : <a href="mailto:contact@example.com">zabinoori712@gmail.com</a>
-                </li>
-            </ul>
-        </div>
+            </div>
+        <% end %>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="contact-info">
+        <h2><%=t("contact_us")%></h2>
+        <ul class="list-unstyled">
+            <li><i class="fas fa-map-marker-alt"></i> <%=t("address")%><a href="https://maps.google.com/?q=123+Main+Street%2C+City%2C+Country" target="_blank">kampany 5th district kabul afghanistan</a></li>
+            <li><i class="fas fa-phone-alt"></i> <%=t("phone")%> <a href="tel:+123456789">+93(0)776578675</a></li>
+            <li><i class="fab fa-whatsapp"></i> <%=t("whatsapp") %><a href="https://wa.me/123456789" target="_blank">+93(0)773883833</a></li>
+            <li><i class="far fa-envelope"></i> <%=t("email") %> : <a href="mailto:contact@example.com">zabinoori712@gmail.com</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        function animateOnScroll() {
+            $('.kitchen-info, .menus-section, .create-menu, .reviews, .contact-info').each(function() {
+                if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 100) {
+                    if (!$(this).hasClass('animate')) {
+                        if ($(this).hasClass('kitchen-info')) {
+                            $(this).addClass('animate-left');
+                        } else if ($(this).hasClass('menus-section')) {
+                            $(this).addClass('animate-right');
+                        } else if ($(this).hasClass('create-menu')) {
+                            $(this).addClass('animate-top');
+                        } else if ($(this).hasClass('reviews')) {
+                            $(this).addClass('animate-bottom');
+                        } else if ($(this).hasClass('contact-info')) {
+                            $(this).addClass('animate-left');
+                        }
+                        $(this).addClass('animate');
+                    }
+                } else {
+                    $(this).removeClass('animate animate-left animate-right animate-top animate-bottom');
+                }
+            });
+        }
+
+        $(window).on('scroll', function() {
+            animateOnScroll();
+        });
+
+        // Trigger animation on page load
+        animateOnScroll();
+    });
+</script>
 </body>
 </html>
+
