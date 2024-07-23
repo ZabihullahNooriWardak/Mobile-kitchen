@@ -123,21 +123,21 @@
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-6 mb-4">
+            <div class="col-md-5 mb-4">
                 <div class="px-4 py-5 text-center">
-                    <h1 class="display-5 fw-bold text-body-emphasis"><%=t("mobile_kitchen")%></h1>
+                    <h1 class="display-5 mb-3 fw-bold text-body-emphasis"><%=t("mobile_kitchen")%></h1>
                     <div class="col-lg-10 mx-auto">
                     <p class="text-justify text-end lead ">
                     <%= t('about_paragraph2').gsub("\n", "<br>").html_safe %>
                   </p>
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                            <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn btn-dark btn-lg px-4 gap-3"><%=t("menus")%></button>
-                            <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn btn-outline-secondary btn-lg px-4"><%=t("order_one")%></button>
+                            <button type="button" onclick="location.href='<%= prebuilt_menus_path %>'" style="border-radius:23px;" class="btn mt-3  btn-dark btn-lg px-4 gap-3"><%=t("menus")%></button>
+                            <button type="button" style="border-radius:23px;" onclick="location.href='<%= cart_path %>'" class="btn mt-3 btn-outline-secondary btn-lg px-4"><%=t("order_one")%></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 text-center video-container">
+            <div class="col-md-7 text-center video-container">
                 <video autoplay loop muted class="im img-fluid">
                     <source src="/assets/cook.mp4" type="video/mp4">
                     Your browser does not support the video tag.
