@@ -118,7 +118,7 @@ en:
   order_no_longer_editable: "Order can no longer be edited or canceled."
   please_proceed_from_cart_or_select_menu: "Please proceed from the cart page or select a prebuilt menu."
   your_cart_is_empty: "Your cart is empty. Please add items before proceeding to checkout."
-  order_placed_successfully: "Order placed successfully."
+  order_placed_successfully: "Order placed successfully and you have to pay 20% before delivery."
   order_updated_successfully: "Order updated successfully."
   order_canceled: "Order canceled."
   order_items: 'Order Items'

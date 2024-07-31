@@ -32,7 +32,7 @@ ps:
   order_no_longer_editable: "سفارش نور د ترمیم یا لغوه کولو وړ نه دی."
   please_proceed_from_cart_or_select_menu: "مهرباني وکړئ له کارت پاڼې څخه ادامه ورکړئ یا یو تیار منو وټاکئ."
   your_cart_is_empty: "ستاسو کارت خالي دی. مهرباني وکړئ مخکې له دې چې دوام ورکړئ توکي اضافه کړئ."
-  order_placed_successfully: "سفارش په بریالیتوب سره ځای پرځای شو."
+  order_placed_successfully: "سفارش په بریالیتوب سره ځای پرځای شو خو ۲۰ فیصد پیسی باید مخکی له انتقال او رسید سخه پرداخت کی"
   order_updated_successfully: "سفارش په بریالیتوب سره تازه شو."
   order_canceled: "سفارش لغوه شو."
   hello: "سلام"

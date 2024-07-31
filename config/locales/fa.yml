@@ -32,7 +32,7 @@ fa:
   order_no_longer_editable: "سفارش دیگر قابل ویرایش یا لغو نیست."
   please_proceed_from_cart_or_select_menu: "لطفا از صفحه سبد خرید ادامه دهید یا یک منوی آماده را انتخاب کنید."
   your_cart_is_empty: "سبد خرید شما خالی است. لطفا قبل از ادامه اقلامی اضافه کنید."
-  order_placed_successfully: "سفارش با موفقیت ثبت شد."
+  order_placed_successfully: " سفارش با موفقیت ثبت شد اما شما باید ۲۰ فیصد پول را قبل از رسیدن سفارش پرداخت کنید ."
   order_updated_successfully: "سفارش با موفقیت به‌روز شد."
   order_canceled: "سفارش لغو شد."
   hello: "سلام"
