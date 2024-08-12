@@ -1,66 +1,59 @@
 Rails.application.routes.draw do
-  resources :reviews
-  get 'dashboard', to: 'dashboard#index'
-  namespace :admin do
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :orders # Assuming you have these routes
-  end
-  
-  # Ensure that users are redirected to the dashboard after login or sign up
-  devise_scope :user do
-    authenticated :user do
-      root 'dashboard#index', as: :authenticated_root
-    end
-    unauthenticated do
-      root 'home#index', as: :unauthenticated_root
-    end
-  end
-  root 'home#index'
-  get 'chatbot/index'
-  get 'chatbot/respond'
   scope "(:locale)", locale: /en|fa|ps/ do
-   get 'contact', to: 'static_pages#contact'
-  get 'static_pages/contact'
-  get 'admin_orders/index'
-  get 'admin_orders/show'
-  get 'admin_orders/update'
-  get 'admin_orders/destroy'
-  get 'orders/index'
-  get 'orders/show'
-  get 'orders/new'
-  get 'orders/create'
-  get 'orders/edit'
-  get 'orders/update'
-  get 'orders/destroy'
-  get 'about', to:'homes#index'
-  get 'chatbot', to: 'chatbot#index'
-  post 'chatbot/respond', to: 'chatbot#respond'
-  get 'recommendations', to: 'recommendations#new'
-  post 'recommendations', to: 'recommendations#create'
-
-  resource :cart, only: [:show] do
-    resources :cart_items, only: [:create, :destroy]
-  end
-  
-  resources :cart_items, only: [:create, :destroy]
-  resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :foods
-  devise_for :users
-  devise_scope :user do
-    get "/user/signout", to: "devise/sessions#destroy", as: "signout"
+    resources :reviews
+    get 'dashboard', to: 'dashboard#index'
+    
+    namespace :admin do
+      resources :users, only: [:index, :show, :edit, :update, :destroy]
+      resources :orders, only: [:index, :show, :update, :destroy]
     end
-  resource :user_detail, only: [:new, :create, :edit, :update, :show]
-  
-  namespace :admin do
-    resources :orders, only: [:index, :show, :update, :destroy]
+    
+    # Devise routes for user authentication
+    devise_for :users
+
+    devise_scope :user do
+      authenticated :user do
+        root to: 'dashboard#index', as: :authenticated_root
+      end
+
+      unauthenticated do
+        root to: 'home#index', as: :unauthenticated_root
+      end
+      
+      get '/user/signout', to: 'devise/sessions#destroy', as: 'signout'
+    end
+
+    root 'home#index'
+
+    get 'chatbot/index'
+    get 'chatbot/respond'
+    
+    get 'contact', to: 'static_pages#contact'
+    get 'static_pages/contact'
+    
+    get 'about', to: 'homes#index'
+    
+    get 'chatbot', to: 'chatbot#index'
+    post 'chatbot/respond', to: 'chatbot#respond'
+    
+    get 'recommendations', to: 'recommendations#new'
+    post 'recommendations', to: 'recommendations#create'
+
+    resource :cart, only: [:show] do
+      resources :cart_items, only: [:create, :destroy]
+    end
+    
+    resources :cart_items, only: [:create, :destroy]
+    resources :orders, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :foods
+    resource :user_detail, only: [:new, :create, :edit, :update, :show]
+    resources :prebuilt_menus
+    
+    resources :orders do
+      member do
+        get :rate
+      end
+      resources :reviews, only: [:create]
+    end
   end
-  resources :prebuilt_menus
-  get 'foods/index'
-end 
-resources :orders do
-  member do
-    get :rate
-  end
-  resources :reviews, only: [:create]
-end
 end

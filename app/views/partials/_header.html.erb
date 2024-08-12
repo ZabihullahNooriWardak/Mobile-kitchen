@@ -13,51 +13,43 @@
     .btn {
       border-radius: 20px;
     }
-li.sidebar-item a {
-  color: white;
-  text-decoration:none;
-}
+    li.sidebar-item a {
+      color: white;
+      text-decoration: none;
+    }
     #sidebar {
-      z-index:300;
+      z-index: 300;
       width: 50px;
-      background: rgb(19,26,36);
+      background: rgb(19, 26, 36);
       color: #fff;
       height: 100vh;
       position: fixed;
       transition: all 0.3s;
     }
-
     .sidebar-logo {
       padding: 15px;
       font-size: 20px;
       color: #fff;
     }
-
-
     .sidebar-nav {
       list-style: none;
       padding: 0;
     }
-
     .sidebar-item {
       padding: 10px 0px;
     }
-
     .sidebar-link {
       color: #fff;
       text-decoration: none;
       display: flex;
       align-items: center;
     }
-
     .sidebar-link i {
       margin-right: 10px;
     }
-
     .sidebar-link:hover {
       background: #444;
     }
-
     .cart-badge, .cart-badge2 {
       background-color: yellow;
       color: black;
@@ -67,12 +59,10 @@ li.sidebar-item a {
       top: -9px;
       right: 212px;
     }
-
     .dropdown {
       position: relative;
       display: inline-block;
     }
-
     .dropdown-button {
       background-color: #007bff;
       color: white;
@@ -83,12 +73,9 @@ li.sidebar-item a {
       border-radius: 50px;
       margin-right: 3px;
     }
-
-
     .dropdown-button:hover {
       background-color: #0056b3;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -98,7 +85,6 @@ li.sidebar-item a {
       z-index: 1;
       border-radius: 5px;
     }
-
     .dropdown-content a {
       color: black;
       padding: 12px 16px;
@@ -106,26 +92,23 @@ li.sidebar-item a {
       display: block;
     }
     .icon-circle {
-  background-color: black; /* Background color */
-  color: white; /* Text color */
-  font-size:25px;
-  border-radius: 55%; /* Makes it circular */
-  width: 45px; /* Width of the circle */
-  height: 40px; /* Height of the circle */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position:fixed;
-  z-index:200;
-  text-align: center;
-  line-height: 40px; /* Vertically centers the text/icon */
-}
-
-
+      background-color: black; /* Background color */
+      color: white; /* Text color */
+      font-size: 25px;
+      border-radius: 55%; /* Makes it circular */
+      width: 45px; /* Width of the circle */
+      height: 40px; /* Height of the circle */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      z-index: 200;
+      text-align: center;
+      line-height: 40px; /* Vertically centers the text/icon */
+    }
     .dropdown-content a:hover {
       background-color: #f1f1f1;
     }
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
@@ -142,18 +125,23 @@ li.sidebar-item a {
       </button>
       <div class="sidebar-logo">
         <%= link_to root_path do %>
-          <%=t("mobile_kitchen")%>
+          <%= t("mobile_kitchen") %>
         <% end %>
       </div>
     </div>
     <ul class="sidebar-nav">
-    
-    <li class="sidebar-item">
-    <%= link_to prebuilt_menus_path, class: "sidebar-link" do %>
-      <i class="fas fa-utensils"></i>
-      <span><%= t("our_custom_menus") %></span>
-    <% end %>
-  </li>
+      <li class="sidebar-item">
+        <%= link_to dashboard_path, class: "sidebar-link" do %>
+          <i class="fas fa-tachometer-alt"></i>
+          <span><%= t("dashboard") %></span>
+        <% end %>
+      </li>
+      <li class="sidebar-item">
+        <%= link_to prebuilt_menus_path, class: "sidebar-link" do %>
+          <i class="fas fa-utensils"></i>
+          <span><%= t("our_custom_menus") %></span>
+        <% end %>
+      </li>
       <li class="sidebar-item">
         <%= link_to contact_path, class: "sidebar-link" do %>
           <i class="fas fa-envelope"></i>
@@ -164,10 +152,10 @@ li.sidebar-item a {
       <li class="sidebar-item">
         <%= link_to reviews_path, class: "sidebar-link" do %>
           <i class="fas fa-comments"></i>
-          <span><%=t("all_reviews")%></span>
+          <span><%= t("all_reviews") %></span>
         <% end %>
       </li>
-    <% end %>
+      <% end %>
       <li class="sidebar-item">
         <%= link_to recommendations_path, class: "sidebar-link" do %>
           <i class="fas fa-star"></i>
@@ -185,7 +173,7 @@ li.sidebar-item a {
           <%= link_to cart_path, class: "sidebar-link position-relative" do %>
             <i class="fas fa-shopping-cart"></i>
             <span><%= t("cart") %></span>
-            <span id="cart-badge" class="cart-badge"><%= @cart.cart_items.count if current_user.cart.present? %></span>
+            <span id="cart-badge" class="cart-badge"><%= @cart_items_count %></span>
           <% end %>
         </li>
         <li class="sidebar-item">
@@ -209,13 +197,12 @@ li.sidebar-item a {
             <span><%= t("add_food") %></span>
           <% end %>
         </li>
-   <li class="sidebar-item">
-  <%= link_to new_prebuilt_menu_path, class: "sidebar-link" do %>
-    <i class="fas fa-plus-square"></i>
-    <span><%=t("add_menu")%></span>
-  <% end %>
-</li>
-
+        <li class="sidebar-item">
+          <%= link_to new_prebuilt_menu_path, class: "sidebar-link" do %>
+            <i class="fas fa-plus-square"></i>
+            <span><%= t("add_menu") %></span>
+          <% end %>
+        </li>
       <% end %>
       <li class="sidebar-item">
         <%= link_to about_path, class: "sidebar-link" do %>
@@ -237,21 +224,19 @@ li.sidebar-item a {
           <% end %>
         </li>
       <% else %>
-       <li class="sidebar-item">
-  <%= link_to new_user_session_path, class: "sidebar-link" do %>
-    <i class="fas fa-sign-in-alt"></i>
-    <span><%= t("login") %></span>
-  <% end %>
-</li>
-<li class="sidebar-item">
-  <%= link_to new_user_registration_path, class: "sidebar-link" do %>
-    <i class="fas fa-user-plus"></i>
-    <span><%= t("sign_up") %></span>
-  <% end %>
-</li>
-
+        <li class="sidebar-item">
+          <%= link_to new_user_session_path, class: "sidebar-link" do %>
+            <i class="fas fa-sign-in-alt"></i>
+            <span><%= t("login") %></span>
+          <% end %>
+        </li>
+        <li class="sidebar-item">
+          <%= link_to new_user_registration_path, class: "sidebar-link" do %>
+            <i class="fas fa-user-plus"></i>
+            <span><%= t("sign_up") %></span>
+          <% end %>
+        </li>
       <% end %>
-        
       <!-- Language Selection Dropdown -->
       <li class="sidebar-item">
         <a href="#" class="sidebar-link collapsed has-dropdown" id="language-toggle">
@@ -260,13 +245,13 @@ li.sidebar-item a {
         </a>
         <ul id="language" class="sidebar-dropdown list-unstyled collapse">
           <li class="sidebar-item">
-                   <%= link_to "English", locale: 'en', class: "sidebar-link" %>
+            <%= link_to "English", locale: 'en', class: "sidebar-link" %>
           </li>
           <li class="sidebar-item">
-          <%= link_to "فارسی", locale: 'fa',class: "sidebar-link" %>
+            <%= link_to "فارسی", locale: 'fa', class: "sidebar-link" %>
           </li>
           <li class="sidebar-item">
-              <%= link_to "پښتو", locale: 'ps',class: "sidebar-link" %>
+            <%= link_to "پښتو", locale: 'ps', class: "sidebar-link" %>
           </li>
         </ul>
       </li>
@@ -293,6 +278,7 @@ li.sidebar-item a {
         languageDropdown.classList.toggle("show");
       });
     });
+
     function setupSidebarToggle() {
       if (window.matchMedia("(max-width: 768px)").matches) {
         document.getElementsByClassName("d-flex")[0].addEventListener('click', function() {
@@ -303,18 +289,16 @@ li.sidebar-item a {
             sidebarNav.style.display = "none";
           }
         });
-  
+
         document.getElementById("showing").addEventListener('click', function() {
           var sidebarNav = document.getElementById("sidebar");
           sidebarNav.style.display = "inline-block";
         });
       }
     }
-  
+
     window.addEventListener('resize', setupSidebarToggle);
-     setupSidebarToggle();
-
-
+    setupSidebarToggle();
   </script>
 </body>
 </html>
