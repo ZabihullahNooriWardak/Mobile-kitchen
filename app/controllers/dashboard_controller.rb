@@ -24,7 +24,7 @@ class DashboardController < ApplicationController
   
     def user_dashboard
       @total_orders = current_user.orders.count
-      @cart_items_count = current_user.cart.items.count
+      @cart_items_count = current_user.cart.cart_items.count
   
       # Prepare data for the user's graph
       @orders_by_prebuilt_menu = current_user.orders.group(:prebuilt_menu_id).count
