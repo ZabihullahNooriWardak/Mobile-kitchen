@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3><%= @total_orders %></h3>
+          <p>Total Orders</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <%= link_to 'View Orders', admin_orders_path, class: "small-box-footer" %>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3><%= @total_users %></h3>
+          <p>Total Users</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <%= link_to 'View Users', admin_users_path, class: "small-box-footer" %>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-6">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3><%= @new_orders_last_30_days %></h3>
+          <p>New Orders Last 30 Days</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+        <%= link_to 'View Analytics', admin_orders_path, class: "small-box-footer" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Order Trends (Last 30 Days)</h3>
+        </div>
+        <div class="card-body">
+          <canvas id="ordersChart" width="400" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/chart.js' %>
+<script>
+  var ctx = document.getElementById('ordersChart').getContext('2d');
+  var ordersChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <%= @orders_by_day.keys.map(&:to_s).to_json.html_safe %>,
+      datasets: [{
+        label: 'New Orders',
+        data: <%= @orders_by_day.values.to_json.html_safe %>,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

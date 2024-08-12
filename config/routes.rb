@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
   resources :reviews
+  get 'dashboard', to: 'dashboard#index'
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :orders # Assuming you have these routes
+  end
+  
+  # Ensure that users are redirected to the dashboard after login or sign up
+  devise_scope :user do
+    authenticated :user do
+      root 'dashboard#index', as: :authenticated_root
+    end
+    unauthenticated do
+      root 'home#index', as: :unauthenticated_root
+    end
+  end
   root 'home#index'
   get 'chatbot/index'
   get 'chatbot/respond'

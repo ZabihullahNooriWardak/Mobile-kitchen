@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-6">
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3><%= @total_orders %></h3>
+          <p>Your Orders</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <%= link_to 'View Orders', orders_path, class: "small-box-footer" %>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-6">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3><%= @cart_items_count %></h3>
+          <p>Items in Cart</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-cart"></i>
+        </div>
+        <%= link_to 'View Cart', cart_path, class: "small-box-footer" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Order Analytics</h3>
+        </div>
+        <div class="card-body">
+          <canvas id="userAnalyticsChart" width="400" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/chart.js' %>
+<script>
+  var ctx = document.getElementById('userAnalyticsChart').getContext('2d');
+  var userAnalyticsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Prebuilt Menu Orders', 'Delivered Items', 'Items in Cart'],
+      datasets: [{
+        label: 'Quantity',
+        data: [<%= @orders_by_prebuilt_menu.values.sum %>, <%= current_user.orders.where(status: 'delivered').count %>, <%= @cart_items_count %>],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
