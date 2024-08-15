@@ -20,20 +20,6 @@
       color: #333;
     }
 
-    .btn-primary-custom {
-      background: linear-gradient(45deg, #6a11cb, #2575fc);
-      border: none;
-      color: #fff;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .btn-primary-custom:hover {
-      background: linear-gradient(45deg, #2575fc, #6a11cb);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
     .card-custom {
       border: none;
       border-radius: 15px;
@@ -51,97 +37,101 @@
     }
 
     .card-body-custom {
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .img-thumbnail-custom {
       max-width: 100%;
-      height: 250px; /* Adjusted image height */
-      object-fit: cover; /* Ensure images retain aspect ratio */
-      border-radius: 15px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0;
     }
 
     .card-title-custom {
-      font-size: 1.3rem; /* Slightly smaller text */
-      font-weight: bold;
+      font-size: 1.25rem;
+      font-weight: 600;
       color: #333;
-      margin-top: 0.5rem; /* Reduced top margin */
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
     }
 
     .card-cost-custom {
-      font-size: 1.8rem; /* Slightly smaller text */
+      font-size: 1.5rem;
       font-weight: bold;
       color: #007bff;
+      margin-bottom: 0.5rem;
     }
 
     .card-text-custom {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #666;
+      margin-bottom: 1.5rem;
     }
 
-    .btn-custom {
-      background-color: #6c757d;
+    .btn-outline-custom {
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      border: 2px solid;
+      transition: background-color 0.3s, color 0.3s;
+      width: 100px;
+    }
+
+    .btn-outline-primary-custom {
+      border-color: #007bff;
+      color: #007bff;
+    }
+
+    .btn-outline-primary-custom:hover {
+      background-color: #007bff;
       color: #fff;
-      border: none;
-      transition: background-color 0.3s;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem; /* Slightly smaller button text */
-      margin-top: 10px;
     }
 
-    .btn-custom:hover {
-      background-color: #5a6268;
+    .btn-outline-success-custom {
+      border-color: #28a745;
+      color: #28a745;
     }
 
-    .btn-success-custom {
+    .btn-outline-success-custom:hover {
       background-color: #28a745;
       color: #fff;
-      border: none;
-      transition: background-color 0.3s;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem; /* Slightly smaller button text */
-      margin-top: 10px;
     }
 
-    .btn-success-custom:hover {
-      background-color: #218838;
+    .btn-outline-warning-custom {
+      border-color: #ffc107;
+      color: #ffc107;
     }
 
-    .btn-warning-custom {
+    .btn-outline-warning-custom:hover {
       background-color: #ffc107;
       color: #fff;
-      border: none;
-      transition: background-color 0.3s;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem; /* Slightly smaller button text */
-      margin-top: 10px;
     }
 
-    .btn-warning-custom:hover {
-      background-color: #e0a800;
+    .btn-outline-danger-custom {
+      border-color: #dc3545;
+      color: #dc3545;
     }
 
-    .btn-danger-custom {
+    .btn-outline-danger-custom:hover {
       background-color: #dc3545;
       color: #fff;
-      border: none;
-      transition: background-color 0.3s;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem; /* Slightly smaller button text */
-      margin-top: 10px;
-    }
-
-    .btn-danger-custom:hover {
-      background-color: #c82333;
     }
 
     .mb-4-custom {
       margin-bottom: 1.5rem;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -166,14 +156,14 @@
             <div class="card-body card-body-custom">
               <h5 class="card-cost card-cost-custom"><%= prebuilt_menu.cost %> <span><%= t("afn") %></span></h5>
               <p class="card-title card-title-custom"><%= prebuilt_menu.name %></p>
-              <div class="text-center mt-4">
-                <%= link_to t("show"), prebuilt_menu, class: 'btn btn-custom btn-sm mr-2' %>
+              <div class="card-actions">
+                <%= link_to t("show"), prebuilt_menu, class: 'btn btn-outline-custom btn-outline-primary-custom' %>
                 <% unless current_user&.user_detail&.is_admin %>
-                  <%= link_to t("order"), new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-success-custom btn-sm' %>
+                  <%= link_to t("order"), new_order_path(prebuilt_menu_id: prebuilt_menu.id), class: 'btn btn-outline-custom btn-outline-success-custom' %>
                 <% end %>
                 <% if current_user&.user_detail&.is_admin %>
-                  <%= link_to t("edit"), edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-warning-custom btn-sm mr-2' %>
-                  <%= button_to t("destroy"), prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger-custom btn-sm', style: 'margin-top: 5px;' %>
+                  <%= link_to t("edit"), edit_prebuilt_menu_path(prebuilt_menu), class: 'btn btn-outline-custom btn-outline-warning-custom' %>
+                  <%= button_to t("destroy"), prebuilt_menu, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-custom btn-outline-danger-custom' %>
                 <% end %>
               </div>
             </div>
